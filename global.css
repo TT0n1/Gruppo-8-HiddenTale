@@ -1,0 +1,59 @@
+body { background: #F6EFD9}
+
+.navbar {
+    width: 100%;
+    height: 148px;
+    background-color: #D1AE8C;
+    padding-top: 9px;
+    padding-left: 8px;
+    padding-bottom: 15px;
+}
+.navbar .logo{
+    width: 422px;
+    height: 124px;
+    border-radius: 40px;
+    border: 3px solid #AC6D3E;
+    background: #D1AE8C;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-right: 12px;
+}
+
+.navbar .Itinerario {
+    width: 336px;
+    height: 124px;
+    border-radius: 40px;
+    border: 3px solid #AC6D3E;
+    background: #D1AE8C;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-right: 10px;
+}
+
+.navbar .Localita {
+    width: 336px;
+    height: 124px;
+    border-radius: 40px;
+    border: 3px solid #AC6D3E;
+    background: #D1AE8C;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-right: 10px;
+}
+
+.navbar .Eventi {
+    width: 336px;
+    height: 124px;
+    border-radius: 40px;
+    border: 3px solid #AC6D3E;
+    background: #D1AE8C;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-right: 10px;
+}
+
+.navbar .account {
+    width: 225px;
+    height: 124px;
+    border-radius: 40px;
+    border: 3px solid #AC6D3E;
+    background: #D1AE8C;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-right: 13px;
+}
