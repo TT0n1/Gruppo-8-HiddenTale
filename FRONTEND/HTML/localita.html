@@ -1,11 +1,12 @@
 <head>
+    <link rel="stylesheet" href="../CSS/global.css">
         <link rel="stylesheet" href="../CSS/localita.css">
     </head>
     <body>
 
 <main class="localita-page">
     
-    <!-- Il tag ha un ID per permettere a JS di scriverci dentro il nome corretto -->
+    
     <h1 id="localita-titolo" class="page-title">Nome Località</h1>
 
     <!-- BLOCCO 1: Immagine Principale + Testo Tradizione -->
@@ -20,7 +21,6 @@
 
         <article class="tradizione-box">
             <h2>Tradizione</h2>
-            <!-- Il paragrafo ha un ID per ricevere il testo della descrizione -->
             <p id="localita-descrizione"></p>
         </article>
     </section>
@@ -46,7 +46,7 @@
         <!-- Il contenitore della griglia rimane vuoto o con immagini fittizie; 
              JS potrà svuotarlo e riempirlo con i tag img corretti della località scelta -->
         <div id="localita-galleria" class="gallery-grid">
-            <!-- I tag img verranno generati dinamicamente o aggiornati via codice -->
+            
             <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 1">
             <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 2">
             <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 3">
@@ -54,5 +54,3 @@
     </section>
     
 </main>
-<script src="script.js"></script>
-    </body>
