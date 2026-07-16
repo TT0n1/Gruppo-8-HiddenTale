@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea Evento - HiddenTale</title>
+
+    <!-- Collegamento ai CSS -->
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/formevento.css">
+</head>
+<body>
+
+<!-- NAVBAR COERENTE CON LE ALTRE PAGINE -->
+<div class="navbar">
+    <a href="index.html" class="nav-item logo" style="text-decoration: none;">
+        <img src="IMAGES/Logo1.svg" alt="Logo">
+        <p>HiddenTale</p>
+    </a>
+    <a href="#" class="nav-item" style="text-decoration: none;">
+        <p>Itinerario</p>
+    </a>
+    <a href="listalocalita.html" class="nav-item" style="text-decoration: none;">
+        <p>Località</p>
+    </a>
+    <a href="listaeventi.html" class="nav-item" style="text-decoration: none;">
+        <p>Eventi</p>
+    </a>
+    <a href="#" class="nav-item account">
+        <img src="IMAGES/UserCircle.svg" alt="Account">
+    </a>
+</div>
+
+<!-- CONTENUTO PRINCIPALE -->
+<main class="form-page">
+
+    <h1 class="page-title">Form Eventi</h1>
+
+    <!-- IL FORM VERO E PROPRIO -->
+    <form action="#" method="POST" class="evento-form-container">
+
+        <!-- COLONNA SINISTRA: Input Testuali -->
+        <div class="form-left-col">
+
+            <!-- Riga: Titolo -->
+            <div class="form-row">
+                <label for="titolo">Titolo:</label>
+                <input type="text" id="titolo" placeholder="Inserire Titolo">
+            </div>
+
+            <!-- Riga: Luogo -->
+            <div class="form-row">
+                <label for="luogo">Luogo:</label>
+                <input type="text" id="luogo" placeholder="Inserire Luogo">
+            </div>
+
+            <!-- Riga: Date (divisa in due) -->
+            <div class="form-row split-row">
+                <div class="form-field-half">
+                    <label for="data-inizio">Data Inizio:</label>
+                    <input type="text" id="data-inizio" placeholder="Inserire Data inizio">
+                </div>
+                <div class="form-field-half">
+                    <label for="data-fine">Data Fine:</label>
+                    <input type="text" id="data-fine" placeholder="Inserire Data Fine">
+                </div>
+            </div>
+
+            <!-- Riga: Posti e Prezzo (divisa in due) -->
+            <div class="form-row split-row">
+                <div class="form-field-half">
+                    <label for="posti">Posti:</label>
+                    <input type="text" id="posti" placeholder="posti disponibili">
+                </div>
+                <div class="form-field-half">
+                    <label for="prezzo">Prezzo:</label>
+                    <input type="text" id="prezzo" placeholder="Inserire prezzo">
+                </div>
+            </div>
+
+            <!-- Riga: Descrizione -->
+            <div class="form-row column-row">
+                <label for="descrizione" class="descrizione-label">Descrizione</label>
+                <textarea id="descrizione" placeholder="Inserire descrizione" rows="6"></textarea>
+            </div>
+
+        </div>
+
+        <!-- COLONNA DESTRA: Immagine e Bottone -->
+        <div class="form-right-col">
+
+            <!-- Box Caricamento Immagine -->
+            <!-- Più avanti con JS potrete farlo cliccabile per caricare un file -->
+            <div class="image-upload-box">
+                <span>Inserire<br>immagine</span>
+            </div>
+
+            <!-- Bottone Submit -->
+            <button type="submit" class="btn-crea">Crea Evento</button>
+
+        </div>
+
+    </form>
+
+</main>
+
+</body>
+</html>

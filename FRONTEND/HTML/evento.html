@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagra del Fusillo - HiddenTale</title>
+
+    <!-- Collegamento ai CSS -->
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/evento.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="index.html" class="nav-item logo" style="text-decoration: none;">
+        <img src="IMAGES/Logo1.svg" alt="Logo">
+        <p>HiddenTale</p>
+    </a>
+    <a href="#" class="nav-item" style="text-decoration: none;">
+        <p>Itinerario</p>
+    </a>
+    <a href="listalocalita.html" class="nav-item" style="text-decoration: none;">
+        <p>Località</p>
+    </a>
+    <a href="listaeventi.html" class="nav-item" style="text-decoration: none;">
+        <p>Eventi</p>
+    </a>
+    <a href="#" class="nav-item account">
+        <img src="IMAGES/UserCircle.svg" alt="Account">
+    </a>
+</div>
+
+<!-- CONTENUTO PRINCIPALE DELLA PAGINA EVENTO -->
+<main class="evento-page">
+
+    <!-- TITOLO -->
+    <h1 id="evento-titolo" class="page-title">Sagra del Fusillo al Tegamino</h1>
+
+    <!-- SEZIONE SUPERIORE: Immagine e Dettagli -->
+    <section class="evento-top-section">
+
+        <!-- Immagine Locandina -->
+        <div class="evento-image-wrapper">
+            <img id="evento-img" src="IMAGES/sagra_del_fusillo_al_tegamino.png" alt="Locandina Evento">
+        </div>
+
+        <!-- Dati Evento (Luogo, Data, Prezzo) -->
+        <article class="evento-dati-box">
+            <div class="dato-item">
+                <span class="dato-label">Luogo:</span>
+                <p id="evento-luogo">Piazza La Rocca, 84090 San Mango Piemonte SA.</p>
+            </div>
+            <div class="dato-item">
+                <span class="dato-label">Data:</span>
+                <p id="evento-data">Si terrà dal venerdì 1 a lunedì 4 agosto alle ore 20:00</p>
+            </div>
+            <div class="dato-item">
+                <span class="dato-label">Prezzo:</span>
+                <p id="evento-prezzo">Ingresso gratuito</p>
+            </div>
+
+            <button class="btn-modifica" aria-label="Modifica questo evento">Modifica Evento</button>
+        </article>
+
+    </section>
+
+    <!-- SEZIONE INFERIORE: Descrizione e Partecipazione -->
+    <section class="evento-bottom-section">
+
+        <!-- Descrizione Testuale -->
+        <article class="evento-descrizione-box">
+            <h2>Descrizione</h2>
+            <p id="evento-descrizione">
+                Protagonista indiscusso è chiaramente il fusillo al tegamino: un formato di pasta corta condito con sugo di pomodoro, ricco di formaggio filante e ragù di carne, il cui sapore si esalta nella cottura nel classico tegamino di terracotta. Accanto alla celebrata specialità gastronomica, le serate includono panini assortiti, dolci tradizionali e vino locale, con della musica dal vivo per offrire un'esperienza sensoriale unica. Novità importante di questa edizione è la presenza dello stand per celiaci.
+            </p>
+        </article>
+
+        <!-- Box Partecipazione -->
+        <aside class="evento-partecipa-box">
+            <p class="posti-rimanenti">Posti Rimanenti<br><span id="evento-posti">Illimitati</span></p>
+            <button class="btn-partecipa" aria-label="Partecipa all'evento">Partecipa</button>
+        </aside>
+
+    </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+/* ==========================================
+   LAYOUT GENERALE PAGINA FORM
+   ========================================== */
+.form-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    color: #4a3728; /* Marrone del progetto */
+}
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #dfd5c6;
+    padding-bottom: 10px;
+}
+
+/* ==========================================
+   CONTENITORE DEL FORM A DUE COLONNE
+   ========================================== */
+.evento-form-container {
+    display: flex;
+    gap: 50px; /* Spazio tra colonna sinistra e destra */
+    align-items: stretch;
+}
+
+/* --- COLONNA SINISTRA --- */
+.form-left-col {
+    flex: 2; /* Prende più spazio rispetto a quella destra */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1.5px solid #dfd5c6; /* Linea divisoria tra i campi */
+    padding: 15px 0;
+    gap: 10px;
+}
+
+/* Modifica la struttura per le righe divise in due (es. Date o Posti/Prezzo) */
+.form-row.split-row {
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.form-field-half {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+}
+
+/* Modifica per la riga della descrizione (Testo sopra, input sotto) */
+.form-row.column-row {
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: none; /* Rimuove la linea sotto la descrizione */
+    padding-top: 15px;
+}
+
+/* Stile delle etichette (Label) */
+label {
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap; /* Evita che il testo vada a capo */
+}
+
+.descrizione-label {
+    margin-bottom: 10px;
+}
+
+/* Stile degli Input e della Textarea */
+input[type="text"], textarea {
+    border: 1.5px solid #4a3728;
+    border-radius: 20px; /* Bordo super arrotondato come Figma */
+    padding: 8px 15px;
+    color: #4a3728;
+    background-color: white;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    border-radius: 15px;
+    resize: vertical; /* Permette all'utente di allungare la casella solo verso il basso */
+}
+
+/* --- COLONNA DESTRA --- */
+.form-right-col {
+    flex: 1; /* Prende meno spazio della sinistra */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end; /* Allinea il bottone a destra */
+    padding-top: 15px; /* Allinea l'inizio del box con l'inizio degli input a sinistra */
+}
+
+/* Box per caricare l'immagine */
+.image-upload-box {
+    width: 100%;
+    aspect-ratio: 1; /* Lo rende un quadrato perfetto */
+    border: 2px solid #4a3728;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    color: #9c7b64; /* Marrone un po' più chiaro per il testo segnaposto */
+    cursor: pointer;
+}
+
+/* Bottone di invio */
+.btn-crea {
+    background-color: #d8bda5;
+    color: #4a3728;
+    border: 1.5px solid #4a3728;
+    border-radius: 15px;
+    padding: 15px 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-crea:hover {
+    background-color: #c4a48c;
+}
