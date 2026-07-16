@@ -1,0 +1,282 @@
+/* ==========================================
+   LAYOUT GENERALE DELLA PAGINA
+   ========================================== */
+.lista-page {
+    max-width: 800px; /* Stringiamo un po' la pagina per farla somigliare al layout mobile/tablet di Figma */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f3eb; /* Il colore di sfondo crema del vostro design */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-title {
+    color: #4a3728; /* Marrone scuro */
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+/* ==========================================
+   BARRA DI RICERCA + FILTRO
+   ========================================== */
+.search-filter-section {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Spazio tra la barra e l'icona filtro */
+    margin-bottom: 25px;
+}
+
+.search-wrapper {
+    position: relative;
+    flex-grow: 1; /* Fa occupare alla barra tutto lo spazio disponibile */
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #4a3728;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 12px 12px 12px 45px; /* Spazio a sinistra per non accavallare il testo all'icona della lente */
+    border: 2px solid #4a3728;
+    border-radius: 30px; /* Effetto super arrotondato come Figma */
+    background-color: #ffffff;
+    color: #4a3728;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.filter-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.filter-button img {
+    width: 28px; /* Dimensione dei cursori del filtro */
+    height: 28px;
+}
+
+/* ==========================================
+   LISTA DEGLI EVENTI (SCORREVOLE)
+   ========================================== */
+.scrollable-list {
+    flex-grow: 1;
+    max-height: 60vh; /* Limita l'altezza della lista al 60% della finestra del browser */
+    overflow-y: auto;  /* Attiva lo scroll verticale solo per questa sezione se ci sono tante card */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;         /* Spazio tra una card e l'altra */
+    padding-right: 10px; /* Spazio per non far attaccare la card alla barra di scorrimento */
+}
+
+/* Personalizzazione della barra di scorrimento (opzionale, per farla più discreta) */
+.scrollable-list::-webkit-scrollbar {
+    width: 6px;
+}
+.scrollable-list::-webkit-scrollbar-thumb {
+    background-color: #dfd5c6;
+    border-radius: 10px;
+}
+
+/* ==========================================
+   STRUTTURA DELLA CARD (ELEMENTO LISTA)
+   ========================================== */
+.evento-card {
+    display: flex;
+    gap: 20px;
+    text-decoration: none; /* Rimuove la sottolineatura blu classica dei link */
+    color: #4a3728;        /* Mantiene il testo marrone */
+    transition: transform 0.2s ease;
+}
+
+.evento-card:hover {
+    transform: translateY(-2px); /* Un leggero effetto al passaggio del mouse, ottimo per la UX */
+}
+
+/* Immagine a sinistra */
+.card-image-wrapper img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 18px; /* Angoli arrotondati dell'immagine */
+    border: 2px solid #4a3728; /* Bordo marrone attorno alla foto */
+}
+
+/* Blocco info a destra */
+.card-info-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuisce equamente Nome, Descrizione ed Eventi */
+}
+
+.info-group {
+    border-bottom: 1.5px solid #dfd5c6; /* La linea sottile marrone sotto ogni dato */
+    padding-bottom: 5px;
+}
+
+.info-label {
+    font-weight: bold;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.info-value {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    /* Trucco CSS per tagliare il testo con i tre puntini se la descrizione è troppo lunga */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ==========================================
+   BOTTONE IN FONDO (INFO FORM)
+   ========================================== */
+.footer-action-section {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.info-form-btn {
+    display: inline-block;
+    background-color: #c4a48c; /* Il colore beige scuro/terracotta del bottone in fondo */
+    color: #4a3728;
+    text-align: center;
+    padding: 15px 25px;
+    border: 2px solid #4a3728;
+    border-radius: 20px; /* Bottone molto arrotondato */
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    line-height: 1.4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s ease;
+}
+
+.info-form-btn:hover {
+    background-color: #b3937b; /* Si scurisce leggermente al passaggio del mouse */
+}
+/* ==========================================
+   MENU A TENDINA (FILTRO)
+   ========================================== */
+.filter-wrapper {
+    position: relative; /* Fondamentale per ancorare la tendina sotto questo elemento */
+}
+
+/* La tendina principale */
+.filter-menu {
+    display: none; /* Nascosto di base */
+    flex-direction: column;
+    position: absolute;
+    top: 50px; /* Lo spinge sotto il bottone */
+    right: -10px; /* Lo allinea a destra del bottone */
+    background-color: #f9f3eb; /* Colore crema */
+    border: 2px solid #4a3728; /* Bordo marrone scuro */
+    width: 210px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    z-index: 100; /* Lo fa apparire sopra agli eventi */
+}
+
+/* Questa classe viene aggiunta/tolta dal JavaScript inline nel bottone */
+.filter-menu.show {
+    display: flex;
+}
+
+/* Il triangolino (freccia verso l'alto) */
+.filter-triangle {
+    position: absolute;
+    top: -14px;
+    right: 15px; /* Posizionato sopra il bottone del filtro */
+    width: 0;
+    height: 0;
+    /* Crea il triangolo marrone di sfondo (bordo) */
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 12px solid #4a3728;
+}
+
+/* Il triangolino interno crema (per simulare che sia vuoto dentro) */
+.filter-triangle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: -8px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid #f9f3eb;
+}
+
+/* Opzioni del filtro */
+.filter-option {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1.5px solid #4a3728; /* Linea divisoria tra opzioni come Figma */
+    color: #4a3728;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    gap: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.filter-option:last-child {
+    border-bottom: none; /* Rimuove la riga sotto l'ultimo elemento */
+}
+
+.filter-option:hover {
+    background-color: #e8dac9; /* Leggero scurimento al passaggio del mouse */
+}
+
+/* --- STILE DEI RADIO BUTTON (Pallini) --- */
+
+/* Nascondiamo il bruttissimo pallino di default di Windows/Mac */
+.filter-option input[type="radio"] {
+    display: none;
+}
+
+/* Creiamo il nostro pallino personalizzato */
+.custom-radio {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #4a3728;
+    border-radius: 50%;
+    background-color: #d8bda5; /* Beige del vostro tema */
+    display: inline-block;
+    position: relative;
+}
+
+/* Quando l'utente seleziona un'opzione, aggiungiamo il puntino scuro al centro */
+.filter-option input[type="radio"]:checked + .custom-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: #4a3728;
+    border-radius: 50%;
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco degli Eventi - HiddenTale</title>
+
+    <!-- Collegamento ai CSS -->
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/listaeventi.css">
+</head>
+<body>
+
+<!-- NAVBAR COERENTE CON INDEX.HTML -->
+<div class="navbar">
+    <a href="index.html" class="nav-item logo" style="text-decoration: none;">
+        <img src="IMAGES/Logo1.svg" alt="Logo">
+        <p>HiddenTale</p>
+    </a>
+    <a href="#" class="nav-item" style="text-decoration: none;">
+        <p>Itinerario</p>
+    </a>
+    <a href="listalocalita.html" class="nav-item" style="text-decoration: none;">
+        <p>Località</p>
+    </a>
+    <a href="listaeventi.html" class="nav-item" style="text-decoration: none;">
+        <p>Eventi</p>
+    </a>
+    <a href="#" class="nav-item account">
+        <img src="IMAGES/UserCircle.svg" alt="Account">
+    </a>
+</div>
+
+<!-- CONTENUTO PRINCIPALE -->
+<main class="lista-page">
+
+    <h1 class="main-title">Elenco degli eventi</h1>
+
+    <!-- BARRA DI RICERCA + BOTTONE FILTRO E MENU -->
+    <section class="search-filter-section">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-bar" placeholder="Cerca un evento...">
+        </div>
+
+        <!-- Contenitore Relativo per il Filtro -->
+        <div class="filter-wrapper">
+
+            <!-- Bottone Filtro -->
+            <!-- onclick aggiunge o rimuove la classe 'show' per aprire/chiudere la tendina -->
+            <button id="filter-btn" class="filter-button" aria-label="Filtra eventi" onclick="document.getElementById('filter-menu').classList.toggle('show')">
+                <img src="IMAGES/iconafiltro.svg" alt="Filtri" width="28" height="28">
+            </button>
+
+            <!-- IL MENU A TENDINA (Nascosto di default) -->
+            <div class="filter-menu" id="filter-menu">
+                <!-- Il triangolino grafico in alto -->
+                <div class="filter-triangle"></div>
+
+                <label class="filter-option">
+                    <input type="radio" name="evento-filtro" value="miei-eventi">
+                    <span class="custom-radio"></span>
+                    I miei eventi
+                </label>
+
+                <label class="filter-option">
+                    <input type="radio" name="evento-filtro" value="vicini">
+                    <span class="custom-radio"></span>
+                    Distanza (più vicini)
+                </label>
+
+                <label class="filter-option">
+                    <input type="radio" name="evento-filtro" value="lontani">
+                    <span class="custom-radio"></span>
+                    Distanza (più lontani)
+                </label>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LISTA SCORREVOLE DEGLI EVENTI -->
+    <section id="lista-eventi" class="scrollable-list">
+
+        <!-- CARD EVENTO 1: Festa della Zeppola -->
+        <a href="evento.html?id=1" class="evento-card">
+            <div class="card-image-wrapper">
+                <img src="IMAGES/festa_della_zeppola.png" alt="Locandina Festa della Zeppola">
+            </div>
+
+            <div class="card-info-wrapper">
+                <div class="info-group">
+                    <span class="info-label">Nome:</span>
+                    <p class="info-value">Festa della Zeppola</p>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Descrizione:</span>
+                    <p class="info-value">La Festa della Zeppola di Montoro 2026 torna al Parco del Sole...</p>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Indirizzo:</span>
+                    <p class="info-value">Sant'Eustachio (AV)</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- CARD EVENTO 2: Sagra del Fusillo -->
+        <a href="evento.html?id=2" class="evento-card">
+            <div class="card-image-wrapper">
+                <img src="IMAGES/sagra_del_fusillo_al_tegamino.png" alt="Locandina Sagra del Fusillo">
+            </div>
+
+            <div class="card-info-wrapper">
+                <div class="info-group">
+                    <span class="info-label">Nome:</span>
+                    <p class="info-value">Sagra del Fusillo al Tegamino</p>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Descrizione:</span>
+                    <p class="info-value">La manifestazione celebra il fusillo locale servito in un caratteristico...</p>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Indirizzo:</span>
+                    <p class="info-value">Piazza La Rocca, 84090 San Mango Piemonte SA.</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- CARD EVENTO 3: Sagra del Catanazzo -->
+        <a href="evento.html?id=3" class="evento-card">
+            <div class="card-image-wrapper">
+                <img src="IMAGES/sagra_del_catanazzo.png" alt="Locandina Sagra del Catanazzo">
+            </div>
+
+            <div class="card-info-wrapper">
+                <div class="info-group">
+                    <span class="info-label">Nome:</span>
+                    <p class="info-value">Sagra del Catanazzo</p>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Descrizione:</span>
+                    <p class="info-value">Il protagonista della festa è il Catanazzo, un piatto della cucina...</p>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Indirizzo:</span>
+                    <p class="info-value">Chiesa di Santa Maria dei Campi, Giovi SA</p>
+                </div>
+            </div>
+        </a>
+
+    </section>
+
+    <!-- BOTTONE INFO IN FONDO ALLA PAGINA -->
+    <section class="footer-action-section">
+        <!-- Questo collegherà al Form dell'Evento quando lo creerete (presumibilmente formevento.html) -->
+        <a href="formevento.html" class="info-form-btn">
+            HAI UN EVENTO CHE VUOI SPONSORIZZARE?<br>
+            CLICCA QUESTO BOTTONE PER ANDARE SUL FORM
+        </a>
+    </section>
+
+</main>
+
+</body>
+</html>
