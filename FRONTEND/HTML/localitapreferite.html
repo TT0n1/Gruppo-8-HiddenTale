@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Località Preferita - HiddenTale</title>
+
+  <!-- Collegamento ai CSS -->
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/localitapreferite.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <a href="index.html" class="nav-item logo" style="text-decoration: none;">
+    <img src="IMAGES/Logo1.svg" alt="Logo">
+    <p>HiddenTale</p>
+  </a>
+  <a href="#" class="nav-item" style="text-decoration: none;">
+    <p>Itinerario</p>
+  </a>
+  <a href="listalocalita.html" class="nav-item" style="text-decoration: none;">
+    <p>Località</p>
+  </a>
+  <a href="listaeventi.html" class="nav-item" style="text-decoration: none;">
+    <p>Eventi</p>
+  </a>
+  <a href="account.html" class="nav-item account" style="text-decoration: none;">
+    <img src="IMAGES/UserCircle.svg" alt="Account">
+  </a>
+</div>
+
+<!-- CONTENUTO PRINCIPALE -->
+<main class="lista-page">
+
+  <!-- TITOLO PAGINA -->
+  <header class="page-header">
+    <h1 class="main-title">Località preferita</h1>
+    <hr class="main-divider">
+  </header>
+
+  <!-- BARRA DI RICERCA + BOTTONE FILTRO -->
+  <section class="search-filter-section">
+    <div class="search-wrapper">
+                <span class="search-icon">
+                    <!-- Sostituisci con l'icona SVG o img della lente -->
+                    <img src="IMAGES/search-icon.svg" alt="Cerca" width="20" height="20">
+                </span>
+      <input type="text" id="search-bar" placeholder="">
+    </div>
+
+    <button id="filter-btn" class="filter-button" aria-label="Filtra località">
+      <img src="IMAGES/iconafiltro.svg" alt="Filtri" width="28" height="28">
+    </button>
+  </section>
+
+  <!-- LISTA SCORREVOLE DELLE LOCALITÀ -->
+  <section id="lista-localita" class="scrollable-list">
+
+    <!-- CARD 1: Calvanico -->
+    <a href="localita.html?id=calvanico" class="localita-card">
+
+      <div class="card-image-wrapper">
+        <img src="IMAGES/calvanico.png" alt="Foto Calvanico">
+      </div>
+
+      <div class="card-info-wrapper">
+        <div class="info-group">
+          <span class="info-label">Nome:</span>
+          <p class="info-value">Calvanico</p>
+          <hr class="info-line">
+        </div>
+
+        <div class="info-group">
+          <span class="info-label">Descrizione:</span>
+          <p class="info-value">L'abitato di Calvanico è circondato da montagne su quasi ...</p>
+          <hr class="info-line">
+        </div>
+
+        <div class="info-group">
+          <span class="info-label">Eventi:</span>
+          <p class="info-value">Calvanico in Musica - Sagra della Castagna</p>
+          <hr class="info-line">
+        </div>
+      </div>
+
+    </a>
+
+    <!-- CARD 2: Zungoli -->
+    <a href="localita.html?id=zungoli" class="localita-card">
+
+      <div class="card-image-wrapper">
+        <img src="IMAGES/zungoli.png" alt="Foto Zungoli">
+      </div>
+
+      <div class="card-info-wrapper">
+        <div class="info-group">
+          <span class="info-label">Nome:</span>
+          <p class="info-value">Zungoli</p>
+          <hr class="info-line">
+        </div>
+
+        <div class="info-group">
+          <span class="info-label">Descrizione:</span>
+          <p class="info-value">Zungoli è un borgo a circa 60 km da Avellino, in Campania ...</p>
+          <hr class="info-line">
+        </div>
+
+        <div class="info-group">
+          <span class="info-label">Eventi:</span>
+          <p class="info-value">Borgo Fiorito - Festa Patronale San Crescenzio e Sant'Anna</p>
+          <hr class="info-line">
+        </div>
+      </div>
+
+    </a>
+
+  </section>
+
+</main>
+
+<!-- Collegamento al file JS -->
+<script src="../JAVASCRIPT/listalocalita.js"></script>
+</body>
+</html>

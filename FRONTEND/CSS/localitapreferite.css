@@ -1,0 +1,159 @@
+/* localitapreferite.css */
+
+.lista-page {
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #4a2c11;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: 20px;
+}
+
+.main-title {
+    font-size: 22px;
+    font-weight: normal;
+    color: #6b401e;
+    margin-bottom: 5px;
+}
+
+.main-divider {
+    border: none;
+    border-top: 1px solid #a3825f;
+    margin-bottom: 20px;
+}
+
+/* Sezione Ricerca e Filtri */
+.search-filter-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid #a57c54;
+    border-radius: 25px;
+    padding: 8px 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+#search-bar {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: transparent;
+    color: #4a2c11;
+}
+
+#search-bar::placeholder {
+    color: #a3825f;
+}
+
+.filter-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: transform 0.2s ease;
+}
+
+.filter-button:hover {
+    transform: scale(1.05);
+}
+
+/* Lista Scorrevole e Card */
+.scrollable-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.localita-card {
+    display: flex;
+    gap: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+}
+
+.localita-card:hover {
+    opacity: 0.9;
+}
+
+.card-image-wrapper {
+    flex-shrink: 0;
+}
+
+.card-image-wrapper img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #a57c54;
+}
+
+.card-info-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #5a381b;
+    margin-bottom: 2px;
+}
+
+.info-value {
+    margin: 0;
+    font-size: 15px;
+    color: #4a2c11;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-line {
+    border: none;
+    border-top: 1px solid #a3825f;
+    margin: 4px 0 0 0;
+    width: 100%;
+}
+
+/* Responsività per schermi più piccoli */
+@media (max-width: 600px) {
+    .localita-card {
+        flex-direction: column;
+    }
+
+    .card-image-wrapper img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+}
