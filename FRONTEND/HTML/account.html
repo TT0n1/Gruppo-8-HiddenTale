@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina Account - HiddenTale</title>
+
+  <!-- Collegamento ai CSS -->
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/account.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <a href="index.html" class="nav-item logo" style="text-decoration: none;">
+    <img src="IMAGES/Logo1.svg" alt="Logo">
+    <p>HiddenTale</p>
+  </a>
+  <a href="#" class="nav-item" style="text-decoration: none;">
+    <p>Itinerario</p>
+  </a>
+  <a href="listalocalita.html" class="nav-item" style="text-decoration: none;">
+    <p>Località</p>
+  </a>
+  <a href="listaeventi.html" class="nav-item" style="text-decoration: none;">
+    <p>Eventi</p>
+  </a>
+  <a href="account.html" class="nav-item account" style="text-decoration: none;">
+    <img src="IMAGES/UserCircle.svg" alt="Account">
+  </a>
+</div>
+
+<!-- CONTENUTO PRINCIPALE DELLA PAGINA ACCOUNT -->
+<main class="account-page">
+
+  <!-- TITOLO -->
+  <header class="account-header">
+    <h1 id="account-titolo" class="page-title">Pagina Account</h1>
+    <hr class="divider">
+  </header>
+
+  <!-- SEZIONE SUPERIORE: Immagine e Dati Profilo -->
+  <section class="account-top-section">
+
+    <!-- Immagine Profilo -->
+    <div class="account-image-wrapper">
+      <img id="account-img" src="IMAGES/profilo_mimmo.png" alt="Foto profilo utente">
+    </div>
+
+    <!-- Dati Account -->
+    <article class="account-dati-box">
+      <div class="dato-item">
+        <span class="dato-label">USERNAME :</span>
+        <span id="account-username" class="dato-valore">MimmoRossi_67</span>
+      </div>
+      <div class="dato-item">
+        <span class="dato-label">EMAIL:</span>
+        <span id="account-email" class="dato-valore">MimmoRossi67@gmail.it</span>
+      </div>
+
+      <button class="btn-modifica" aria-label="Modifica dati account">MODIFICA DATI</button>
+    </article>
+
+  </section>
+
+  <!-- SEZIONE INFERIORE: Menu Opzioni Rapide -->
+  <section class="account-bottom-section">
+
+    <button class="btn-opzione-larga" aria-label="Vai ai miei itinerari">
+      I MIEI ITINERARI
+    </button>
+
+    <button class="btn-opzione-larga" aria-label="Vai ai miei eventi">
+      I MIEI EVENTI
+    </button>
+
+    <button class="btn-opzione-larga" aria-label="Vai alle località preferite">
+      LOCALITÀ PREFERITE
+    </button>
+
+  </section>
+
+</main>
+
+</body>
+</html>
