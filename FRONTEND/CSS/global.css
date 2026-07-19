@@ -3,6 +3,26 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #F6EFD9;
 }
+.main-title {
+    color: #633A1C;
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 12px;
+    display: block; 
+    width: 100%;
+}
+
+.main-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 5px;   
+    right: 5px;  
+    height: 1px;
+    background-color: #633A1C;
+}
 
 .navbar {
     display: flex;

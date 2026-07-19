@@ -1,0 +1,217 @@
+.creazione-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Riga del Titolo dell'itinerario */
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.title-row label {
+    font-size: 1.3rem;
+    color: #633A1C;
+    white-space: nowrap;
+}
+
+/* Input personalizzati */
+.custom-input {
+    background-color: #FFFFFF;
+    border: 2px solid #a67c58;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    color: #4a3319;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-titolo {
+    width: 300px;
+}
+
+/* Griglia per Partenza e Arrivo */
+.form-grid-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 1.2rem;
+    color: #633A1C;
+}
+
+/* Gestione dell'input con la lente interna */
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.search-input-wrapper .input-search {
+    width: 100%;
+    padding-left: 45px; /* Crea lo spazio a sinistra per evitare sovrapposizioni */
+}
+
+/* Blocca e ridimensiona la lente d'ingrandimento */
+.search-input-wrapper .search-icon {
+    position: absolute;
+    left: 16px;
+    width: 18px !important;
+    height: 18px !important;
+    pointer-events: none;
+}
+
+/* Bottone Genera al centro */
+.center-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.btn-genera {
+    background-color: #d5b497;
+    border: 2px solid #a67c58;
+    color: #4a3319;
+    padding: 8px 35px;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background 0.2s ease;
+}
+
+.btn-genera:hover {
+    background-color: #c9a485;
+}
+
+/* Area Itinerario Proposto */
+.section-subtitle {
+    font-size: 1.3rem;
+    color: #633A1C;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.proposto-box {
+    border: 2px solid #a67c58;
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 20px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.tappa-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.tappa-chip {
+    background-color: #d5b497;
+    color: #4a3319;
+    padding: 6px 25px;
+    border-radius: 20px;
+    border: 2px solid #a67c58;
+    font-size: 1.1rem;
+    min-width: 120px;
+    text-align: center;
+}
+
+.tappa-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.action-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.action-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Colori specifici richiesti per la matita (giallo #B59652) */
+.btn-matita {
+    background-color: #F9F5EB;
+    border: 2px solid #B59652;
+}
+
+.btn-matita svg {
+    stroke: #B59652 !important;
+}
+
+/* Colori specifici richiesti per la X (Rosso #C23305) */
+.btn-elimina-tappa {
+    background-color: #FADBD8;
+    border: 2px solid #C23305;
+}
+
+/* Pulsanti in fondo alla pagina */
+.form-actions-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 40px;
+}
+
+.btn-final {
+    padding: 10px 45px;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    transition: opacity 0.2s ease;
+}
+
+.btn-final:hover {
+    opacity: 0.9;
+}
+
+/* Reset ha colore C23305 */
+.btn-reset {
+    background-color: #C23305;
+}
+
+/* Salva ha colore 6E8B3D */
+.btn-salva {
+    background-color: #6E8B3D;
+}

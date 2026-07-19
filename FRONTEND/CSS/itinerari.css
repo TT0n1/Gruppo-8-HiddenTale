@@ -1,0 +1,312 @@
+/* ==========================================
+   BARRA DI RICERCA E FILTRI
+   ========================================== */
+.search-filter-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.search-wrapper {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 12px 20px 12px 45px; 
+    font-size: 1rem;
+    border: 2px solid #4a3319;    
+    border-radius: 50px;          
+    background-color: #ffffff;
+    color: #4a3319;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    width: 18px;  
+    height: 18px;
+    pointer-events: none; 
+    stroke-width: 3.5;
+}
+
+.filter-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;               
+    color: #4a3319;               
+    transition: transform 0.1s ease, color 0.2s;
+}
+
+.filter-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.main-title {
+    color: #633A1C;
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 12px;
+    display: block; 
+    width: 100%;
+}
+
+.main-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 5px;   
+    right: 5px;  
+    height: 1px;
+    background-color: #633A1C;
+}
+
+/* ==========================================
+   LISTA ITINERARI E CARD (Corretto con la "o")
+   ========================================== */
+.itinerari-list {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.itinerario-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 14px 25px;
+    background-color: #d5b497;    
+    border: 2px solid #a67c58;    
+    border-radius: 30px;          
+    font-size: 1.1rem;
+    color: #4a3319;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.itinerario-card:hover {
+    background-color: #c9a485;
+}
+
+.itinerario-card:active {
+    transform: scale(0.99);       
+}
+
+.arrow-down-icon {
+    color: #4a3319;
+}
+
+/* ==========================================
+   BOTTONE CREA ITINERARIO
+   ========================================== */
+.bottom-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 50px;
+}
+
+.btn-crea {
+    padding: 12px 25px;
+    background-color: #d5b497;
+    border: 2px solid #a67c58;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #4a3319;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-crea:hover {
+    background-color: #c9a485;
+}
+
+/* ==========================================
+   STRUTTURA DEL POPUP (MODAL)
+   ========================================== */
+.modal {
+    display: none;                
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex;                
+}
+
+.modal-content {
+    background-color: #f9f3eb;    
+    padding: 30px;
+    border: 2px solid #a67c58;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #a67c58;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #4a3319;
+}
+
+.modal-body {
+    margin-top: 15px;
+    color: #4a3319;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   CONTENUTO INTERNO NUOVO POPUP
+   ========================================== */
+.popup-itinerary-detail {
+    color: #4a3319;
+}
+
+.popup-route-title {
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: #633A1C;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #a67c58;
+    padding-bottom: 4px;
+    width: fit-content;
+}
+
+.popup-info-line {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #a67c58;
+    padding-bottom: 4px;
+    width: fit-content;
+}
+
+.popup-section-label {
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Box scorrevole per le tappe */
+.itinerary-grid-box {
+    border: 2px solid #a67c58;
+    padding: 20px 15px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;                 
+    max-height: 240px;         
+    overflow-y: auto;          
+    padding-right: 15px;       
+    box-sizing: border-box;
+}
+
+.itinerary-grid-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 15px;
+    align-items: center;
+}
+
+.pill-box {
+    background-color: #d5b497; 
+    border: 2px solid #a67c58; 
+    color: #4a3319;
+    padding: 6px 12px;
+    border-radius: 20px;       
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.stage-name {
+    position: relative;
+}
+
+.itinerary-grid-row:not(:last-child) .stage-name::after {
+    content: "↓";
+    position: absolute;
+    bottom: -23px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #4a3319;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Stile Scrollbar */
+.itinerary-grid-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.itinerary-grid-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.itinerary-grid-box::-webkit-scrollbar-thumb {
+    background-color: #a67c58;
+    border-radius: 10px;
+}
+
+.popup-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-modify-itinerary {
+    padding: 10px 20px;
+    background-color: #d5b497;
+    border: 2px solid #a67c58;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: #4a3319;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-modify-itinerary:hover {
+    background-color: #c9a485;
+}
+
+.btn-modify-itinerary:active {
+    transform: scale(0.98);
+}

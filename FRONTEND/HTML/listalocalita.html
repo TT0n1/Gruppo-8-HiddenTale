@@ -10,19 +10,39 @@
     <link rel="stylesheet" href="../CSS/listalocalita.css">
 </head>
 <body>
+    <div class="navbar">
+    <a href="index.html" class="nav-item logo" style="text-decoration: none;">
+        <img src="IMAGES/Logo1.svg" alt="Logo">
+        <p>HiddenTale</p>
+    </a>
+    <a href="#" class="nav-item" style="text-decoration: none;">
+        <p>Itinerario</p>
+    </a>
+    <a href="listalocalita.html" class="nav-item" style="text-decoration: none;">
+        <p>Località</p>
+    </a>
+    <a href="listaeventi.html" class="nav-item" style="text-decoration: none;">
+        <p>Eventi</p>
+    </a>
+    <a href="#" class="nav-item account">
+        <img src="IMAGES/UserCircle.svg" alt="Account">
+    </a>
+</div>
+    <h1 class="main-title">Elenco delle località</h1>
 
     <main class="lista-page">
         
         <!-- TITOLO PAGINA -->
-        <h1 class="main-title">Elenco delle località</h1>
+        
 
         <!-- BARRA DI RICERCA + BOTTONE FILTRO -->
         <section class="search-filter-section">
             <div class="search-wrapper">
-                <!-- La lente di ingrandimento possiamo metterla come sfondo CSS o come icona -->
-                <span class="search-icon">🔍</span>
-                <input type="text" id="search-bar" placeholder="Cerca una località...">
-            </div>
+        <!-- Sostituita l'emoji con il tag img per il file SVG della lente -->
+        <img src="./IMAGES/lente.svg" alt="Cerca" class="search-icon" width="18" height="18">
+        
+        <input type="text" id="search-bar" placeholder="Cerca una località...">
+    </div>
             
             <!-- Bottone Filtro con l'icona degli slider di Figma -->
             <button id="filter-btn" class="filter-button" aria-label="Filtra località">

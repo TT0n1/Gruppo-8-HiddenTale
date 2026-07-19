@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiddenTale - I miei itinerari</title>
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/itinerari.css">
+</head>
+<body>
+    <div class="navbar">
+    <a href="index.html" class="nav-item logo" style="text-decoration: none;">
+        <img src="IMAGES/Logo1.svg" alt="Logo">
+        <p>HiddenTale</p>
+    </a>
+    <a href="#" class="nav-item" style="text-decoration: none;">
+        <p>Itinerario</p>
+    </a>
+    <a href="listalocalita.html" class="nav-item" style="text-decoration: none;">
+        <p>Località</p>
+    </a>
+    <a href="listaeventi.html" class="nav-item" style="text-decoration: none;">
+        <p>Eventi</p>
+    </a>
+    <a href="#" class="nav-item account">
+        <img src="IMAGES/UserCircle.svg" alt="Account">
+    </a>
+</div>
+
+    <!-- Qui puoi lasciare il tuo header/navbar attuale -->
+
+    <main class="lista-page">
+        <h1 class="main-title">I miei itinerari</h1>
+        
+        <section class="search-filter-section">
+    <div class="search-wrapper">
+        <!-- Sostituita l'emoji con il tag img per il file SVG della lente -->
+        <img src="./IMAGES/lente.svg" alt="Cerca" class="search-icon" width="18" height="18">
+        
+        <input type="text" id="search-bar" placeholder="Cerca una località...">
+    </div>
+    
+    <!-- Bottone Filtro con l'icona degli slider di Figma -->
+    <button id="filter-btn" class="filter-button" aria-label="Filtra località">
+        <img src="./IMAGES/iconafiltro.svg" alt="Filtri" width="28" height="28">
+    </button>
+</section>
+
+        <!-- Lista itinerari con il box configurato come bottone -->
+        <div class="itinerari-list">
+            <button class="itinerario-card" id="btn-open-popup">
+                <span>Banzano-Caliano</span>
+                <svg class="arrow-down-icon" viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M19 9l-7 7-7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Bottone in basso a destra per creare l'itinerario -->
+        <div class="bottom-actions">
+            <button class="btn-crea">Crea Itinerario</button>
+        </div>
+
+        <!-- FINESTRA POPUP (Invisibile all'inizio) -->
+        <!-- FINESTRA POPUP (Invisibile all'inizio) -->
+<div id="itinerary-modal" class="modal">
+    <div class="modal-content">
+        <!-- Lasciamo la X per chiudere il popup -->
+        <span class="close-btn">&times;</span>
+        
+        <!-- INIZIO NUOVO BLOCCO DATI -->
+        <div class="popup-itinerary-detail">
+            <!-- Titolo principale e info partenza/arrivo -->
+            <h2 class="popup-route-title">Montepulciano-San Quirico d'Orcia</h2>
+            
+            <div class="popup-info-line">Partenza: Montepulciano</div>
+            <div class="popup-info-line">Arrivo: San Quirico d'Orcia</div>
+            
+            <h3 class="popup-section-label">Itinerario:</h3>
+            
+            <!-- Box Tabella delle tappe -->
+            <div class="itinerary-grid-box">
+                <!-- Tappa 1 -->
+                <div class="itinerary-grid-row">
+                    <div class="pill-box stage-name">Monticchiello</div>
+                    <div class="pill-box stage-time">9:30</div>
+                    <div class="pill-box stage-dist">8Km</div>
+                </div>
+                
+                <!-- Tappa 2 -->
+                <div class="itinerary-grid-row">
+                    <div class="pill-box stage-name">Pienza</div>
+                    <div class="pill-box stage-time">11:30</div>
+                    <div class="pill-box stage-dist">7Km</div>
+                </div>
+                
+                <!-- Tappa 3 -->
+                <div class="itinerary-grid-row">
+                    <div class="pill-box stage-name">Cappella di Vitaleta</div>
+                    <div class="pill-box stage-time">13:00</div>
+                    <div class="pill-box stage-dist">4.5Km</div>
+                </div>
+            </div>
+            
+            <!-- Area bottone di modifica inferiore -->
+            <div class="popup-footer-actions">
+                <button class="btn-modify-itinerary">Modifica Itinerario</button>
+            </div>
+        </div>
+        <!-- FINE NUOVO BLOCCO DATI -->
+
+    </div>
+</div>
+    </main>
+
+    <script src="../JAVASCRIPT/itinerari.js"></script>
+</body>
+</html>
