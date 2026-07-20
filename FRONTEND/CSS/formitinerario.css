@@ -215,3 +215,51 @@
 .btn-salva {
     background-color: #6E8B3D;
 }
+/* Stile Modal Successo */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+/* Classe aggiunta via JS per mostrare il popup */
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background-color: #FAF6EE; /* Colore di sfondo in linea con il tema */
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-card {
+    transform: translateY(0);
+}
+
+.modal-card h3 {
+    margin-bottom: 10px;
+    color: #633A1C;
+}
+
+.modal-card p {
+    margin-bottom: 20px;
+    color: #555;
+}
