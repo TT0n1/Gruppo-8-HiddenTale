@@ -1,0 +1,173 @@
+/* forminformazioni.css */
+
+.form-page {
+    background-color: #f7eedb;
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #4a2c11;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: 15px;
+}
+
+.page-title {
+    font-size: 22px;
+    font-weight: normal;
+    color: #6b401e;
+    margin-bottom: 5px;
+}
+
+.main-divider {
+    border: none;
+    border-top: 1px solid #a3825f;
+    margin-bottom: 25px;
+}
+
+.informazioni-form-container {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+}
+
+.form-left-col {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-right-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* Riga nome */
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    font-weight: bold;
+    color: #5a381b;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.form-row input[type="text"] {
+    flex: 1;
+    padding: 6px 15px;
+    border: 2px solid #a57c54;
+    border-radius: 20px;
+    background-color: #ffffff;
+    color: #4a2c11;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-row input[type="text"]::placeholder {
+    color: #a3825f;
+}
+
+/* Divisore sotto il nome */
+.input-divider {
+    border: none;
+    border-top: 1px solid #a3825f;
+    margin: 10px 0 25px 0;
+    width: 100%;
+}
+
+/* Riga Textarea */
+.column-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.descrizione-label {
+    font-weight: bold;
+    color: #5a381b;
+    font-size: 16px;
+}
+
+.column-row textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #a57c54;
+    border-radius: 15px;
+    background-color: #ffffff;
+    color: #4a2c11;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.column-row textarea::placeholder {
+    color: #a3825f;
+}
+
+/* Box Immagine */
+.image-upload-box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 320px;
+    border: 2px solid #a57c54;
+    border-radius: 15px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #a3825f;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+
+/* Bottone Aggiungi */
+.btn-aggiungi {
+    background-color: #ceaf8e;
+    border: 2px solid #a57c54;
+    border-radius: 20px;
+    padding: 12px 24px;
+    font-weight: bold;
+    color: #4a2c11;
+    cursor: pointer;
+    font-size: 14px;
+    align-self: flex-end;
+}
+
+.btn-aggiungi:hover {
+    background-color: #c09d7a;
+}
+
+/* Responsività */
+@media (max-width: 768px) {
+    .informazioni-form-container {
+        flex-direction: column;
+    }
+
+    .form-right-col {
+        align-items: center;
+        gap: 20px;
+    }
+
+    .image-upload-box {
+        align-self: center;
+    }
+
+    .btn-aggiungi {
+        align-self: stretch;
+    }
+}
