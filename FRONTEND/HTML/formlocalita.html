@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Informazioni - HiddenTale</title>
+
+    <!-- Collegamento ai CSS -->
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/formlocalita.css">
+</head>
+<body>
+
+<!-- Contenitore in cui verrà caricata la navbar -->
+<div id="navbar-container"></div>
+
+<!-- Richiamo dello script per caricare la navbar -->
+<script src="../../JAVASCRIPT/navbar.js"></script>
+
+<!-- CONTENUTO PRINCIPALE -->
+<main class="form-page">
+
+    <header class="page-header">
+        <h1 class="page-title">Form per nuove informazioni</h1>
+        <hr class="main-divider">
+    </header>
+
+    <!-- IL FORM -->
+    <form action="#" method="POST" class="informazioni-form-container">
+
+        <!-- COLONNA SINISTRA: Input Testuali -->
+        <div class="form-left-col">
+
+            <!-- Riga: Nome -->
+            <div class="form-row">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Inserire nome">
+            </div>
+
+            <hr class="input-divider">
+
+            <!-- Riga: Informazione/Aneddoto -->
+            <div class="form-row column-row">
+                <label for="informazione" class="descrizione-label">Informazione/Aneddoto</label>
+                <textarea id="informazione" placeholder="Inserire informazioni" rows="12"></textarea>
+            </div>
+
+        </div>
+
+        <!-- COLONNA DESTRA: Immagine e Bottone -->
+        <div class="form-right-col">
+
+            <!-- Box Caricamento Immagine -->
+            <div class="image-upload-box">
+                <span>Inserire<br>immagine</span>
+            </div>
+
+            <!-- Bottone Submit -->
+            <button type="submit" class="btn-aggiungi">Aggiungi informazioni</button>
+
+        </div>
+
+    </form>
+
+</main>
+
+</body>
+</html>
