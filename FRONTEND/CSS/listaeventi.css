@@ -2,7 +2,6 @@
    LAYOUT GENERALE DELLA PAGINA
    ========================================== */
 .lista-page {
-    max-width: 800px; /* Stringiamo un po' la pagina per farla somigliare al layout mobile/tablet di Figma */
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f3eb; /* Il colore di sfondo crema del vostro design */

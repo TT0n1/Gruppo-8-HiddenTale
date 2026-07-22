@@ -29,7 +29,7 @@
     flex: 1; /* Prende metà dello spazio disponibile */
 }
 
-.main-image-wrapper img {
+.main-image-wrapper > img {
     width: 100%;
     border-radius: 15px; /* Angoli smussati come Figma */
     object-fit: cover;
@@ -40,13 +40,22 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    background: white; /* O trasparente se l'SVG ha già lo sfondo */
+    background: white;
     border: none;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.favorite-btn img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
 }
 
 .tradizione-box {

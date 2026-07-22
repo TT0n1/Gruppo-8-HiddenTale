@@ -22,7 +22,7 @@
 
   <!-- TITOLO PAGINA -->
   <header class="page-header">
-    <h1 class="main-title">Località preferita</h1>
+    <h1 class="main-title">Località preferite</h1>
     <hr class="main-divider">
   </header>
 
@@ -30,7 +30,6 @@
   <section class="search-filter-section">
     <div class="search-wrapper">
                 <span class="search-icon">
-                    <!-- Sostituisci con l'icona SVG o img della lente -->
                     <img src="IMAGES/search-icon.svg" alt="Cerca" width="20" height="20">
                 </span>
       <input type="text" id="search-bar" placeholder="">
@@ -41,72 +40,64 @@
     </button>
   </section>
 
-  <!-- LISTA SCORREVOLE DELLE LOCALITÀ -->
+  <!-- LISTA SCORREVOLE DELLE LOCALITÀ (Svuotata dalle card statiche) -->
   <section id="lista-localita" class="scrollable-list">
-
-    <!-- CARD 1: Calvanico -->
-    <a href="localita.html?id=calvanico" class="localita-card">
-
-      <div class="card-image-wrapper">
-        <img src="IMAGES/calvanico.png" alt="Foto Calvanico">
-      </div>
-
-      <div class="card-info-wrapper">
-        <div class="info-group">
-          <span class="info-label">Nome:</span>
-          <p class="info-value">Calvanico</p>
-          <hr class="info-line">
-        </div>
-
-        <div class="info-group">
-          <span class="info-label">Descrizione:</span>
-          <p class="info-value">L'abitato di Calvanico è circondato da montagne su quasi ...</p>
-          <hr class="info-line">
-        </div>
-
-        <div class="info-group">
-          <span class="info-label">Eventi:</span>
-          <p class="info-value">Calvanico in Musica - Sagra della Castagna</p>
-          <hr class="info-line">
-        </div>
-      </div>
-
-    </a>
-
-    <!-- CARD 2: Zungoli -->
-    <a href="localita.html?id=zungoli" class="localita-card">
-
-      <div class="card-image-wrapper">
-        <img src="IMAGES/zungoli.png" alt="Foto Zungoli">
-      </div>
-
-      <div class="card-info-wrapper">
-        <div class="info-group">
-          <span class="info-label">Nome:</span>
-          <p class="info-value">Zungoli</p>
-          <hr class="info-line">
-        </div>
-
-        <div class="info-group">
-          <span class="info-label">Descrizione:</span>
-          <p class="info-value">Zungoli è un borgo a circa 60 km da Avellino, in Campania ...</p>
-          <hr class="info-line">
-        </div>
-
-        <div class="info-group">
-          <span class="info-label">Eventi:</span>
-          <p class="info-value">Borgo Fiorito - Festa Patronale San Crescenzio e Sant'Anna</p>
-          <hr class="info-line">
-        </div>
-      </div>
-
-    </a>
-
+    <!-- Le card verranno inserite qui dinamicamente dal JS -->
   </section>
 
 </main>
 
-<!-- Collegamento al file JS -->
-<script src="../JAVASCRIPT/listalocalita.js"></script>
+<!-- Inserimento database finto -->
+<script src="../JAVASCRIPT/dati_localita.js"></script>
+
+<!-- Script per generare dinamicamente solo le località salvate nei preferiti -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const listaContainer = document.getElementById("lista-localita");
+
+    // Recupera l'array di nomi delle località salvate in preferiti.js
+    const preferiti = JSON.parse(sessionStorage.getItem("localitaPreferite")) || [];
+
+    // Se non ci sono preferiti, mostra un messaggio
+    if (preferiti.length === 0) {
+      listaContainer.innerHTML = "<p style='text-align: center; margin-top: 20px;'>Nessuna località aggiunta ai preferiti.</p>";
+      return;
+    }
+
+    // Cicla il database e crea le card solo per i titoli presenti nell'array preferiti
+    for (const [id, dati] of Object.entries(databaseLocalita)) {
+      if (preferiti.includes(dati.titolo)) {
+        const cardLink = document.createElement("a");
+        cardLink.href = `localita.html?id=${id}`;
+        cardLink.className = "localita-card";
+
+        cardLink.innerHTML = `
+              <div class="card-image-wrapper">
+                <img src="${dati.immaginePrincipale}" alt="Foto di ${dati.titolo}">
+              </div>
+              <div class="card-info-wrapper">
+                <div class="info-group">
+                  <span class="info-label">Nome:</span>
+                  <p class="info-value">${dati.titolo}</p>
+                  <hr class="info-line">
+                </div>
+                <div class="info-group">
+                  <span class="info-label">Descrizione:</span>
+                  <p class="info-value">${dati.descrizione}</p>
+                  <hr class="info-line">
+                </div>
+                <div class="info-group">
+                  <span class="info-label">Provincia:</span>
+                  <p class="info-value">${dati.provincia}</p>
+                  <hr class="info-line">
+                </div>
+              </div>
+            `;
+
+        listaContainer.appendChild(cardLink);
+      }
+    }
+  });
+</script>
 </body>
 </html>

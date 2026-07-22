@@ -1,63 +1,100 @@
-<head>
-    <link rel="stylesheet" href="../CSS/global.css">
-        <link rel="stylesheet" href="../CSS/localita.css">
+    <head>
+        <link rel="stylesheet" href="../CSS/global.css">
+            <link rel="stylesheet" href="../CSS/localita.css">
     </head>
+
     <body>
-    <!-- Contenitore in cui verrà caricata la navbar -->
-    <div id="navbar-container"></div>
+        <!-- Contenitore in cui verrà caricata la navbar -->
+        <div id="navbar-container"></div>
 
-    <!-- Richiamo dello script per caricare la navbar -->
-    <script src="../JAVASCRIPT/navbar.js"></script>
+        <!-- Richiamo dello script per caricare la navbar -->
+        <script src="../JAVASCRIPT/navbar.js"></script>
 
-<h1 id="localita-titolo" class="main-title">Nome Località</h1>
+        <h1 id="localita-titolo" class="main-title">Nome Località</h1>
 
-<main class="localita-page">
-    
-    
-    
+        <main class="localita-page">
 
-    <!-- BLOCCO 1: Immagine Principale + Testo Tradizione -->
-    <section class="intro-section">
-        <div class="main-image-wrapper">
-            <img id="localita-img-principale" src="IMAGES\placeholder.jpg" alt="Immagine della località">
-            <!-- mettere immagine cuore pieno quaando cliccato-->
-            <button class="favorite-btn" aria-label="Aggiungi ai preferiti">
-    <img src="IMAGES/cuore_vuoto.svg" alt="Icona cuore">
-</button>
-        </div>
 
-        <article class="tradizione-box">
-            <h2>Tradizione</h2>
-            <p id="localita-descrizione"></p>
-        </article>
-    </section>
 
-    <!-- BLOCCO 2: Dati Statistici + Stemma -->
-    <section class="data-section">
-        <div class="stats-box">
-            <div class="stat-item">
-                <p><strong>N° Abitanti:</strong> <span id="localita-abitanti">-</span></p>
+
+        <!-- BLOCCO 1: Immagine Principale + Testo Tradizione -->
+        <section class="intro-section">
+            <div class="main-image-wrapper">
+                <img id="localita-img-principale" src="IMAGES\placeholder.jpg" alt="Immagine della località">
+                <!-- mettere immagine cuore pieno quaando cliccato-->
+                <button class="favorite-btn" aria-label="Aggiungi ai preferiti">
+                    <img src="IMAGES/cuore_vuoto.svg" alt="Icona cuore">
+                </button>
             </div>
-            <div class="stat-item">
-                <p><strong>Provincia:</strong> <span id="localita-provincia">-</span></p>
-            </div>
-        </div>
-        
-        <div class="stemma-box">
-            <img id="localita-stemma" src="images/placeholder-stemma.png" alt="Stemma del Comune">
-        </div>
-    </section>
 
-    <!-- BLOCCO 3: Galleria Fotografica -->
-    <section class="gallery-section">
-        <!-- Il contenitore della griglia rimane vuoto o con immagini fittizie; 
-             JS potrà svuotarlo e riempirlo con i tag img corretti della località scelta -->
-        <div id="localita-galleria" class="gallery-grid">
-            
-            <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 1">
-            <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 2">
-            <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 3">
-        </div>
-    </section>
-    
-</main>
+            <article class="tradizione-box">
+                <h2>Tradizione</h2>
+                <p id="localita-descrizione"></p>
+            </article>
+        </section>
+
+        <!-- BLOCCO 2: Dati Statistici + Stemma -->
+        <section class="data-section">
+            <div class="stats-box">
+                <div class="stat-item">
+                    <p><strong>N° Abitanti:</strong> <span id="localita-abitanti">-</span></p>
+                </div>
+                <div class="stat-item">
+                    <p><strong>Provincia:</strong> <span id="localita-provincia">-</span></p>
+                </div>
+            </div>
+
+            <div class="stemma-box">
+                <img id="localita-stemma" src="images/placeholder-stemma.png" alt="Stemma del Comune">
+            </div>
+        </section>
+
+        <!-- BLOCCO 3: Galleria Fotografica -->
+        <section class="gallery-section">
+            <!-- Il contenitore della griglia rimane vuoto o con immagini fittizie;
+                 JS potrà svuotarlo e riempirlo con i tag img corretti della località scelta -->
+            <div id="localita-galleria" class="gallery-grid">
+
+                <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 1">
+                <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 2">
+                <img class="gallery-thumb" src="images/placeholder-thumb.jpg" alt="Foto galleria 3">
+            </div>
+        </section>
+
+        </main>
+
+        <!-- 1. Aggiungi il database finto per primo -->
+        <script src="../JAVASCRIPT/dati_localita.js"></script>
+
+        <!-- 2. Aggiungi lo script che popola la pagina leggendo l'URL -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Estrae l'id (es: ?id=roma)
+                const urlParams = new URLSearchParams(window.location.search);
+                const idLocalita = urlParams.get("id");
+
+                // Se l'id non c'è o non esiste nel file js, mostra un errore
+                if (!idLocalita || !databaseLocalita[idLocalita]) {
+                    document.getElementById("localita-titolo").innerText = "Località non trovata";
+                    document.getElementById("localita-descrizione").innerText = "Nessun dato disponibile per questa selezione.";
+                    return;
+                }
+
+                // Prende i dati corrispondenti a quell'id
+                const dati = databaseLocalita[idLocalita];
+
+                // Inserisce i testi
+                document.getElementById("localita-titolo").innerText = dati.titolo;
+                document.getElementById("localita-descrizione").innerText = dati.descrizione;
+                document.getElementById("localita-abitanti").innerText = dati.abitanti;
+                document.getElementById("localita-provincia").innerText = dati.provincia;
+
+                // Inserisce le immagini
+                document.getElementById("localita-img-principale").src = dati.immaginePrincipale;
+                document.getElementById("localita-stemma").src = dati.stemma;
+            });
+        </script>
+
+        <!-- 3. Mantieni lo script dei preferiti per ultimo in modo che legga il titolo aggiornato -->
+        <script src="../JAVASCRIPT/preferiti.js"></script>
+    </body>
