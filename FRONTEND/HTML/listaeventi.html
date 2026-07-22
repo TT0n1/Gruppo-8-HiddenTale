@@ -65,80 +65,13 @@
         </div>
     </section>
 
-    <!-- LISTA SCORREVOLE DEGLI EVENTI -->
+    <!-- LISTA SCORREVOLE DEGLI EVENTI (Svuotata per la generazione dinamica) -->
     <section id="lista-eventi" class="scrollable-list">
-
-        <!-- CARD EVENTO 1: Festa della Zeppola -->
-        <a href="evento.html?id=1" class="evento-card">
-            <div class="card-image-wrapper">
-                <img src="IMAGES/festa_della_zeppola.png" alt="Locandina Festa della Zeppola">
-            </div>
-
-            <div class="card-info-wrapper">
-                <div class="info-group">
-                    <span class="info-label">Nome:</span>
-                    <p class="info-value">Festa della Zeppola</p>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Descrizione:</span>
-                    <p class="info-value">La Festa della Zeppola di Montoro 2026 torna al Parco del Sole...</p>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Indirizzo:</span>
-                    <p class="info-value">Sant'Eustachio (AV)</p>
-                </div>
-            </div>
-        </a>
-
-        <!-- CARD EVENTO 2: Sagra del Fusillo -->
-        <a href="evento.html?id=2" class="evento-card">
-            <div class="card-image-wrapper">
-                <img src="IMAGES/sagra_del_fusillo_al_tegamino.png" alt="Locandina Sagra del Fusillo">
-            </div>
-
-            <div class="card-info-wrapper">
-                <div class="info-group">
-                    <span class="info-label">Nome:</span>
-                    <p class="info-value">Sagra del Fusillo al Tegamino</p>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Descrizione:</span>
-                    <p class="info-value">La manifestazione celebra il fusillo locale servito in un caratteristico...</p>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Indirizzo:</span>
-                    <p class="info-value">Piazza La Rocca, 84090 San Mango Piemonte SA.</p>
-                </div>
-            </div>
-        </a>
-
-        <!-- CARD EVENTO 3: Sagra del Catanazzo -->
-        <a href="evento.html?id=3" class="evento-card">
-            <div class="card-image-wrapper">
-                <img src="IMAGES/sagra_del_catanazzo.png" alt="Locandina Sagra del Catanazzo">
-            </div>
-
-            <div class="card-info-wrapper">
-                <div class="info-group">
-                    <span class="info-label">Nome:</span>
-                    <p class="info-value">Sagra del Catanazzo</p>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Descrizione:</span>
-                    <p class="info-value">Il protagonista della festa è il Catanazzo, un piatto della cucina...</p>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Indirizzo:</span>
-                    <p class="info-value">Chiesa di Santa Maria dei Campi, Giovi SA</p>
-                </div>
-            </div>
-        </a>
-
+        <!-- Le card verranno inserite qui dinamicamente dal JS -->
     </section>
 
     <!-- BOTTONE INFO IN FONDO ALLA PAGINA -->
     <section class="footer-action-section">
-        <!-- Questo collegherà al Form dell'Evento quando lo creerete (presumibilmente formevento.html) -->
         <a href="formevento.html" class="info-form-btn">
             HAI UN EVENTO CHE VUOI SPONSORIZZARE?<br>
             CLICCA QUESTO BOTTONE PER ANDARE SUL FORM
@@ -146,6 +79,14 @@
     </section>
 
 </main>
+
+<!-- Inserimento database eventi -->
+<script src="../JAVASCRIPT/dati_eventi.js"></script>
+
+<!-- Script per generare dinamicamente la lista degli eventi -->
+
+<!-- Script per generare dinamicamente la lista degli eventi -->
+<script src="../JAVASCRIPT/listaeventi.js"></script>
 
 </body>
 </html>

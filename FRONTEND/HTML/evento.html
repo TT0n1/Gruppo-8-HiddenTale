@@ -72,5 +72,40 @@
 
 </main>
 
+<!-- 1. Richiamo del database finto degli eventi -->
+<script src="../JAVASCRIPT/dati_eventi.js"></script>
+
+<!-- 2. Script per popolare dinamicamente i dati -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Estrae l'id dall'URL (es: ?id=2)
+        const urlParams = new URLSearchParams(window.location.search);
+        const idEvento = urlParams.get("id");
+
+        // Se l'id non esiste o è sbagliato, mostra un errore
+        if (!idEvento || !databaseEventi[idEvento]) {
+            document.getElementById("evento-titolo").innerText = "Evento non trovato";
+            document.getElementById("evento-descrizione").innerText = "Nessun dato disponibile per questa selezione.";
+            return;
+        }
+
+        // Prende i dati corrispondenti a quell'id
+        const dati = databaseEventi[idEvento];
+
+        // Inserisce i testi base
+        document.getElementById("evento-titolo").innerText = dati.nome;
+        document.getElementById("evento-luogo").innerText = dati.indirizzo;
+        document.getElementById("evento-descrizione").innerText = dati.descrizione;
+
+        // Inserisce l'immagine
+        document.getElementById("evento-img").src = dati.immagineLocandina;
+
+        // Inserisce i dati extra (con un fallback nel caso in cui tu non li abbia ancora inseriti nel DB)
+        document.getElementById("evento-data").innerText = dati.data || "Data non specificata";
+        document.getElementById("evento-prezzo").innerText = dati.prezzo || "Non specificato";
+        document.getElementById("evento-posti").innerText = dati.posti || "N/D";
+    });
+</script>
+
 </body>
 </html>
