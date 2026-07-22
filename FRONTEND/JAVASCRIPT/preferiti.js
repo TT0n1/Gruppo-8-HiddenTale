@@ -1,41 +1,59 @@
 document.addEventListener("DOMContentLoaded", function() {
     const favoriteBtn = document.querySelector(".favorite-btn");
+    if (!favoriteBtn) return;
+
     const cuoreImg = favoriteBtn.querySelector("img");
+    const urlParams = new URLSearchParams(window.location.search);
+    const idLocalita = urlParams.get("id");
 
-    // Prende il nome della località dal titolo della pagina (es. "Roma", "Milano")
-    const titoloLocalita = document.getElementById("localita-titolo").innerText.trim();
+    if (!idLocalita) return;
 
-    // Recupera l'array dei preferiti salvati in sessione, o crea un array vuoto se non esiste
+    let nomeLocalita = "";
+
+    // 1. Identifica il nome dal database statico
+    if (typeof databaseLocalita !== 'undefined' && databaseLocalita[idLocalita]) {
+        nomeLocalita = databaseLocalita[idLocalita].titolo || databaseLocalita[idLocalita].nome;
+    }
+
+    // 2. Se non presente, cerca nei dati aggiunti in sessione
+    if (!nomeLocalita) {
+        const localitaSessione = JSON.parse(sessionStorage.getItem('localitaUtente')) || [];
+        const datiSessione = localitaSessione.find(l => l.id === idLocalita);
+        if (datiSessione) {
+            nomeLocalita = datiSessione.nome || datiSessione.titolo;
+        }
+    }
+
+    // 3. Fallback sull'HTML nel caso manchino i dati
+    if (!nomeLocalita) {
+        const titoloElement = document.getElementById("localita-titolo");
+        if (titoloElement) {
+            nomeLocalita = titoloElement.innerText.trim();
+        }
+    }
+
+    if (!nomeLocalita) return;
+
     let preferiti = JSON.parse(sessionStorage.getItem("localitaPreferite")) || [];
 
-    // 1. Al caricamento della pagina: se la località è già nei preferiti, mostra il cuore pieno
-    if (preferiti.includes(titoloLocalita)) {
+    if (preferiti.includes(nomeLocalita)) {
         cuoreImg.setAttribute("src", "IMAGES/cuore_pieno.svg");
     }
 
-    // 2. Al click sul bottone: cambia immagine e aggiorna i preferiti in sessione
     favoriteBtn.addEventListener("click", function() {
         const currentSrc = cuoreImg.getAttribute("src");
 
         if (currentSrc.includes("cuore_vuoto.svg")) {
-            // Selezionato: metti cuore pieno e aggiungi alla lista
             cuoreImg.setAttribute("src", "IMAGES/cuore_pieno.svg");
-
-            if (!preferiti.includes(titoloLocalita)) {
-                preferiti.push(titoloLocalita);
+            if (!preferiti.includes(nomeLocalita)) {
+                preferiti.push(nomeLocalita);
             }
         } else {
-            // Deselezionato: metti cuore vuoto e rimuovi dalla lista
             cuoreImg.setAttribute("src", "IMAGES/cuore_vuoto.svg");
-
-            // Filtra l'array mantenendo solo le località diverse da quella attuale
-            preferiti = preferiti.filter(nome => nome !== titoloLocalita);
+            preferiti = preferiti.filter(nome => nome !== nomeLocalita);
         }
 
-        // Salva la lista aggiornata nel sessionStorage
         sessionStorage.setItem("localitaPreferite", JSON.stringify(preferiti));
-
-        // Stampa in console (F12) per verificare che la lista si aggiorni correttamente
         console.log("Preferiti salvati in sessione:", preferiti);
     });
 });

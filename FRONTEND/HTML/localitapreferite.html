@@ -54,49 +54,80 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const listaContainer = document.getElementById("lista-localita");
+    if (!listaContainer) return;
 
-    // Recupera l'array di nomi delle località salvate in preferiti.js
+    // Recupera l'array di nomi delle località salvate nei preferiti
     const preferiti = JSON.parse(sessionStorage.getItem("localitaPreferite")) || [];
 
     // Se non ci sono preferiti, mostra un messaggio
     if (preferiti.length === 0) {
-      listaContainer.innerHTML = "<p style='text-align: center; margin-top: 20px;'>Nessuna località aggiunta ai preferiti.</p>";
+      listaContainer.innerHTML = "<p style='text-align: center; margin-top: 20px; color: #4a3728;'>Nessuna località aggiunta ai preferiti.</p>";
       return;
     }
 
-    // Cicla il database e crea le card solo per i titoli presenti nell'array preferiti
-    for (const [id, dati] of Object.entries(databaseLocalita)) {
-      if (preferiti.includes(dati.titolo)) {
-        const cardLink = document.createElement("a");
-        cardLink.href = `localita.html?id=${id}`;
-        cardLink.className = "localita-card";
+    // 1. Raccoglie le località dal database statico
+    let arrayStatico = typeof databaseLocalita !== 'undefined' ? Object.entries(databaseLocalita).map(([id, dati]) => ({
+      id: id,
+      titolo: dati.titolo || dati.nome,
+      descrizione: dati.descrizione || dati.informazione,
+      provincia: dati.provincia || "Non specificata",
+      immaginePrincipale: dati.immaginePrincipale || dati.immagine || '../IMAGES/placeholder.jpg'
+    })) : [];
 
-        cardLink.innerHTML = `
-              <div class="card-image-wrapper">
-                <img src="${dati.immaginePrincipale}" alt="Foto di ${dati.titolo}">
-              </div>
-              <div class="card-info-wrapper">
-                <div class="info-group">
-                  <span class="info-label">Nome:</span>
-                  <p class="info-value">${dati.titolo}</p>
-                  <hr class="info-line">
-                </div>
-                <div class="info-group">
-                  <span class="info-label">Descrizione:</span>
-                  <p class="info-value">${dati.descrizione}</p>
-                  <hr class="info-line">
-                </div>
-                <div class="info-group">
-                  <span class="info-label">Provincia:</span>
-                  <p class="info-value">${dati.provincia}</p>
-                  <hr class="info-line">
-                </div>
-              </div>
-            `;
+    // 2. Raccoglie le località salvate in sessione (create dall'utente)
+    const localitaSessione = JSON.parse(sessionStorage.getItem('localitaUtente')) || [];
+    const arraySessione = localitaSessione.map(loc => ({
+      id: loc.id,
+      titolo: loc.nome || loc.titolo || "Senza Titolo",
+      descrizione: loc.informazione || loc.descrizione || "Nessuna descrizione",
+      provincia: loc.provincia || "Non specificata",
+      immaginePrincipale: loc.immagine || loc.immaginePrincipale || '../IMAGES/placeholder.jpg'
+    }));
 
-        listaContainer.appendChild(cardLink);
-      }
+    // 3. Unisce le due liste
+    const tutteLeLocalita = arrayStatico.concat(arraySessione);
+
+    // 4. Filtra tenendo solo quelle il cui nome è presente nell'array dei preferiti
+    const preferiteTrovate = tutteLeLocalita.filter(loc => preferiti.includes(loc.titolo));
+
+    if (preferiteTrovate.length === 0) {
+      listaContainer.innerHTML = "<p style='text-align: center; margin-top: 20px; color: #4a3728;'>Nessuna località aggiunta ai preferiti.</p>";
+      return;
     }
+
+    listaContainer.innerHTML = "";
+
+    // 5. Crea le card per le località preferite trovate
+    preferiteTrovate.forEach(dati => {
+      const cardLink = document.createElement("a");
+      cardLink.href = `localita.html?id=${dati.id}`;
+      cardLink.className = "localita-card";
+
+      cardLink.innerHTML = `
+        <div class="card-image-wrapper">
+          <img src="${dati.immaginePrincipale}" alt="Foto di ${dati.titolo}">
+        </div>
+        <div class="card-info-wrapper">
+          <div class="info-group">
+            <span class="info-label">Nome:</span>
+            <p class="info-value">${dati.titolo}</p>
+            <hr class="info-line">
+          </div>
+          <div class="info-group">
+            <span class="info-label">Descrizione:</span>
+            <p class="info-value">${dati.descrizione}</p>
+            <hr class="info-line">
+          </div>
+          <div class="info-group">
+            <span class="info-label">Provincia:</span>
+            <p class="info-value">${dati.provincia}</p>
+            <hr class="info-line">
+          </div>
+        </div>
+      `;
+
+      listaContainer.appendChild(cardLink);
+    });
   });
 </script>
 </body>
