@@ -294,18 +294,19 @@
 
 .btn-modify-itinerary {
     padding: 10px 20px;
-    background-color: #d5b497;
-    border: 2px solid #a67c58;
+    background-color: #C23305;    /* Sfondo rosso come btn-reset */
+    border: none;                 /* Rimosso il bordo marrone */
     border-radius: 20px;
     font-size: 0.95rem;
-    color: #4a3319;
+    color: #FFFFFF;               /* Testo bianco */
     cursor: pointer;
     font-weight: 500;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: opacity 0.2s ease, transform 0.1s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Leggera ombra per dare profondità */
 }
 
 .btn-modify-itinerary:hover {
-    background-color: #c9a485;
+    opacity: 0.9;                 /* Effetto hover coerente con btn-final */
 }
 
 .btn-modify-itinerary:active {
