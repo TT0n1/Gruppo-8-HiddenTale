@@ -24,6 +24,117 @@ body {
     background-color: #633A1C;
 }
 
+/* ==========================================
+   POPOVER FILTRO (STILE TOOLTIP)
+   ========================================== */
+
+/* Contenitore padre che posiziona il popup rispetto al bottone */
+.filter-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Box principale del Popover */
+.filter-popover {
+    position: absolute;
+    top: calc(100% + 14px); /* Posizionato subito sotto il bottone */
+    right: 0;               /* Allineato a destra */
+    background-color: #FAF6EE;
+    border: 3px solid #633A1C;
+    min-width: 230px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    display: none;          /* Nascosto di base */
+    z-index: 1000;
+}
+
+.filter-popover.show {
+    display: block;
+}
+
+/* FRECCIETTA IN ALTO A DESTRA (Bordo + Riempimento) */
+.filter-popover::before,
+.filter-popover::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    right: 18px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+/* Bordo esterno del triangolo */
+.filter-popover::before {
+    border-width: 0 16px 22px 16px;
+    border-color: transparent transparent #633A1C transparent;
+}
+
+/* Riempimento crema interno del triangolo */
+.filter-popover::after {
+    border-width: 0 12px 17px 12px;
+    border-color: transparent transparent #FAF6EE transparent;
+    right: 22px;
+}
+
+/* Elenco delle righe dei filtri */
+.filter-options {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Singola riga d'opzione */
+.filter-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-bottom: 1.5px solid #633A1C;
+    color: #633A1C;
+    font-weight: 700;
+    font-size: 1.1rem;
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+.filter-item:last-child {
+    border-bottom: none; /* L'ultima riga non ha il separatore sotto */
+}
+
+.filter-item:hover {
+    background-color: #F2E8D5;
+}
+
+/* PERSONALIZZAZIONE RADIO BUTTON (Cerchio marrone con pallino chiaro) */
+.filter-item input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 3px solid #633A1C;
+    border-radius: 50%;
+    margin-right: 12px;
+    outline: none;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+}
+
+.filter-item input[type="radio"]::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #D2A87A; /* Nocciola chiaro interno */
+    transform: scale(0);
+    transition: transform 0.15s ease-in-out;
+}
+
+/* Pallino visibile quando selezionato */
+.filter-item input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
 .navbar {
     display: flex;
     /* CAMBIATO: da center a stretch per uniformare l'altezza */

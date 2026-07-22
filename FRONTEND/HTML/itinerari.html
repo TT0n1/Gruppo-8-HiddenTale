@@ -26,11 +26,33 @@
         
         <input type="text" id="search-bar" placeholder="Cerca una località...">
     </div>
-    
+    <div class="filter-container">
     <!-- Bottone Filtro con l'icona degli slider di Figma -->
     <button id="filter-btn" class="filter-button" aria-label="Filtra località">
         <img src="./IMAGES/iconafiltro.svg" alt="Filtri" width="28" height="28">
     </button>
+    <div id="popover-filtro" class="filter-popover">
+        <form id="form-filtri" class="filter-options">
+            
+           <p class="filter-title">Ordina per durata:</p>
+
+        <label class="filter-item">
+            <input type="radio" name="ordinamento" value="tutti" checked>
+            <span>Tutti gli itinerari</span>
+        </label>
+
+        <label class="filter-item">
+            <input type="radio" name="ordinamento" value="lunghi">
+            <span>Dai più lunghi</span>
+        </label>
+
+        <label class="filter-item">
+            <input type="radio" name="ordinamento" value="corti">
+            <span>Dai più corti</span>
+        </label>
+
+        </form>
+    </div>
 </section>
 
         <!-- Lista itinerari con il box configurato come bottone -->
@@ -101,5 +123,6 @@
     </main>
 
     <script src="../JAVASCRIPT/itinerari.js"></script>
+     <script src="../JAVASCRIPT/filtri.js"></script>
 </body>
 </html>

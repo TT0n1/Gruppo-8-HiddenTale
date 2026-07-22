@@ -1,17 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Selettori basati esattamente sul tuo HTML
+    // Selettori Modal e Lista (i tuoi originali)
     const modal = document.getElementById('itinerary-modal');
     const closeBtn = document.querySelector('.close-btn');
     const itinerariList = document.querySelector('.itinerari-list');
 
+    // Nuovi selettori per Ricerca e Popover Filtri
+    const searchInput = document.getElementById('search-bar');
+    const formFiltri = document.getElementById('form-filtri');
+
     // 1. Legge gli itinerari salvati dal localStorage
     const itinerari = JSON.parse(localStorage.getItem('itinerari')) || [];
 
-    // 2. Se ci sono itinerari nel localStorage, li mostra dinamicamente nella lista
-    if (itinerariList && itinerari.length > 0) {
-        itinerariList.innerHTML = ''; // Svuolta le card statiche per mettere quelle dinamiche
+    // 2. FUNZIONE PER FILTRARE, ORDINARE E MOSTRARE LE CARD
+    function aggiornaVista() {
+        if (!itinerariList) return;
 
-        itinerari.forEach(itinerario => {
+        // A. Testo digitato nella barra di ricerca
+        const testoRicerca = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        // B. Opzione selezionata nel form filtri (es. 'tutti', 'lunghi', 'corti', 'az')
+        const opzioneFiltro = formFiltri ? formFiltri.querySelector('input[name="ordinamento"]:checked')?.value : 'tutti';
+
+        // C. Filtra per testo (cerca nel titolo, partenza o arrivo)
+        let risultati = itinerari.filter(item => {
+            const titolo = (item.titolo || '').toLowerCase();
+            const partenza = (item.partenza || '').toLowerCase();
+            const arrivo = (item.arrivo || '').toLowerCase();
+            return titolo.includes(testoRicerca) || partenza.includes(testoRicerca) || arrivo.includes(testoRicerca);
+        });
+
+        // D. Ordina i risultati
+        if (opzioneFiltro === 'lunghi') {
+            risultati.sort((a, b) => (b.durata || b.tappe?.length || 0) - (a.durata || a.tappe?.length || 0));
+        } else if (opzioneFiltro === 'corti') {
+            risultati.sort((a, b) => (a.durata || a.tappe?.length || 0) - (b.durata || b.tappe?.length || 0));
+        } else if (opzioneFiltro === 'az') {
+            risultati.sort((a, b) => a.titolo.localeCompare(b.titolo));
+        }
+
+        // E. Svuota la lista e genera le nuove card
+        itinerariList.innerHTML = '';
+
+        if (risultati.length === 0) {
+            itinerariList.innerHTML = '<p class="no-results" style="padding: 1rem; color: #666;">Nessun itinerario trovato.</p>';
+            return;
+        }
+
+        risultati.forEach(itinerario => {
             const card = document.createElement('button');
             card.classList.add('itinerario-card');
             card.dataset.id = itinerario.id;
@@ -25,7 +60,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. APERTURA POPUP (Funziona sia con le card dinamiche che con quelle fisse nell'HTML)
+    // 3. LISTENERS PER EVENTI DI RICERCA E FILTRO
+    if (searchInput) {
+        searchInput.addEventListener('input', aggiornaVista);
+    }
+
+    if (formFiltri) {
+        formFiltri.addEventListener('change', () => {
+            aggiornaVista();
+            // Chiude la tendina dei filtri dopo la selezione
+            const popover = document.getElementById('popover-filtro');
+            if (popover) popover.classList.remove('show');
+        });
+    }
+
+    // Caricamento iniziale della lista
+    aggiornaVista();
+
+    // 4. APERTURA POPUP (Codice originale intatto)
     if (itinerariList) {
         itinerariList.addEventListener('click', (e) => {
             const card = e.target.closest('.itinerario-card');
@@ -70,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. CHIUSURA POPUP
+    // 5. CHIUSURA POPUP (Codice originale intatto)
     if (closeBtn && modal) {
         closeBtn.addEventListener('click', () => {
             modal.classList.remove('show');
