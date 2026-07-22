@@ -25,43 +25,37 @@
     <!-- BARRA DI RICERCA + BOTTONE FILTRO E MENU -->
     <section class="search-filter-section">
         <div class="search-wrapper">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="search-bar" placeholder="Cerca un evento...">
+            <img src="./IMAGES/lente.svg" alt="Cerca" class="search-icon" width="18" height="18">
+            <input type="text" id="search-bar" placeholder="Cerca una località...">
         </div>
 
-        <!-- Contenitore Relativo per il Filtro -->
-        <div class="filter-wrapper">
-
+        <div class="filter-container">
             <!-- Bottone Filtro -->
-            <!-- onclick aggiunge o rimuove la classe 'show' per aprire/chiudere la tendina -->
-            <button id="filter-btn" class="filter-button" aria-label="Filtra eventi" onclick="document.getElementById('filter-menu').classList.toggle('show')">
+            <button id="filter-btn" class="filter-button" aria-label="Filtra eventi">
                 <img src="IMAGES/iconafiltro.svg" alt="Filtri" width="28" height="28">
             </button>
 
-            <!-- IL MENU A TENDINA (Nascosto di default) -->
-            <div class="filter-menu" id="filter-menu">
-                <!-- Il triangolino grafico in alto -->
-                <div class="filter-triangle"></div>
+            <!-- IL MENU A TENDINA -->
+            <div id="popover-filtro" class="filter-popover">
+                <form id="form-filtri" class="filter-options">
+                    <p class="filter-title">Ordina eventi:</p>
 
-                <label class="filter-option">
-                    <input type="radio" name="evento-filtro" value="miei-eventi">
-                    <span class="custom-radio"></span>
-                    I miei eventi
-                </label>
+                    <label class="filter-item">
+                        <input type="radio" name="evento-filtro" value="tutti" checked>
+                        <span>Tutti gli eventi</span>
+                    </label>
 
-                <label class="filter-option">
-                    <input type="radio" name="evento-filtro" value="vicini">
-                    <span class="custom-radio"></span>
-                    Distanza (più vicini)
-                </label>
+                    <label class="filter-item">
+                        <input type="radio" name="evento-filtro" value="vicini">
+                        <span>Più vicini (Distanza)</span>
+                    </label>
 
-                <label class="filter-option">
-                    <input type="radio" name="evento-filtro" value="lontani">
-                    <span class="custom-radio"></span>
-                    Distanza (più lontani)
-                </label>
+                    <label class="filter-item">
+                        <input type="radio" name="evento-filtro" value="lontani">
+                        <span>Più lontani (Distanza)</span>
+                    </label>
+                </form>
             </div>
-
         </div>
     </section>
 
@@ -84,9 +78,9 @@
 <script src="../JAVASCRIPT/dati_eventi.js"></script>
 
 <!-- Script per generare dinamicamente la lista degli eventi -->
-
-<!-- Script per generare dinamicamente la lista degli eventi -->
 <script src="../JAVASCRIPT/listaeventi.js"></script>
+
+<script src="../JAVASCRIPT/filtri.js"></script>
 
 </body>
 </html>
