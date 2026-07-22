@@ -1,21 +1,92 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="it">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../CSS/global.css">
-    <title>Hello world project</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index - HiddenTale</title>
 
+    <!-- Collegamento ai CSS -->
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+
+</head>
 <body>
 <!-- Contenitore in cui verrà caricata la navbar -->
 <div id="navbar-container"></div>
 
 <!-- Richiamo dello script per caricare la navbar -->
-<script src="../../JAVASCRIPT/navbar.js"></script>
+<script src="../JAVASCRIPT/navbar.js"></script>
+
+<!-- Barra di Ricerca -->
+<div class="search-container">
+    <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" readonly />
+    </div>
+</div>
+
+<!-- Banner Mappa -->
+<div class="map-banner">
+    <img src="" alt="Mappa Fisciano / Università degli Studi di Salerno">
+</div>
+
+<!-- Sezione Eventi -->
+<div class="events-section">
+    <h2 class="events-title">Eventi nei paraggi</h2>
+
+    <!-- Carosello Scorrevole -->
+    <div class="carousel-container" id="carouselContainer">
+        <div class="carousel-track" id="carouselTrack">
+
+            <!-- Evento 1 -->
+            <div class="event-card">
+                <div class="card-image-box">
+                    <img src="" alt="Festa della zeppola">
+                </div>
+                <p class="card-title">Festa della zeppola - AV</p>
+            </div>
+
+            <!-- Evento 2 -->
+            <div class="event-card">
+                <div class="card-image-box">
+                    <img src="" alt="Sagra del fusillo">
+                </div>
+                <p class="card-title">Sagra del fusillo al tegamino - SA</p>
+            </div>
+
+            <!-- Evento 3 -->
+            <div class="event-card">
+                <div class="card-image-box">
+                    <img src="" alt="Sagra del Catanazzo">
+                </div>
+                <p class="card-title">Sagra del Catanazzo - SA</p>
+            </div>
+
+            <!-- Evento 4 -->
+            <div class="event-card">
+                <div class="card-image-box">
+                    <img src="" alt="Festa del Vino">
+                </div>
+                <p class="card-title">Festa del Vino - BN</p>
+            </div>
+
+            <!-- Evento 5 -->
+            <div class="event-card">
+                <div class="card-image-box">
+                    <img src="" alt="Sagra della Castagna">
+                </div>
+                <p class="card-title">Sagra della Castagna - CE</p>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
-<script></script>
+<script src="../JAVASCRIPT/carousel.js"></script>
 </body>
 </html>
 
