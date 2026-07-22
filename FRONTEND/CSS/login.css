@@ -1,0 +1,91 @@
+/* Layout principale centrato nella pagina */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    padding: 2rem 1rem;
+}
+
+/* Card del Form */
+.login-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.login-title {
+    font-size: 2rem;
+    color: #2c1810;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+}
+
+.login-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* Struttura del Form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: left;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.input-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.custom-input:focus {
+    border-color: #d1ae8c;
+    box-shadow: 0 0 0 3px rgba(209, 174, 140, 0.25);
+}
+
+/* Pulsante Accedi (Colore della Navbar: #D1AE8C) */
+.btn-accedi {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.85rem;
+    background-color: #d1ae8c;
+    color: #2c1810;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-accedi:hover {
+    background-color: #c49d79;
+}
+
+.btn-accedi:active {
+    transform: scale(0.98);
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiddenTale - Accedi</title>
+    <!-- Stili globali e stili specifici per il login -->
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/login.css">
+</head>
+<body>
+
+    <!-- Container Navbar (caricata dinamicamente via JS) -->
+    <div id="navbar-container"></div>
+
+    <main class="login-wrapper">
+        <div class="login-card">
+            <h1 class="login-title">Accedi</h1>
+            <p class="login-subtitle">Inserisci le tue credenziali per continuare</p>
+
+            <form id="form-login" class="login-form">
+                <!-- Campo Email -->
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <input 
+                        type="email" 
+                        id="login-email" 
+                        class="custom-input" 
+                        placeholder="es. nome@email.com" 
+                        required
+                    >
+                </div>
+
+                <!-- Campo Password -->
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input 
+                        type="password" 
+                        id="login-password" 
+                        class="custom-input" 
+                        placeholder="••••••••" 
+                        required
+                    >
+                </div>
+
+                <!-- Pulsante Accedi -->
+                <button type="submit" class="btn-accedi">Accedi</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Script per la Navbar e per la logica di Login -->
+    <script src="../JAVASCRIPT/navbar.js"></script>
+    <script src="../JAVASCRIPT/login.js"></script>
+</body>
+</html>
