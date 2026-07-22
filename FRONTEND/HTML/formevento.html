@@ -44,11 +44,11 @@
             <div class="form-row split-row">
                 <div class="form-field-half">
                     <label for="data-inizio">Data Inizio:</label>
-                    <input type="text" id="data-inizio" placeholder="Inserire Data inizio">
+                    <input type="date" id="data-inizio" required>
                 </div>
                 <div class="form-field-half">
                     <label for="data-fine">Data Fine:</label>
-                    <input type="text" id="data-fine" placeholder="Inserire Data Fine">
+                    <input type="date" id="data-fine" required>
                 </div>
             </div>
 
@@ -56,11 +56,11 @@
             <div class="form-row split-row">
                 <div class="form-field-half">
                     <label for="posti">Posti:</label>
-                    <input type="text" id="posti" placeholder="posti disponibili">
+                    <input type="number" id="posti" placeholder="Posti disponibili" min="1">
                 </div>
                 <div class="form-field-half">
                     <label for="prezzo">Prezzo:</label>
-                    <input type="text" id="prezzo" placeholder="Inserire prezzo">
+                    <input type="number" id="prezzo" placeholder="Inserire prezzo (€)" step="0.50" min="0">
                 </div>
             </div>
 
@@ -88,7 +88,22 @@
 
     </form>
 
+    <!-- Modale di Conferma -->
+    <div id="modal-conferma" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Evento Creato!</h2>
+            <p>Il tuo evento è stato salvato con successo.</p>
+            <button id="btn-conferma-modal" class="btn-crea">Torna agli eventi</button>
+        </div>
+    </div>
+
 </main>
+
+<!-- Importa prima il database statico -->
+<script src="../JAVASCRIPT/dati_eventi.js"></script>
+
+<!-- Poi importa lo script che gestisce il form -->
+<script src="../JAVASCRIPT/formevento.js"></script>
 
 </body>
 </html>
