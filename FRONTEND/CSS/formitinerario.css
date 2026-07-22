@@ -263,3 +263,47 @@
     margin-bottom: 20px;
     color: #555;
 }
+
+/* Posizionamento del wrapper per agganciare la tendina */
+.search-input-wrapper {
+    position: relative;
+}
+
+/* Contenitore del menù a tendina */
+.autocomplete-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: #ffffff;
+    border: 2px solid #8d5026;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    max-height: 180px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 2px;
+}
+
+/* Singola voce della lista */
+.autocomplete-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    color: #5c3011;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+}
+
+/* Effetto hover sul suggerimento */
+.autocomplete-item:hover {
+    background-color: #f7eedd;
+    color: #8d5026;
+    font-weight: 600;
+}
+
+/* Evidenziazione delle lettere combacianti */
+.autocomplete-item strong {
+    color: #8d5026;
+    text-decoration: underline;
+}
