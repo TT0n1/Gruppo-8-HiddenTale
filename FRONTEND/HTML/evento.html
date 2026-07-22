@@ -76,34 +76,74 @@
 <script src="../JAVASCRIPT/dati_eventi.js"></script>
 
 <!-- 2. Script per popolare dinamicamente i dati -->
+<!-- 2. Script per popolare dinamicamente i dati -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Estrae l'id dall'URL (es: ?id=2)
         const urlParams = new URLSearchParams(window.location.search);
         const idEvento = urlParams.get("id");
 
-        // Se l'id non esiste o è sbagliato, mostra un errore
-        if (!idEvento || !databaseEventi[idEvento]) {
+        function mostraErrore() {
             document.getElementById("evento-titolo").innerText = "Evento non trovato";
             document.getElementById("evento-descrizione").innerText = "Nessun dato disponibile per questa selezione.";
+            document.getElementById("evento-img").style.display = "none";
+        }
+
+        if (!idEvento) {
+            mostraErrore();
             return;
         }
 
-        // Prende i dati corrispondenti a quell'id
-        const dati = databaseEventi[idEvento];
+        let dati = null;
 
-        // Inserisce i testi base
-        document.getElementById("evento-titolo").innerText = dati.nome;
-        document.getElementById("evento-luogo").innerText = dati.indirizzo;
-        document.getElementById("evento-descrizione").innerText = dati.descrizione;
+        // 1. Cerca nel database statico
+        if (typeof databaseEventi !== 'undefined' && databaseEventi[idEvento]) {
+            dati = databaseEventi[idEvento];
+        }
 
-        // Inserisce l'immagine
-        document.getElementById("evento-img").src = dati.immagineLocandina;
+        // 2. Se non lo trova, cerca nella sessione
+        if (!dati) {
+            const eventiSessione = JSON.parse(sessionStorage.getItem('eventiUtente')) || [];
+            dati = eventiSessione.find(e => e.id === idEvento);
+        }
 
-        // Inserisce i dati extra (con un fallback nel caso in cui tu non li abbia ancora inseriti nel DB)
-        document.getElementById("evento-data").innerText = dati.data || "Data non specificata";
-        document.getElementById("evento-prezzo").innerText = dati.prezzo || "Non specificato";
-        document.getElementById("evento-posti").innerText = dati.posti || "N/D";
+        // 3. Se l'evento non esiste da nessuna parte, mostra errore
+        if (!dati) {
+            mostraErrore();
+            return;
+        }
+
+        // 4. Popola i dati (supporta sia le chiavi del file statico sia quelle del form custom)
+        document.getElementById("evento-titolo").innerText = dati.nome || dati.titolo || "Titolo non disponibile";
+        document.getElementById("evento-luogo").innerText = dati.indirizzo || dati.luogo || "Luogo non specificato";
+        document.getElementById("evento-descrizione").innerText = dati.descrizione || "Nessuna descrizione";
+        document.getElementById("evento-img").src = dati.immagineLocandina || dati.immaginePrincipale || "../IMAGES/placeholder.jpg";
+
+        // Gestione data
+        let stringaData = dati.data;
+        if (!stringaData && dati.dataInizio && dati.dataFine) {
+            stringaData = `Dal ${dati.dataInizio} al ${dati.dataFine}`;
+        }
+        document.getElementById("evento-data").innerText = stringaData || "Data non specificata";
+
+        // Gestione prezzo
+        let stringaPrezzo = dati.prezzo;
+        if (stringaPrezzo && !isNaN(stringaPrezzo)) {
+            stringaPrezzo = `€ ${parseFloat(stringaPrezzo).toFixed(2)}`;
+        } else if (stringaPrezzo === "0" || stringaPrezzo === "") {
+            stringaPrezzo = "Ingresso gratuito";
+        }
+        document.getElementById("evento-prezzo").innerText = stringaPrezzo || "Non specificato";
+
+        // Gestione posti
+        document.getElementById("evento-posti").innerText = dati.posti || "Illimitati";
+
+        // Gestione bottone Modifica
+        const btnModifica = document.querySelector(".btn-modifica");
+        if (btnModifica) {
+            btnModifica.addEventListener("click", function() {
+                window.location.href = `formevento.html?editId=${idEvento}`;
+            });
+        }
     });
 </script>
 

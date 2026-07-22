@@ -12,49 +12,57 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!listaContainer) return;
 
         const testoRicerca = searchInput ? searchInput.value.toLowerCase().trim() : '';
-        const opzioneFiltro = formFiltri ? formFiltri.querySelector('input[name="evento-filtro"]:checked')?.value : 'tutti';
+        const opzioneFiltro = formFiltri ? formFiltri.querySelector('input[name="ordinamento"]:checked')?.value : 'tutti';
 
-        // Supporta sia se databaseEventi è un Array, sia se è un Oggetto
-        let eventiArray = Array.isArray(databaseEventi)
+        // 1. Recupera gli eventi base dal file JS statico
+        let eventiBase = Array.isArray(databaseEventi)
             ? databaseEventi
             : Object.keys(databaseEventi).map(key => ({ id: key, ...databaseEventi[key] }));
 
+        // 2. Recupera gli eventi creati dall'utente salvati in sessione
+        const eventiSessione = JSON.parse(sessionStorage.getItem('eventiUtente')) || [];
+
+        // 3. Unisce i due array (mettendo in cima i nuovi eventi creati)
+        let tuttiGliEventi = [...eventiSessione, ...eventiBase];
+
+        // 4. Filtro per testo (barra di ricerca)
         if (testoRicerca !== '') {
-            eventiArray = eventiArray.filter(dati => {
+            tuttiGliEventi = tuttiGliEventi.filter(dati => {
                 const titolo = (dati.titolo || dati.nome || '').toLowerCase();
+                const luogo = (dati.luogo || dati.provincia || '').toLowerCase();
                 const descrizione = (dati.descrizione || '').toLowerCase();
-                const luogo = (dati.luogo || dati.provincia || dati.citta || '').toLowerCase();
 
                 return titolo.includes(testoRicerca) ||
-                    descrizione.includes(testoRicerca) ||
-                    luogo.includes(testoRicerca);
+                    luogo.includes(testoRicerca) ||
+                    descrizione.includes(testoRicerca);
             });
         }
 
-        if (opzioneFiltro === 'vicini') {
-            eventiArray.sort((a, b) => (a.distanza || 0) - (b.distanza || 0));
-        } else if (opzioneFiltro === 'lontani') {
-            eventiArray.sort((a, b) => (b.distanza || 0) - (a.distanza || 0));
+        // 5. Ordinamento
+        if (opzioneFiltro === 'az') {
+            tuttiGliEventi.sort((a, b) => (a.titolo || a.nome || '').localeCompare(b.titolo || b.nome || ''));
+        } else if (opzioneFiltro === 'za') {
+            tuttiGliEventi.sort((a, b) => (b.titolo || b.nome || '').localeCompare(a.titolo || a.nome || ''));
         }
 
+        // Svuota e riempie il contenitore
         listaContainer.innerHTML = '';
 
-        if (eventiArray.length === 0) {
+        if (tuttiGliEventi.length === 0) {
             listaContainer.innerHTML = '<p class="no-results" style="padding: 1rem; text-align: center; color: #4a3728;">Nessun evento trovato.</p>';
             return;
         }
 
-        eventiArray.forEach(dati => {
-            // Nomi delle variabili flessibili per adattarsi a come è scritto dati_eventi.js
+        tuttiGliEventi.forEach(dati => {
             const idEvento = dati.id || '';
-            const titoloEvento = dati.titolo || dati.nome || 'Nome non disponibile';
-            const immagineEvento = dati.immagineLocandina || dati.immagine || dati.img || './IMAGES/placeholder.jpg';
-            const luogoEvento = dati.luogo || dati.provincia || dati.citta || 'Luogo non specificato';
-            const dataEvento = dati.data || dati.date || 'Data da definire';
+            const titoloEvento = dati.titolo || dati.nome || 'Evento senza nome';
+            const immagineEvento = dati.immaginePrincipale || dati.immagineLocandina || dati.img || '../IMAGES/placeholder.jpg';
+            const descrizioneEvento = dati.descrizione || 'Nessuna descrizione disponibile';
+            const luogoEvento = dati.luogo || dati.provincia || 'Luogo non specificato';
 
             const cardLink = document.createElement('a');
             cardLink.href = `evento.html?id=${idEvento}`;
-            cardLink.className = 'localita-card evento-card';
+            cardLink.className = 'evento-card';
 
             cardLink.innerHTML = `
                 <div class="card-image-wrapper">
@@ -68,8 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     
                     <div class="info-group">
-                        <span class="info-label">Data:</span>
-                        <p class="info-value">${dataEvento}</p>
+                        <span class="info-label">Descrizione:</span>
+                        <p class="info-value">${descrizioneEvento}</p>
                     </div>
                     
                     <div class="info-group">

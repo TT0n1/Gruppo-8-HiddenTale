@@ -76,29 +76,60 @@
         <!-- 2. Aggiungi lo script che popola la pagina leggendo l'URL -->
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                // Estrae l'id (es: ?id=roma)
                 const urlParams = new URLSearchParams(window.location.search);
                 const idLocalita = urlParams.get("id");
 
-                // Se l'id non c'è o non esiste nel file js, mostra un errore
-                if (!idLocalita || !databaseLocalita[idLocalita]) {
+                function mostraErrore() {
                     document.getElementById("localita-titolo").innerText = "Località non trovata";
                     document.getElementById("localita-descrizione").innerText = "Nessun dato disponibile per questa selezione.";
+                    document.getElementById("localita-img-principale").style.display = "none";
+                }
+
+                if (!idLocalita) {
+                    mostraErrore();
                     return;
                 }
 
-                // Prende i dati corrispondenti a quell'id
-                const dati = databaseLocalita[idLocalita];
+                let dati = null;
 
-                // Inserisce i testi
-                document.getElementById("localita-titolo").innerText = dati.titolo;
-                document.getElementById("localita-descrizione").innerText = dati.descrizione;
-                document.getElementById("localita-abitanti").innerText = dati.abitanti;
-                document.getElementById("localita-provincia").innerText = dati.provincia;
+                // 1. Cerca nel database statico
+                if (typeof databaseLocalita !== 'undefined' && databaseLocalita[idLocalita]) {
+                    dati = databaseLocalita[idLocalita];
+                }
 
-                // Inserisce le immagini
-                document.getElementById("localita-img-principale").src = dati.immaginePrincipale;
-                document.getElementById("localita-stemma").src = dati.stemma;
+                // 2. Se non la trova, cerca nella sessione (località aggiunte dall'utente)
+                if (!dati) {
+                    const localitaSessione = JSON.parse(sessionStorage.getItem('localitaUtente')) || [];
+                    dati = localitaSessione.find(l => l.id === idLocalita);
+                }
+
+                // 3. Se la località non esiste da nessuna parte, mostra errore
+                if (!dati) {
+                    mostraErrore();
+                    return;
+                }
+
+                // 4. Popola i testi (supporta sia le chiavi del file statico sia quelle del form custom)
+                document.getElementById("localita-titolo").innerText = dati.nome || dati.titolo || "Nome non disponibile";
+                document.getElementById("localita-descrizione").innerText = dati.informazione || dati.descrizione || "Nessuna descrizione disponibile.";
+
+                // I campi abitanti e provincia non sono nel form custom, quindi mettiamo un fallback
+                const abitantiElement = document.getElementById("localita-abitanti");
+                if (abitantiElement) abitantiElement.innerText = dati.abitanti || "Dato non disponibile";
+
+                const provinciaElement = document.getElementById("localita-provincia");
+                if (provinciaElement) provinciaElement.innerText = dati.provincia || "Dato non disponibile";
+
+                // 5. Inserisce le immagini
+                const imgPrincipale = document.getElementById("localita-img-principale");
+                if (imgPrincipale) {
+                    imgPrincipale.src = dati.immagine || dati.immaginePrincipale || "../IMAGES/placeholder.jpg";
+                }
+
+                const imgStemma = document.getElementById("localita-stemma");
+                if (imgStemma) {
+                    imgStemma.src = dati.stemma || "../IMAGES/placeholder-stemma.png";
+                }
             });
         </script>
 

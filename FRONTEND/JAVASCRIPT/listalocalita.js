@@ -1,14 +1,7 @@
-// Sostituisci l'intero contenuto di JAVASCRIPT/listalocalita.js con questo:
-
 document.addEventListener('DOMContentLoaded', () => {
     const listaContainer = document.getElementById('lista-localita');
     const searchInput = document.getElementById('search-bar');
     const formFiltri = document.getElementById('form-filtri');
-
-    if (typeof databaseLocalita === 'undefined') {
-        console.error("Errore: databaseLocalita non trovato.");
-        return;
-    }
 
     // Rendiamo la funzione globale così lo script filtri.js può vederla e chiamarla
     window.aggiornaVista = function() {
@@ -17,9 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const testoRicerca = searchInput ? searchInput.value.toLowerCase().trim() : '';
         const opzioneFiltro = formFiltri ? formFiltri.querySelector('input[name="ordinamento"]:checked')?.value : 'tutti';
 
-        let risultati = Object.entries(databaseLocalita);
+        // 1. Recupera i dati dal database statico (se esiste)
+        let arrayStatico = typeof databaseLocalita !== 'undefined' ? Object.entries(databaseLocalita) : [];
 
-        // 1. Filtro per testo (barra di ricerca)
+        // 2. Recupera i dati dalla sessione e normalizza le chiavi
+        const localitaSessione = JSON.parse(sessionStorage.getItem('localitaUtente')) || [];
+        const arraySessione = localitaSessione.map(loc => {
+            return [loc.id, {
+                titolo: loc.nome || loc.titolo || "Senza Titolo",
+                descrizione: loc.informazione || loc.descrizione || "Nessuna descrizione",
+                provincia: loc.provincia || "Non specificata", // Nel form non c'è, mettiamo un fallback
+                immaginePrincipale: loc.immagine || loc.immaginePrincipale || '../IMAGES/placeholder.jpg'
+            }];
+        });
+
+        // 3. Unisci i dati statici e quelli della sessione
+        let risultati = arrayStatico.concat(arraySessione);
+
+        // 4. Filtro per testo (barra di ricerca)
         if (testoRicerca !== '') {
             risultati = risultati.filter(([id, dati]) => {
                 const titolo = (dati.titolo || '').toLowerCase();
@@ -28,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // 2. Ordinamento (radio button)
+        // 5. Ordinamento (radio button)
         if (opzioneFiltro === 'az') {
             risultati.sort((a, b) => a[1].titolo.localeCompare(b[1].titolo));
         } else if (opzioneFiltro === 'za') {
@@ -78,5 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('input', window.aggiornaVista);
     }
 
+    // Inizializza la visualizzazione
     window.aggiornaVista();
 });
