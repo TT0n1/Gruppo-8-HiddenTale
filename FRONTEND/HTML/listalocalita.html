@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elenco delle Località</title>
-    
+
     <!-- Collegamento ai CSS (usando sempre ../ per uscire dalla cartella HTML) -->
     <link rel="stylesheet" href="../CSS/global.css">
     <link rel="stylesheet" href="../CSS/listalocalita.css">
@@ -18,58 +18,82 @@
     <h1 class="main-title">Elenco delle località</h1>
 
     <main class="lista-page">
-        
+
         <!-- TITOLO PAGINA -->
-        
+
 
         <!-- BARRA DI RICERCA + BOTTONE FILTRO -->
+        <!-- Sostituisci la sezione search-filter-section in listalocalita.html con questa: -->
+
         <section class="search-filter-section">
             <div class="search-wrapper">
-        <!-- Sostituita l'emoji con il tag img per il file SVG della lente -->
-        <img src="./IMAGES/lente.svg" alt="Cerca" class="search-icon" width="18" height="18">
-        
-        <input type="text" id="search-bar" placeholder="Cerca una località...">
-    </div>
-            
-            <!-- Bottone Filtro con l'icona degli slider di Figma -->
-            <button id="filter-btn" class="filter-button" aria-label="Filtra località">
-                <img src="./IMAGES/iconafiltro.svg" alt="Filtri" width="28" height="28">
-            </button>
+                <img src="./IMAGES/lente.svg" alt="Cerca" class="search-icon" width="18" height="18">
+                <input type="text" id="search-bar" placeholder="Cerca una località...">
+            </div>
+
+            <div class="filter-container">
+                <!-- Bottone Filtro -->
+                <button id="filter-btn" class="filter-button" aria-label="Filtra località">
+                    <img src="./IMAGES/iconafiltro.svg" alt="Filtri" width="28" height="28">
+                </button>
+
+                <!-- Menù a tendina dei filtri -->
+                <div id="popover-filtro" class="filter-popover">
+                    <form id="form-filtri" class="filter-options">
+                        <p class="filter-title">Ordina per nome:</p>
+
+                        <label class="filter-item">
+                            <input type="radio" name="ordinamento" value="tutti" checked>
+                            <span>Predefinito</span>
+                        </label>
+
+                        <label class="filter-item">
+                            <input type="radio" name="ordinamento" value="az">
+                            <span>A-Z</span>
+                        </label>
+
+                        <label class="filter-item">
+                            <input type="radio" name="ordinamento" value="za">
+                            <span>Z-A</span>
+                        </label>
+                    </form>
+                </div>
+            </div>
         </section>
 
         <!-- LISTA SCORREVOLE DELLE LOCALITÀ -->
         <!-- Questo contenitore avrà l'overflow nel CSS per permettere lo scroll verticale -->
         <section id="lista-localita" class="scrollable-list">
-            
+
             <!-- CARD ESEMPIO (Ripeterete questo blocco o lo genererete con JS) -->
             <!-- L'intera card è un link. Il 'href' punterà alla pagina generica passando un parametro id -->
             <a href="localita.html?id=1" class="localita-card">
-                
+
                 <!-- Parte Sinistra: Immagine della località -->
                 <div class="card-image-wrapper">
                     <img src="./IMAGES/placeholder" alt="Foto località">
                 </div>
-                
+
                 <!-- Parte Destra: Informazioni della località -->
                 <div class="card-info-wrapper">
                     <div class="info-group">
                         <span class="info-label">Nome:</span>
                         <p class="info-value">placeholder</p>
                     </div>
-                    
+
                     <div class="info-group">
                         <span class="info-label">Descrizione:</span>
                         <p class="info-value">descrizione placeholder</p>
                     </div>
-                    
+
                     <div class="info-group">
                         <span class="info-label">Eventi:</span>
                         <p class="info-value">eventi placeholder</p>
                     </div>
                 </div>
-                
+
             </a>
-            
+
             <!-- Altre card andranno qui sotto... -->
 
         </section>
@@ -89,5 +113,7 @@
 
     <!-- Collegamento al file JS per la logica di ricerca e rendering -->
     <script src="../JAVASCRIPT/listalocalita.js"></script>
+
+    <script src="../JAVASCRIPT/filtri.js"></script>
 </body>
 </html>
