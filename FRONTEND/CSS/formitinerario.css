@@ -307,3 +307,26 @@
     color: #8d5026;
     text-decoration: underline;
 }
+
+.main-title {
+    color: #633A1C;
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin-bottom: 25px;
+    margin-left: 5px;       /* Aggiunto il margine a sinistra (puoi aumentarlo a 10px o 15px se serve) */
+    position: relative;
+    padding-bottom: 12px;
+    display: block;
+    width: calc(100% - 5px); /* Regola la larghezza per evitare overflow con il margine */
+    box-sizing: border-box;
+}
+
+.main-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;                /* Allinea la linea sotto direttamente al margine del testo */
+    right: 5px;
+    height: 1px;
+    background-color: #633A1C;
+}

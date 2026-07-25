@@ -1,14 +1,16 @@
 /* ==========================================
-   BARRA DI RICERCA E FILTRI
+   BARRA DI RICERCA E FILTRI (ALLINEATA)
    ========================================== */
 .search-filter-section {
     display: flex;
     align-items: center;
     gap: 12px;
-    width: 100%;
-    box-sizing: border-box;
+    width: calc(100% - 30px);          /* Stessa larghezza calcolata per le card */
+    margin-left: 15px;                 /* Stesso margine sinistro delle card */
+    margin-right: 15px;                /* Stesso margine destro delle card */
     margin-top: 15px;
     margin-bottom: 25px;
+    box-sizing: border-box;
 }
 
 .search-wrapper {
@@ -19,36 +21,47 @@
 }
 
 #search-bar {
-    width: 100%;
-    padding: 12px 20px 12px 45px; 
-    font-size: 1rem;
-    border: 2px solid #4a3319;    
-    border-radius: 50px;          
-    background-color: #ffffff;
-    color: #4a3319;
-    box-sizing: border-box;
+    width: 100%;                       /* Occupa il 100% del wrapper */
+    height: 38px;
+    padding-left: 42px;
+    padding-right: 12px;
+    background-color: #FFFFFF;
+    border: 1.5px solid #8d5026;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: #633A1C;
     outline: none;
+    box-shadow: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+#search-bar::placeholder {
+    color: #6B879B;
+    font-weight: 400;
 }
 
 .search-icon {
     position: absolute;
-    left: 16px;
-    width: 18px;  
-    height: 18px;
-    pointer-events: none; 
+    left: 14px;
+    width: 16px !important;
+    height: 16px !important;
+    pointer-events: none;
+    stroke: #502A14;
     stroke-width: 3.5;
+    fill: none;
 }
 
 .filter-button {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;               
-    color: #4a3319;               
+    flex-shrink: 0;                   /* L'icona del filtro non si schiaccia mai */
+    color: #4a3319;
     transition: transform 0.1s ease, color 0.2s;
 }
 
@@ -62,18 +75,20 @@
     font-size: 1.8rem;
     font-weight: normal;
     margin-bottom: 25px;
+    margin-left: 5px;       /* Aggiunto il margine a sinistra (puoi aumentarlo a 10px o 15px se serve) */
     position: relative;
     padding-bottom: 12px;
-    display: block; 
-    width: 100%;
+    display: block;
+    width: calc(100% - 5px); /* Regola la larghezza per evitare overflow con il margine */
+    box-sizing: border-box;
 }
 
 .main-title::after {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 5px;   
-    right: 5px;  
+    left: 0;                /* Allinea la linea sotto direttamente al margine del testo */
+    right: 5px;
     height: 1px;
     background-color: #633A1C;
 }
@@ -92,15 +107,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 98%;                   /* Riduce leggermente la larghezza per creare lo spazio ai lati */
+    margin-left: auto;            /* Centra e crea margine automatico a sinistra */
+    margin-right: auto;           /* Centra e crea margine automatico a destra */
     padding: 14px 25px;
-    background-color: #d5b497;    
-    border: 2px solid #a67c58;    
-    border-radius: 30px;          
+    background-color: #d5b497;
+    border: 2px solid #a67c58;
+    border-radius: 30px;
     font-size: 1.1rem;
     color: #4a3319;
     cursor: pointer;
     text-align: left;
+    box-sizing: border-box;       /* Evita problemi di calcolo delle dimensioni */
     transition: background-color 0.2s, transform 0.1s;
 }
 
@@ -109,12 +127,13 @@
 }
 
 .itinerario-card:active {
-    transform: scale(0.99);       
+    transform: scale(0.99);
 }
 
 .arrow-down-icon {
     color: #4a3319;
 }
+
 
 /* ==========================================
    BOTTONE CREA ITINERARIO
@@ -123,6 +142,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 50px;
+    margin-right: 15px;         /* Aggiunto il margine a destra (puoi aumentarlo/diminuirlo a piacere) */
 }
 
 .btn-crea {
@@ -145,24 +165,24 @@
    STRUTTURA DEL POPUP (MODAL)
    ========================================== */
 .modal {
-    display: none;                
+    display: none;
     position: fixed;
     z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); 
+    background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
 }
 
 .modal.show {
-    display: flex;                
+    display: flex;
 }
 
 .modal-content {
-    background-color: #f9f3eb;    
+    background-color: #f9f3eb;
     padding: 30px;
     border: 2px solid #a67c58;
     border-radius: 20px;
@@ -232,10 +252,10 @@
     background-color: transparent;
     display: flex;
     flex-direction: column;
-    gap: 22px;                 
-    max-height: 240px;         
-    overflow-y: auto;          
-    padding-right: 15px;       
+    gap: 22px;
+    max-height: 240px;
+    overflow-y: auto;
+    padding-right: 15px;
     box-sizing: border-box;
 }
 
@@ -247,11 +267,11 @@
 }
 
 .pill-box {
-    background-color: #d5b497; 
-    border: 2px solid #a67c58; 
+    background-color: #d5b497;
+    border: 2px solid #a67c58;
     color: #4a3319;
     padding: 6px 12px;
-    border-radius: 20px;       
+    border-radius: 20px;
     text-align: center;
     font-size: 0.9rem;
     font-weight: 500;
