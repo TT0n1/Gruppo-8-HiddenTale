@@ -65,18 +65,28 @@
         <!-- Box Partecipazione -->
         <aside class="evento-partecipa-box">
             <p class="posti-rimanenti">Posti Rimanenti<br><span id="evento-posti">Illimitati</span></p>
-            <button class="btn-partecipa" aria-label="Partecipa all'evento">Partecipa</button>
+            <button id="btn-apri-partecipa" class="btn-partecipa" aria-label="Partecipa all'evento">Partecipa</button>
         </aside>
 
     </section>
+
+    <!-- Modale Partecipazione -->
+    <div id="modal-partecipa" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Avviso</h2>
+            <p>Questa funzionalità è ancora in fase di sviluppo.</p>
+            <div class="modal-buttons">
+                <button id="btn-conferma-partecipa" class="btn-partecipa">Chiudi</button>
+            </div>
+        </div>
+    </div>
 
 </main>
 
 <!-- 1. Richiamo del database finto degli eventi -->
 <script src="../JAVASCRIPT/dati_eventi.js"></script>
 
-<!-- 2. Script per popolare dinamicamente i dati -->
-<!-- 2. Script per popolare dinamicamente i dati -->
+<!-- 2. Script per popolare dinamicamente i dati e gestire il popup -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -112,7 +122,7 @@
             return;
         }
 
-        // 4. Popola i dati (supporta sia le chiavi del file statico sia quelle del form custom)
+        // 4. Popola i dati
         document.getElementById("evento-titolo").innerText = dati.nome || dati.titolo || "Titolo non disponibile";
         document.getElementById("evento-luogo").innerText = dati.indirizzo || dati.luogo || "Luogo non specificato";
         document.getElementById("evento-descrizione").innerText = dati.descrizione || "Nessuna descrizione";
@@ -142,6 +152,30 @@
         if (btnModifica) {
             btnModifica.addEventListener("click", function() {
                 window.location.href = `formevento.html?editId=${idEvento}`;
+            });
+        }
+
+        // GESTIONE POPUP PARTECIPA
+        const btnApriPartecipa = document.getElementById("btn-apri-partecipa");
+        const modalPartecipa = document.getElementById("modal-partecipa");
+        const btnConfermaPartecipa = document.getElementById("btn-conferma-partecipa");
+
+        if (btnApriPartecipa && modalPartecipa) {
+            // Apre il popup
+            btnApriPartecipa.addEventListener("click", function() {
+                modalPartecipa.style.display = "flex";
+            });
+
+            // Chiude il popup
+            btnConfermaPartecipa.addEventListener("click", function() {
+                modalPartecipa.style.display = "none";
+            });
+
+            // Chiude cliccando fuori dal modale
+            window.addEventListener("click", function(event) {
+                if (event.target === modalPartecipa) {
+                    modalPartecipa.style.display = "none";
+                }
             });
         }
     });
