@@ -3,18 +3,17 @@ let tappeItinerario = [];
 
 // Database generale delle località con orario stimato e chilometraggio assoluto
 const databaseLocalita = [
-    { nome: "Napoli", orario: "09:00", km: 0 },
-    { nome: "Salerno", orario: "10:30", km: 55 },
-    { nome: "Vietri sul Mare", orario: "11:15", km: 60 },
-    { nome: "Cetara", orario: "12:00", km: 66 },
-    { nome: "Maiori", orario: "13:00", km: 78 },
-    { nome: "Minori", orario: "14:30", km: 80 },
-    { nome: "Atrani", orario: "15:15", km: 83 },
-    { nome: "Amalfi", orario: "16:00", km: 84 },
-    { nome: "Positano", orario: "17:45", km: 100 },
-    { nome: "Sorrento", orario: "19:00", km: 115 }
+    { nome: "Fisciano", orario: "09:00", km: 0 },
+    { nome: "Baronissi", orario: "09:45", km: 6 },
+    { nome: "Pellezzano", orario: "10:30", km: 12 },
+    { nome: "Mercato San Severino", orario: "11:30", km: 22 },
+    { nome: "Calvanico", orario: "12:30", km: 32 },
+    { nome: "Montoro", orario: "14:00", km: 42 },
+    { nome: "Bracigliano", orario: "15:00", km: 50 },
+    { nome: "Siano", orario: "16:00", km: 58 },
+    { nome: "Castiglione del Genovesi", orario: "17:15", km: 75 },
+    { nome: "San Cipriano Picentino", orario: "18:15", km: 82 }
 ];
-
 /**
  * Funzione per attivare il menù a tendina con autocompletamento su un campo di input
  */
