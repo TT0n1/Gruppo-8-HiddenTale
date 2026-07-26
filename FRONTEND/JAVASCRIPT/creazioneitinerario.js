@@ -150,26 +150,50 @@ document.addEventListener('DOMContentLoaded', () => {
             const tappaElement = document.createElement('div');
             tappaElement.classList.add('tappa-item');
 
-            tappaElement.innerHTML = `
-                <div class="tappa-chip">${tappa.nome}</div>
-                <div class="tappa-chip">${tappa.orario}</div>
-                <div class="tappa-chip">${tappa.distanza}</div>
-                
-                <div class="tappa-actions">
-                    <button type="button" class="action-btn btn-matita" data-index="${index}" aria-label="Modifica tappa">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#6E8B3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 20h9"></path>
-                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                        </svg>
-                    </button>
-                    <button type="button" class="action-btn btn-elimina-tappa" data-index="${index}" aria-label="Elimina tappa">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#C23305" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-            `;
+            // Se la tappa è in modalità modifica, mostra i campi di testo nel rettangolo
+            if (tappa.isEditing) {
+                tappaElement.innerHTML = `
+                    <input type="text" class="tappa-edit-input edit-nome" value="${tappa.nome}" placeholder="Luogo">
+                    <input type="text" class="tappa-edit-input edit-orario" value="${tappa.orario}" placeholder="Orario">
+                    <input type="text" class="tappa-edit-input edit-distanza" value="${tappa.distanza}" placeholder="Distanza">
+                    
+                    <div class="tappa-actions">
+                        <button type="button" class="action-btn btn-conferma-edit" data-index="${index}" aria-label="Conferma modifica">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#6E8B3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                        <button type="button" class="action-btn btn-annulla-edit" data-index="${index}" aria-label="Annulla modifica">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#C23305" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+            } else {
+                // Modalità visualizzazione standard
+                tappaElement.innerHTML = `
+                    <div class="tappa-chip">${tappa.nome}</div>
+                    <div class="tappa-chip">${tappa.orario}</div>
+                    <div class="tappa-chip">${tappa.distanza}</div>
+                    
+                    <div class="tappa-actions">
+                        <button type="button" class="action-btn btn-matita" data-index="${index}" aria-label="Modifica tappa">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#B59652" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                        </button>
+                        <button type="button" class="action-btn btn-elimina-tappa" data-index="${index}" aria-label="Elimina tappa">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#C23305" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+            }
 
             propostoBox.appendChild(tappaElement);
         });
@@ -197,9 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Gestione Modifica / Eliminazione Tappe
+    // Gestione Modifica / Eliminazione Tappe tramite Modifica In-Line
     if (propostoBox) {
         propostoBox.addEventListener('click', (e) => {
+            // Elimina tappa
             const btnDelete = e.target.closest('.btn-elimina-tappa');
             if (btnDelete) {
                 const index = parseInt(btnDelete.dataset.index, 10);
@@ -208,21 +233,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Click sulla matita per attivare la modifica interna al rettangolo
             const btnEdit = e.target.closest('.btn-matita');
             if (btnEdit) {
                 const index = parseInt(btnEdit.dataset.index, 10);
-                const tappa = tappeItinerario[index];
-
-                const nuovoNome = prompt('Modifica luogo:', tappa.nome);
-                if (nuovoNome && nuovoNome.trim()) tappa.nome = nuovoNome.trim();
-
-                const nuovoOrario = prompt('Modifica orario:', tappa.orario);
-                if (nuovoOrario && nuovoOrario.trim()) tappa.orario = nuovoOrario.trim();
-
-                const nuovaDistanza = prompt('Modifica distanza:', tappa.distanza);
-                if (nuovaDistanza && nuovaDistanza.trim()) tappa.distanza = nuovaDistanza.trim();
-
+                tappeItinerario[index].isEditing = true;
                 renderTappe();
+                return;
+            }
+
+            // Salva modifiche effettuate nella riga
+            const btnConferma = e.target.closest('.btn-conferma-edit');
+            if (btnConferma) {
+                const index = parseInt(btnConferma.dataset.index, 10);
+                const parentRow = btnConferma.closest('.tappa-item');
+
+                const valNome = parentRow.querySelector('.edit-nome').value.trim();
+                const valOrario = parentRow.querySelector('.edit-orario').value.trim();
+                const valDistanza = parentRow.querySelector('.edit-distanza').value.trim();
+
+                if (valNome) tappeItinerario[index].nome = valNome;
+                if (valOrario) tappeItinerario[index].orario = valOrario;
+                if (valDistanza) tappeItinerario[index].distanza = valDistanza;
+
+                tappeItinerario[index].isEditing = false;
+                renderTappe();
+                return;
+            }
+
+            // Annulla modifica
+            const btnAnnulla = e.target.closest('.btn-annulla-edit');
+            if (btnAnnulla) {
+                const index = parseInt(btnAnnulla.dataset.index, 10);
+                tappeItinerario[index].isEditing = false;
+                renderTappe();
+                return;
             }
         });
     }
@@ -247,12 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Pulisce la proprietà isEditing prima di salvare
+            const tappeDaSalvare = tappeItinerario.map(({ isEditing, ...rest }) => rest);
+
             const nuovoItinerario = {
                 id: Date.now(),
                 titolo: inputTitolo ? inputTitolo.value.trim() : 'Senza Titolo',
                 partenza: inputPartenza ? inputPartenza.value.trim() : '',
                 arrivo: inputArrivo ? inputArrivo.value.trim() : '',
-                tappe: tappeItinerario
+                tappe: tappeDaSalvare
             };
 
             const esistenti = JSON.parse(localStorage.getItem('itinerari')) || [];

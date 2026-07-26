@@ -1,159 +1,208 @@
-/* localitapreferite.css */
+/* ==========================================
+   LAYOUT GENERALE DELLA PAGINA
+   ========================================== */
 
-.lista-page {
-    padding: 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #4a2c11;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.page-header {
-    margin-bottom: 20px;
-}
 
 .main-title {
-    font-size: 22px;
+    color: #633A1C;
+    font-size: 1.8rem;
     font-weight: normal;
-    color: #6b401e;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
+    margin-left: 5px;       /* Aggiunto il margine a sinistra (puoi aumentarlo a 10px o 15px se serve) */
+    position: relative;
+    padding-bottom: 12px;
+    display: block;
+    width: calc(100% - 5px); /* Regola la larghezza per evitare overflow con il margine */
+    box-sizing: border-box;
 }
 
-.main-divider {
-    border: none;
-    border-top: 1px solid #a3825f;
-    margin-bottom: 20px;
+.main-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;                /* Allinea la linea sotto direttamente al margine del testo */
+    right: 5px;
+    height: 1px;
+    background-color: #633A1C;
 }
 
-/* Sezione Ricerca e Filtri */
+/* ==========================================
+   BARRA DI RICERCA + FILTRO
+   ========================================== */
 .search-filter-section {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
+    gap: 12px;
+    width: calc(100% - 30px);          /* Stessa larghezza calcolata per le card */
+    margin-left: 15px;                 /* Stesso margine sinistro delle card */
+    margin-right: 15px;                /* Stesso margine destro delle card */
+    margin-top: 15px;
+    margin-bottom: 25px;
+    box-sizing: border-box;
 }
 
 .search-wrapper {
-    flex: 1;
+    position: relative;
+    flex-grow: 1;
     display: flex;
     align-items: center;
-    background-color: #ffffff;
-    border: 2px solid #a57c54;
-    border-radius: 25px;
-    padding: 8px 15px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.search-icon {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
 }
 
 #search-bar {
-    flex: 1;
-    border: none;
+    width: 100%;                       /* Occupa il 100% del wrapper */
+    height: 38px;
+    padding-left: 42px;
+    padding-right: 12px;
+    background-color: #FFFFFF;
+    border: 1.5px solid #8d5026;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: #633A1C;
     outline: none;
-    font-size: 16px;
-    background: transparent;
-    color: #4a2c11;
+    box-shadow: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
 }
 
 #search-bar::placeholder {
-    color: #a3825f;
+    color: #6B879B;
+    font-weight: 400;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    width: 16px !important;
+    height: 16px !important;
+    pointer-events: none;
+    stroke: #502A14;
+    stroke-width: 3.5;
+    fill: none;
 }
 
 .filter-button {
-    background: transparent;
+    background: none;
     border: none;
     cursor: pointer;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    transition: transform 0.2s ease;
+    flex-shrink: 0;                   /* L'icona del filtro non si schiaccia mai */
+    color: #4a3319;
+    transition: transform 0.1s ease, color 0.2s;
 }
 
-.filter-button:hover {
-    transform: scale(1.05);
+.filter-icon {
+    width: 24px;
+    height: 24px;
 }
 
-/* Lista Scorrevole e Card */
-.scrollable-list {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
+/* ==========================================
+   STRUTTURA DELLA CARD (ELEMENTO LISTA)
+   ========================================== */
 .localita-card {
     display: flex;
     gap: 20px;
-    text-decoration: none;
-    color: inherit;
-    transition: opacity 0.2s ease;
+    text-decoration: none;     /* Rimuove la sottolineatura blu classica dei link */
+    color: #4a3728;            /* Mantiene il testo marrone */
+    width: calc(100% - 30px); /* Sottrae i 30px totali dei margini laterali */
+    margin-left: 15px;        /* Margine fisso a sinistra */
+    margin-right: 15px;       /* Margine fisso a destra */
+    margin-bottom: 20px;      /* SPAZIO SOTTO: distanzia le card tra loro */
+    margin-top: 5px;          /* SPAZIO SOPRA: evita che il bordo in hover venga tagliato */
+    box-sizing: border-box;
+
+    /* Gestione livello e posizionamento per evitare taglimenti */
+    position: relative;
+    z-index: 1;
+    transition: transform 0.2s ease, z-index 0s;
 }
 
+/* Rimuove il margine sotto solo per l'ultima card della lista (opzionale) */
+.localita-card:last-child {
+    margin-bottom: 5px;
+}
+
+/* Durante l'hover, la card passa sopra a tutto in primo piano */
 .localita-card:hover {
-    opacity: 0.9;
+    transform: translateY(-2px); /* Un leggero effetto al passaggio del mouse */
+    z-index: 10;                 /* La porta in primo piano assoluto rispetto agli altri elementi */
 }
 
+/* Immagine a sinistra */
 .card-image-wrapper {
-    flex-shrink: 0;
+    flex-shrink: 0;              /* Evita che l'immagine si schiacci */
+    position: relative;
 }
 
 .card-image-wrapper img {
-    width: 200px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     object-fit: cover;
-    border-radius: 12px;
-    border: 2px solid #a57c54;
+    border-radius: 18px;         /* Angoli arrotondati dell'immagine */
+    border: 2px solid #4a3728;   /* Bordo marrone attorno alla foto */
+    box-sizing: border-box;      /* Mantiene il bordo all'INTERNO dei 160px */
+    display: block;              /* Rimuove spazi bianchi inline */
 }
 
+/* Blocco info a destra */
 .card-info-wrapper {
-    flex: 1;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 10px;
+    justify-content: space-between; /* Distribuisce equamente Nome, Descrizione ed Eventi */
 }
 
 .info-group {
-    display: flex;
-    flex-direction: column;
+    border-bottom: 1.5px solid #dfd5c6; /* La linea sottile marrone sotto ogni dato */
+    padding-bottom: 5px;
 }
 
 .info-label {
     font-weight: bold;
-    font-size: 16px;
-    color: #5a381b;
+    font-size: 0.95rem;
+    display: block;
     margin-bottom: 2px;
 }
 
 .info-value {
     margin: 0;
-    font-size: 15px;
-    color: #4a2c11;
-    white-space: nowrap;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    /* Trucco CSS per tagliare il testo con i tre puntini se la descrizione è troppo lunga */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-.info-line {
-    border: none;
-    border-top: 1px solid #a3825f;
-    margin: 4px 0 0 0;
-    width: 100%;
+/* ==========================================
+   BOTTONE IN FONDO (INFO FORM)
+   ========================================== */
+.footer-action-section {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
 }
 
-/* Responsività per schermi più piccoli */
-@media (max-width: 600px) {
-    .localita-card {
-        flex-direction: column;
-    }
+.info-form-btn {
+    display: inline-block;
+    background-color: #c4a48c; /* Il colore beige scuro/terracotta del bottone in fondo */
+    color: #4a3728;
+    text-align: center;
+    padding: 15px 25px;
+    border: 2px solid #4a3728;
+    border-radius: 20px; /* Bottone molto arrotondato */
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    line-height: 1.4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s ease;
+}
 
-    .card-image-wrapper img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16/9;
-    }
+.info-form-btn:hover {
+    background-color: #b3937b; /* Si scurisce leggermente al passaggio del mouse */
 }

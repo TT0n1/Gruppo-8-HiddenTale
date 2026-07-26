@@ -5,8 +5,8 @@ const databaseLocalita = {
         descrizione: "Capitale d'Italia, celebre per la sua storia millenaria e i suoi monumenti...",
         abitanti: "2.873.000",
         provincia: "Roma (RM)",
-        immaginePrincipale: "IMAGES/roma_principale.jpg",
-        stemma: "IMAGES/stemma_roma.png"
+        immaginePrincipale: "IMAGES/img.png",
+        stemma: "IMAGES/Stemma_Roma.png"
     },
     "firenze": {
         titolo: "Firenze",

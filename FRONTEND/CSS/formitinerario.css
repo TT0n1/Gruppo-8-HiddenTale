@@ -139,6 +139,24 @@
     text-align: center;
 }
 
+/* Input di Modifica In-Line all'interno delle tappe */
+.tappa-edit-input {
+    background-color: #FFFFFF;
+    color: #4a3319;
+    padding: 6px 15px;
+    border-radius: 20px;
+    border: 2px solid #6E8B3D; /* Bordo verde per evidenziare la modalità modifica */
+    font-size: 1.05rem;
+    min-width: 120px;
+    text-align: center;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.tappa-edit-input:focus {
+    box-shadow: 0 0 5px rgba(110, 139, 61, 0.4);
+}
+
 .tappa-actions {
     display: flex;
     align-items: center;
@@ -166,7 +184,7 @@
     transform: scale(1.05);
 }
 
-/* Colori specifici richiesti per la matita (giallo #B59652) */
+/* Bottone Matita */
 .btn-matita {
     background-color: #F9F5EB;
     border: 2px solid #B59652;
@@ -176,7 +194,14 @@
     stroke: #B59652 !important;
 }
 
-/* Colori specifici richiesti per la X (Rosso #C23305) */
+/* Bottone Conferma Modifica (Verde) */
+.btn-conferma-edit {
+    background-color: #EAF2E8;
+    border: 2px solid #6E8B3D;
+}
+
+/* Bottone Annulla Modifica / Elimina Tappa (Rosso) */
+.btn-annulla-edit,
 .btn-elimina-tappa {
     background-color: #FADBD8;
     border: 2px solid #C23305;
@@ -215,6 +240,7 @@
 .btn-salva {
     background-color: #6E8B3D;
 }
+
 /* Stile Modal Successo */
 .modal-overlay {
     position: fixed;
@@ -232,14 +258,13 @@
     z-index: 1000;
 }
 
-/* Classe aggiunta via JS per mostrare il popup */
 .modal-overlay.show {
     opacity: 1;
     pointer-events: auto;
 }
 
 .modal-card {
-    background-color: #FAF6EE; /* Colore di sfondo in linea con il tema */
+    background-color: #FAF6EE;
     padding: 30px;
     border-radius: 12px;
     text-align: center;
@@ -262,11 +287,6 @@
 .modal-card p {
     margin-bottom: 20px;
     color: #555;
-}
-
-/* Posizionamento del wrapper per agganciare la tendina */
-.search-input-wrapper {
-    position: relative;
 }
 
 /* Contenitore del menù a tendina */
@@ -295,14 +315,12 @@
     transition: background-color 0.2s ease;
 }
 
-/* Effetto hover sul suggerimento */
 .autocomplete-item:hover {
     background-color: #f7eedd;
     color: #8d5026;
     font-weight: 600;
 }
 
-/* Evidenziazione delle lettere combacianti */
 .autocomplete-item strong {
     color: #8d5026;
     text-decoration: underline;
@@ -313,11 +331,11 @@
     font-size: 1.8rem;
     font-weight: normal;
     margin-bottom: 25px;
-    margin-left: 5px;       /* Aggiunto il margine a sinistra (puoi aumentarlo a 10px o 15px se serve) */
+    margin-left: 5px;
     position: relative;
     padding-bottom: 12px;
     display: block;
-    width: calc(100% - 5px); /* Regola la larghezza per evitare overflow con il margine */
+    width: calc(100% - 5px);
     box-sizing: border-box;
 }
 
@@ -325,7 +343,7 @@
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;                /* Allinea la linea sotto direttamente al margine del testo */
+    left: 0;
     right: 5px;
     height: 1px;
     background-color: #633A1C;

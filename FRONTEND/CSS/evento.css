@@ -9,13 +9,30 @@
     color: #4a3728;
 }
 
+/* Titolo della pagina adeguato allo stile di località (.main-title) */
 .page-title {
-    color: #4a3728;
-    font-size: 1.8rem;
+    color: #633A1C;
+    font-size: 1.6rem;
     font-weight: normal;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #dfd5c6; /* Linea sotto il titolo come da Figma */
-    padding-bottom: 10px;
+    margin-bottom: 25px;
+    text-align: left;
+    position: relative;
+    padding-bottom: 12px;
+    padding-left: 15px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Linea sotto il titolo accorciata (stesso stile di località) */
+.page-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    height: 1px;
+    background-color: #633A1C;
 }
 
 /* ==========================================
@@ -23,30 +40,38 @@
    ========================================== */
 .evento-top-section {
     display: flex;
-    gap: 40px;
+    gap: 30px;
     margin-bottom: 30px;
+    padding-left: 15px;         /* Margine rientrato a sinistra */
+    box-sizing: border-box;
 }
 
 .evento-image-wrapper {
-    flex: 0 0 45%; /* L'immagine prende il 45% dello spazio */
+    flex: 0 0 380px;            /* Aumentata da 320px a 380px per ingrandirla un po' */
+    position: relative;
 }
 
+/* Immagine con dimensioni riequilibrate */
 .evento-image-wrapper img {
     width: 100%;
-    border-radius: 15px;
-    border: 2px solid #4a3728;
+    height: 260px;               /* Aumentata da 220px a 260px per mantenere le proporzioni */
+    border-radius: 15px;         /* Angoli arrotondati come località */
+    border: 2px solid #4a3728;   /* Bordo marrone attorno alla foto */
     object-fit: cover;
+    box-sizing: border-box;
+    display: block;
 }
 
 .evento-dati-box {
-    flex: 1; /* I dati prendono il resto dello spazio */
+    flex: 1;                     /* Occupazione dello spazio rimanente */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
+/* Linee sottili divisorie dei dati uniformate a quelle di località */
 .dato-item {
-    border-bottom: 1.5px solid #dfd5c6;
+    border-bottom: 2px solid #dfd5c6;
     padding-bottom: 8px;
     margin-bottom: 15px;
 }
@@ -85,7 +110,9 @@
 .evento-bottom-section {
     display: flex;
     gap: 40px;
-    align-items: flex-end; /* Allinea il bottone partecipa in basso con il testo */
+    align-items: flex-end;
+    padding-left: 15px;         /* Stesso margine a sinistra del blocco superiore */
+    box-sizing: border-box;
 }
 
 .evento-descrizione-box {
@@ -136,7 +163,9 @@
     background-color: #c4a48c;
 }
 
-/* Stili per il popup di partecipazione */
+/* ==========================================
+   POPUP DI PARTECIPAZIONE
+   ========================================== */
 .modal-overlay {
     display: none;
     position: fixed;

@@ -23,16 +23,15 @@
   <!-- TITOLO PAGINA -->
   <header class="page-header">
     <h1 class="main-title">Località preferite</h1>
-    <hr class="main-divider">
   </header>
 
   <!-- BARRA DI RICERCA + BOTTONE FILTRO -->
   <section class="search-filter-section">
     <div class="search-wrapper">
-                <span class="search-icon">
-                    <img src="IMAGES/search-icon.svg" alt="Cerca" width="20" height="20">
-                </span>
-      <input type="text" id="search-bar" placeholder="">
+      <!-- Sostituita l'emoji con il tag img per il file SVG della lente -->
+      <img src="./IMAGES/lente.svg" alt="Cerca" class="search-icon" width="18" height="18">
+
+      <input type="text" id="search-bar" placeholder="Cerca una località preferita...">
     </div>
 
     <button id="filter-btn" class="filter-button" aria-label="Filtra località">
@@ -111,17 +110,14 @@
           <div class="info-group">
             <span class="info-label">Nome:</span>
             <p class="info-value">${dati.titolo}</p>
-            <hr class="info-line">
           </div>
           <div class="info-group">
             <span class="info-label">Descrizione:</span>
             <p class="info-value">${dati.descrizione}</p>
-            <hr class="info-line">
           </div>
           <div class="info-group">
             <span class="info-label">Provincia:</span>
             <p class="info-value">${dati.provincia}</p>
-            <hr class="info-line">
           </div>
         </div>
       `;
@@ -130,5 +126,7 @@
     });
   });
 </script>
+
+<script src="../JAVASCRIPT/filtri.js"></script>
 </body>
 </html>
