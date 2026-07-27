@@ -1,43 +1,39 @@
 // Array locale per contenere le tappe visibili nell'itinerario
 let tappeItinerario = [];
 
-// Database generale delle località con orario stimato e chilometraggio assoluto
+// Database generale con il tempo di percorrenza SINGOLO da ciascuna località a quella successiva
 const databaseLocalita = [
-    { nome: "Fisciano", orario: "09:00", km: 0 },
-    { nome: "Baronissi", orario: "09:45", km: 6 },
-    { nome: "Pellezzano", orario: "10:30", km: 12 },
-    { nome: "Mercato San Severino", orario: "11:30", km: 22 },
-    { nome: "Calvanico", orario: "12:30", km: 32 },
-    { nome: "Montoro", orario: "14:00", km: 42 },
-    { nome: "Bracigliano", orario: "15:00", km: 50 },
-    { nome: "Siano", orario: "16:00", km: 58 },
-    { nome: "Castiglione del Genovesi", orario: "17:15", km: 75 },
-    { nome: "San Cipriano Picentino", orario: "18:15", km: 82 }
+    { nome: "Fisciano", tempoDaPrecedente: 0, km: 0 },
+    { nome: "Baronissi", tempoDaPrecedente: 10, km: 6 },
+    { nome: "Pellezzano", tempoDaPrecedente: 10, km: 12 },
+    { nome: "Mercato San Severino", tempoDaPrecedente: 15, km: 22 },
+    { nome: "Calvanico", tempoDaPrecedente: 15, km: 32 },
+    { nome: "Montoro", tempoDaPrecedente: 15, km: 42 },
+    { nome: "Bracigliano", tempoDaPrecedente: 15, km: 50 },
+    { nome: "Siano", tempoDaPrecedente: 15, km: 58 },
+    { nome: "Castiglione del Genovesi", tempoDaPrecedente: 20, km: 75 },
+    { nome: "San Cipriano Picentino", tempoDaPrecedente: 15, km: 82 }
 ];
+
 /**
  * Funzione per attivare il menù a tendina con autocompletamento su un campo di input
  */
 function setupAutocomplete(inputElement) {
     const wrapper = inputElement.closest('.search-input-wrapper');
 
-    // Disabilita l'autocompletamento di default del browser
     inputElement.setAttribute('autocomplete', 'off');
 
-    // Evento alla digitazione nell'input
     inputElement.addEventListener('input', function () {
         const val = this.value.trim();
 
-        // Chiude eventuali liste già aperte
         closeAllAutocompleteLists();
 
         if (!val) return;
 
-        // Crea il contenitore della tendina
         const listContainer = document.createElement('div');
         listContainer.classList.add('autocomplete-list');
         wrapper.appendChild(listContainer);
 
-        // Filtra le località del database in base al testo digitato
         const corrispondenze = databaseLocalita.filter(item =>
             item.nome.toLowerCase().includes(val.toLowerCase())
         );
@@ -47,12 +43,10 @@ function setupAutocomplete(inputElement) {
             return;
         }
 
-        // Genera gli elementi della lista
         corrispondenze.forEach(item => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('autocomplete-item');
 
-            // Evidenzia in grassetto la parte di testo che combacia
             const matchIndex = item.nome.toLowerCase().indexOf(val.toLowerCase());
             const prima = item.nome.substring(0, matchIndex);
             const coincidenza = item.nome.substring(matchIndex, matchIndex + val.length);
@@ -60,7 +54,6 @@ function setupAutocomplete(inputElement) {
 
             itemDiv.innerHTML = `${prima}<strong>${coincidenza}</strong>${dopo}`;
 
-            // Selezione della località al click
             itemDiv.addEventListener('click', function () {
                 inputElement.value = item.nome;
                 closeAllAutocompleteLists();
@@ -70,7 +63,6 @@ function setupAutocomplete(inputElement) {
         });
     });
 
-    // Chiude la tendina cliccando in un punto qualsiasi fuori dall'input
     document.addEventListener('click', function (e) {
         if (e.target !== inputElement) {
             closeAllAutocompleteLists();
@@ -87,7 +79,7 @@ function closeAllAutocompleteLists() {
 }
 
 /**
- * Estrae il segmento di tappe tra due località e ricalcola le distanze relative.
+ * Estrae il segmento di tappe e assegna a ciascuna tappa il tempo di percorrenza singolo dalla tappa precedente.
  */
 function calcolaSequenzaItinerario(partenza, arrivo) {
     const normalize = str => str.trim().toLowerCase();
@@ -100,19 +92,34 @@ function calcolaSequenzaItinerario(partenza, arrivo) {
     }
 
     let segmento = [];
+    let versoAvanti = true;
+
     if (startIndex <= endIndex) {
         segmento = databaseLocalita.slice(startIndex, endIndex + 1);
+        versoAvanti = true;
     } else {
         segmento = databaseLocalita.slice(endIndex, startIndex + 1).reverse();
+        versoAvanti = false;
     }
 
     const kmIniziali = segmento[0].km;
 
-    return segmento.map(tappa => ({
-        nome: tappa.nome,
-        orario: tappa.orario,
-        distanza: `${Math.abs(tappa.km - kmIniziali)} km`
-    }));
+    return segmento.map((tappa, idx) => {
+        let tempoTratta = 0;
+
+        if (idx === 0) {
+            tempoTratta = 0; // La prima tappa ha 0 min di attesa/spostamento
+        } else {
+            // Se andiamo avanti usiamo il valore della tappa corrente, altrimenti della tappa precedente nell'array originale
+            tempoTratta = versoAvanti ? tappa.tempoDaPrecedente : segmento[idx - 1].tempoDaPrecedente;
+        }
+
+        return {
+            nome: tappa.nome,
+            tempo: `${tempoTratta} min`,
+            distanza: `${Math.abs(tappa.km - kmIniziali)} km`
+        };
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -125,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputPartenza = document.getElementById('itinerario-partenza');
     const inputArrivo = document.getElementById('itinerario-arrivo');
 
-    // Attiva il menù a tendina sui due campi di ricerca
     if (inputPartenza) setupAutocomplete(inputPartenza);
     if (inputArrivo) setupAutocomplete(inputArrivo);
 
@@ -149,11 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const tappaElement = document.createElement('div');
             tappaElement.classList.add('tappa-item');
 
-            // Se la tappa è in modalità modifica, mostra i campi di testo nel rettangolo
             if (tappa.isEditing) {
                 tappaElement.innerHTML = `
                     <input type="text" class="tappa-edit-input edit-nome" value="${tappa.nome}" placeholder="Luogo">
-                    <input type="text" class="tappa-edit-input edit-orario" value="${tappa.orario}" placeholder="Orario">
+                    <input type="text" class="tappa-edit-input edit-tempo" value="${tappa.tempo}" placeholder="Tempo tratta (es. 10 min)">
                     <input type="text" class="tappa-edit-input edit-distanza" value="${tappa.distanza}" placeholder="Distanza">
                     
                     <div class="tappa-actions">
@@ -171,10 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
             } else {
-                // Modalità visualizzazione standard
                 tappaElement.innerHTML = `
                     <div class="tappa-chip">${tappa.nome}</div>
-                    <div class="tappa-chip">${tappa.orario}</div>
+                    <div class="tappa-chip">${tappa.tempo}</div>
                     <div class="tappa-chip">${tappa.distanza}</div>
                     
                     <div class="tappa-actions">
@@ -198,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Generazione della sequenza
     if (btnGenera) {
         btnGenera.addEventListener('click', () => {
             const partenzaVal = inputPartenza ? inputPartenza.value : '';
@@ -220,10 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Gestione Modifica / Eliminazione Tappe tramite Modifica In-Line
     if (propostoBox) {
         propostoBox.addEventListener('click', (e) => {
-            // Elimina tappa
             const btnDelete = e.target.closest('.btn-elimina-tappa');
             if (btnDelete) {
                 const index = parseInt(btnDelete.dataset.index, 10);
@@ -232,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Click sulla matita per attivare la modifica interna al rettangolo
             const btnEdit = e.target.closest('.btn-matita');
             if (btnEdit) {
                 const index = parseInt(btnEdit.dataset.index, 10);
@@ -241,18 +241,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Salva modifiche effettuate nella riga
             const btnConferma = e.target.closest('.btn-conferma-edit');
             if (btnConferma) {
                 const index = parseInt(btnConferma.dataset.index, 10);
                 const parentRow = btnConferma.closest('.tappa-item');
 
                 const valNome = parentRow.querySelector('.edit-nome').value.trim();
-                const valOrario = parentRow.querySelector('.edit-orario').value.trim();
+                const valTempo = parentRow.querySelector('.edit-tempo').value.trim();
                 const valDistanza = parentRow.querySelector('.edit-distanza').value.trim();
 
                 if (valNome) tappeItinerario[index].nome = valNome;
-                if (valOrario) tappeItinerario[index].orario = valOrario;
+                if (valTempo) tappeItinerario[index].tempo = valTempo;
                 if (valDistanza) tappeItinerario[index].distanza = valDistanza;
 
                 tappeItinerario[index].isEditing = false;
@@ -260,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Annulla modifica
             const btnAnnulla = e.target.closest('.btn-annulla-edit');
             if (btnAnnulla) {
                 const index = parseInt(btnAnnulla.dataset.index, 10);
@@ -271,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Reset
     if (btnReset) {
         btnReset.addEventListener('click', () => {
             tappeItinerario = [];
@@ -281,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Salvataggio Itinerario
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -291,7 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Pulisce la proprietà isEditing prima di salvare
             const tappeDaSalvare = tappeItinerario.map(({ isEditing, ...rest }) => rest);
 
             const nuovoItinerario = {

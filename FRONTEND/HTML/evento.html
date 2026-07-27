@@ -46,7 +46,7 @@
                 <p id="evento-prezzo">Ingresso gratuito</p>
             </div>
 
-            <button class="btn-modifica" aria-label="Modifica questo evento">Modifica Evento</button>
+
         </article>
 
     </section>
@@ -147,13 +147,7 @@
         // Gestione posti
         document.getElementById("evento-posti").innerText = dati.posti || "Illimitati";
 
-        // Gestione bottone Modifica
-        const btnModifica = document.querySelector(".btn-modifica");
-        if (btnModifica) {
-            btnModifica.addEventListener("click", function() {
-                window.location.href = `formevento.html?editId=${idEvento}`;
-            });
-        }
+
 
         // GESTIONE POPUP PARTECIPA
         const btnApriPartecipa = document.getElementById("btn-apri-partecipa");
