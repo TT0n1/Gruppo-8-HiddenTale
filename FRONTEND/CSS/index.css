@@ -1,5 +1,3 @@
-
-
 /* --- BARRA DI RICERCA --- */
 .search-input-wrapper {
     position: relative;
@@ -8,8 +6,8 @@
     display: flex;
     align-items: center;
     margin-top: 0;
-    margin-bottom: 20px; /* Margine sotto */
-    margin-left: 15px;   /* Spostato verso sinistra (regola questo valore a piacere) */
+    margin-bottom: 20px;
+    margin-left: 15px;
     margin-right: auto;
 }
 
@@ -44,7 +42,42 @@
     fill: none;
 }
 
-/* --- BOX MAPPA BANNER --- */
+/* --- AUTOCOMPLETAMENTO BARRA DI RICERCA (Stili importati da formitinerario) --- */
+.autocomplete-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    border: 1.5px solid #8d5026;
+    border-radius: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 4px 0;
+}
+
+.autocomplete-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    color: #5c3011;
+    font-size: 0.95rem;
+    text-align: left;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.autocomplete-item:hover {
+    background-color: #f7eedd;
+    color: #8d5026;
+    font-weight: 600;
+}
+
+.autocomplete-item strong {
+    color: #8d5026;
+    text-decoration: underline;
+}
+
 /* --- CONTAINER MAPPA BANNER --- */
 .map-banner {
     width: 98%;
@@ -53,8 +86,6 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-
-    /* Centra l'elemento orizzontalmente */
     display: block;
     margin: 0 auto;
 }
@@ -68,22 +99,33 @@
 /* --- SEZIONE EVENTI --- */
 .events-section {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .events-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #4a270d;
     margin-bottom: 15px;
 }
 
-/* --- CAROSELLO --- */
-.carousel-container {
+/* --- CONTENITORE AMPIATO IN LUNGHEZZA --- */
+.carousel-wrapper {
     position: relative;
+    width: 90%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 48px;
+    box-sizing: border-box;
+}
+
+/* --- CAROSELLO CENTRATO --- */
+.carousel-container {
     width: 100%;
     overflow: hidden;
-    padding: 5px 0;
+    padding: 10px 4px;
+    box-sizing: border-box;
 }
 
 .carousel-track {
@@ -93,21 +135,24 @@
 }
 
 .event-card {
-    /* Mostra 3 schede contemporaneamente tenendo conto dei gap */
     flex: 0 0 calc((100% - 30px) / 3);
+    max-width: calc((100% - 30px) / 3);
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
 }
 
+/* Card Immagine */
 .card-image-box {
     width: 100%;
-    height: 170px;
+    height: 260px;
     border: 2px solid #8d5026;
-    border-radius: 16px;
+    border-radius: 14px;
     overflow: hidden;
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-sizing: border-box;
 }
 
 .card-image-box img {
@@ -119,26 +164,60 @@
 
 .card-title {
     margin-top: 10px;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #4a270d;
     text-align: center;
 }
 
+/* --- PULSANTI FRECCIA ESTERNI --- */
+.carousel-btn {
+    position: absolute;
+    top: calc(260px / 2 + 10px);
+    transform: translateY(-50%);
+    background-color: #F6EFD9;
+    color: #4a270d;
+    border: 1.5px solid #8d5026;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
+.carousel-btn:hover {
+    background-color: #d8bda5;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* --- BANNER DESCRIZIONE --- */
 .Descrizione {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centra gli elementi orizzontalmente nella pagina */
+    justify-content: center;
     background-color: #F6EFD9;
-    padding: 24px 20px;       /* Spaziatura verticale maggiorata */
-    gap: 20px;                /* Spazio più ampio tra logo e testo */
+    padding: 24px 20px;
+    gap: 20px;
     width: 100%;
     box-sizing: border-box;
     text-align: center;
 }
 
 .Descrizione div img {
-    height: 75px;             /* Logo nettamente più grande */
+    height: 75px;
     width: auto;
     display: block;
     object-fit: contain;
@@ -147,19 +226,28 @@
 .Descrizione p {
     margin: 0;
     color: #633A1C;
-    font-size: 2.2rem;        /* Testo molto più grande e visibile */
+    font-size: 2.2rem;
     font-weight: 700;
     letter-spacing: 0.5px;
 }
-/* Responsive per schermi piccoli */
-@media (max-width: 768px) {
-    .event-card {
-        flex: 0 0 calc((100% - 15px) / 2); /* 2 schede su tablet */
+
+/* --- RESPONSIVE --- */
+@media (max-width: 850px) {
+    .carousel-wrapper {
+        width: 95%;
+        padding: 0 35px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .event-card {
-        flex: 0 0 100%; /* 1 scheda su mobile */
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .card-image-box {
+        height: 220px;
+    }
+    .carousel-btn {
+        top: calc(220px / 2 + 10px);
     }
 }

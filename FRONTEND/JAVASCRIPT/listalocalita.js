@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return [loc.id, {
                 titolo: loc.nome || loc.titolo || "Senza Titolo",
                 descrizione: loc.informazione || loc.descrizione || "Nessuna descrizione",
-                provincia: loc.provincia || "Non specificata", // Nel form non c'è, mettiamo un fallback
+                provincia: loc.provincia || "Non specificata",
                 immaginePrincipale: loc.immagine || loc.immaginePrincipale || '../IMAGES/placeholder.jpg'
             }];
         });
@@ -82,8 +82,95 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // ==========================================
+    // GESTIONE MENÙ A TENDINA (AUTOCOMPLETAMENTO)
+    // ==========================================
     if (searchInput) {
-        searchInput.addEventListener('input', window.aggiornaVista);
+        const wrapper = searchInput.closest('.search-input-wrapper') || searchInput.parentElement;
+        searchInput.setAttribute('autocomplete', 'off');
+
+        function mostraTendina(filtro = '') {
+            chiudiTutteLeTendine();
+
+            // Ottiene tutte le località per il suggerimento
+            let arrayStatico = typeof databaseLocalita !== 'undefined' ? Object.values(databaseLocalita) : [];
+            const localitaSessione = JSON.parse(sessionStorage.getItem('localitaUtente')) || [];
+
+            const nomiLocalita = [
+                ...arrayStatico.map(l => l.titolo || l.nome),
+                ...localitaSessione.map(l => l.nome || l.titolo)
+            ].filter(Boolean);
+
+            // Elimina i duplicati
+            const nomiUnici = [...new Set(nomiLocalita)];
+
+            // Filtra in base a quanto digitato
+            const corrispondenze = nomiUnici.filter(nome =>
+                nome.toLowerCase().includes(filtro.toLowerCase())
+            );
+
+            const listContainer = document.createElement('div');
+            listContainer.classList.add('autocomplete-list');
+            wrapper.appendChild(listContainer);
+
+            if (corrispondenze.length === 0) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.classList.add('autocomplete-item');
+                emptyDiv.style.fontStyle = 'italic';
+                emptyDiv.style.color = '#888';
+                emptyDiv.textContent = 'Nessuna località trovata';
+                listContainer.appendChild(emptyDiv);
+                return;
+            }
+
+            corrispondenze.forEach(nome => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('autocomplete-item');
+
+                if (filtro.trim() !== '') {
+                    const matchIndex = nome.toLowerCase().indexOf(filtro.toLowerCase());
+                    const prima = nome.substring(0, matchIndex);
+                    const coincidenza = nome.substring(matchIndex, matchIndex + filtro.length);
+                    const dopo = nome.substring(matchIndex + filtro.length);
+                    itemDiv.innerHTML = `${prima}<strong>${coincidenza}</strong>${dopo}`;
+                } else {
+                    itemDiv.textContent = nome;
+                }
+
+                itemDiv.addEventListener('mousedown', function (e) {
+                    e.preventDefault();
+                    searchInput.value = nome;
+                    chiudiTutteLeTendine();
+                    window.aggiornaVista();
+                });
+
+                listContainer.appendChild(itemDiv);
+            });
+        }
+
+        function chiudiTutteLeTendine() {
+            const liste = document.querySelectorAll('.autocomplete-list');
+            liste.forEach(lista => lista.remove());
+        }
+
+        searchInput.addEventListener('focus', function () {
+            mostraTendina(this.value.trim());
+        });
+
+        searchInput.addEventListener('click', function () {
+            mostraTendina(this.value.trim());
+        });
+
+        searchInput.addEventListener('input', function () {
+            mostraTendina(this.value.trim());
+            window.aggiornaVista();
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.search-input-wrapper') && !e.target.closest('#search-bar')) {
+                chiudiTutteLeTendine();
+            }
+        });
     }
 
     // Inizializza la visualizzazione

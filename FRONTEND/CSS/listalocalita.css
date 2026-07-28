@@ -2,13 +2,12 @@
    LAYOUT GENERALE DELLA PAGINA
    ========================================== */
 
-
 .main-title {
     color: #633A1C;
     font-size: 1.8rem;
     font-weight: normal;
     margin-bottom: 25px;
-    margin-left: 5px;       /* Aggiunto il margine a sinistra (puoi aumentarlo a 10px o 15px se serve) */
+    margin-left: 5px;       /* Aggiunto il margine a sinistra */
     position: relative;
     padding-bottom: 12px;
     display: block;
@@ -78,6 +77,42 @@
     stroke: #502A14;
     stroke-width: 3.5;
     fill: none;
+}
+
+/* --- AUTOCOMPLETAMENTO BARRA DI RICERCA --- */
+.autocomplete-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    border: 1.5px solid #8d5026;
+    border-radius: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 4px 0;
+}
+
+.autocomplete-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    color: #5c3011;
+    font-size: 0.95rem;
+    text-align: left;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.autocomplete-item:hover {
+    background-color: #f7eedd;
+    color: #8d5026;
+    font-weight: 600;
+}
+
+.autocomplete-item strong {
+    color: #8d5026;
+    text-decoration: underline;
 }
 
 .filter-button {

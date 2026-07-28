@@ -34,9 +34,11 @@
 }
 
 .account-image-wrapper img {
-    width: 250px;
-    height: 180px;
-    object-fit: cover;
+    max-width: 100%;      /* Permette all'immagine di ridimensionarsi se lo schermo è piccolo */
+    max-height: 250px;     /* Imposta un'altezza massima per non occupare troppo spazio */
+    width: auto;           /* Mantiene la larghezza proporzionata */
+    height: auto;          /* Mantiene l'altezza proporzionata */
+    object-fit: contain;   /* Assicura che l'intera foto sia visibile senza ritagli */
     border-radius: 15px;
     border: 2px solid #b88a5e;
 }

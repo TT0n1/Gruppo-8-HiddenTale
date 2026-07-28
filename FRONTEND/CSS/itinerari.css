@@ -52,6 +52,42 @@
     fill: none;
 }
 
+/* --- AUTOCOMPLETAMENTO BARRA DI RICERCA --- */
+.autocomplete-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    border: 1.5px solid #8d5026;
+    border-radius: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 4px 0;
+}
+
+.autocomplete-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    color: #5c3011;
+    font-size: 0.95rem;
+    text-align: left;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.autocomplete-item:hover {
+    background-color: #f7eedd;
+    color: #8d5026;
+    font-weight: 600;
+}
+
+.autocomplete-item strong {
+    color: #8d5026;
+    text-decoration: underline;
+}
+
 .filter-button {
     background: none;
     border: none;
@@ -75,7 +111,7 @@
     font-size: 1.8rem;
     font-weight: normal;
     margin-bottom: 25px;
-    margin-left: 5px;       /* Aggiunto il margine a sinistra (puoi aumentarlo a 10px o 15px se serve) */
+    margin-left: 5px;       /* Aggiunto il margine a sinistra */
     position: relative;
     padding-bottom: 12px;
     display: block;
@@ -94,7 +130,7 @@
 }
 
 /* ==========================================
-   LISTA ITINERARI E CARD (Corretto con la "o")
+   LISTA ITINERARI E CARD
    ========================================== */
 .itinerari-list {
     margin-top: 25px;
@@ -134,7 +170,6 @@
     color: #4a3319;
 }
 
-
 /* ==========================================
    BOTTONE CREA ITINERARIO
    ========================================== */
@@ -142,7 +177,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 50px;
-    margin-right: 15px;         /* Aggiunto il margine a destra (puoi aumentarlo/diminuirlo a piacere) */
+    margin-right: 15px;
 }
 
 .btn-crea {
@@ -150,7 +185,7 @@
     background-color: #d5b497;
     border: 2px solid #a67c58;
     border-radius: 12px;
-    font-size: 1rem;
+    font-size: 1.0rem;
     color: #4a3319;
     cursor: pointer;
     font-weight: 500;
@@ -211,7 +246,6 @@
     color: #4a3319;
     line-height: 1.6;
 }
-
 
 /* ==========================================
    CONTENUTO INTERNO NUOVO POPUP
@@ -314,19 +348,19 @@
 
 .btn-modify-itinerary {
     padding: 10px 20px;
-    background-color: #C23305;    /* Sfondo rosso come btn-reset */
-    border: none;                 /* Rimosso il bordo marrone */
+    background-color: #C23305;
+    border: none;
     border-radius: 20px;
     font-size: 0.95rem;
-    color: #FFFFFF;               /* Testo bianco */
+    color: #FFFFFF;
     cursor: pointer;
     font-weight: 500;
     transition: opacity 0.2s ease, transform 0.1s;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Leggera ombra per dare profondità */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-modify-itinerary:hover {
-    opacity: 0.9;                 /* Effetto hover coerente con btn-final */
+    opacity: 0.9;
 }
 
 .btn-modify-itinerary:active {

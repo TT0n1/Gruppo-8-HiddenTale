@@ -1,114 +1,153 @@
 document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     const container = document.getElementById('carouselContainer');
 
-    if (typeof databaseEventi === 'undefined') {
-        console.error("Errore: databaseEventi non trovato.");
-        return;
-    }
-
-    // 1. Popolamento dinamico del carosello
-    let eventiArray = Array.isArray(databaseEventi)
-        ? databaseEventi
-        : Object.keys(databaseEventi).map(key => ({ id: key, ...databaseEventi[key] }));
-
-    track.innerHTML = '';
-
-    eventiArray.forEach(dati => {
-        const idEvento = dati.id || '';
-        const titoloEvento = dati.titolo || dati.nome || 'Evento senza nome';
-        const immagineEvento = dati.immagineLocandina || dati.immagine || dati.img || '../IMAGES/placeholder.jpg';
-        const provinciaEvento = dati.provincia ? ` - ${dati.provincia}` : '';
-
-        // Creazione della card come link per rimandare alla pagina specifica (opzionale, basato sul tuo sistema)
-        const cardLink = document.createElement('a');
-        cardLink.href = `evento.html?id=${idEvento}`;
-        cardLink.className = 'event-card';
-        cardLink.style.textDecoration = 'none';
-        cardLink.style.color = 'inherit';
-
-        cardLink.innerHTML = `
-            <div class="card-image-box">
-                <img src="${immagineEvento}" alt="${titoloEvento}">
-            </div>
-            <p class="card-title">${titoloEvento}${provinciaEvento}</p>
-        `;
-
-        track.appendChild(cardLink);
-    });
-
-    // 2. Logica originale del carosello
-    const originalCards = Array.from(track.children);
-    const originalCount = originalCards.length;
+    if (!track) return;
 
     let currentIndex = 0;
-    let autoScrollInterval;
+    let autoPlayTimer = null;
     let isTransitioning = false;
 
-    // Se non ci sono eventi, interrompi lo script del carosello
-    if (originalCount === 0) return;
-
-    function setupClones() {
-        const visibleCards = getVisibleCardsCount();
-        for (let i = 0; i < visibleCards; i++) {
-            if (originalCards[i]) {
-                const clone = originalCards[i].cloneNode(true);
-                clone.classList.add('clone');
-                track.appendChild(clone);
-            }
-        }
+    // Popola il carosello dal database eventi
+    if (typeof databaseEventi !== 'undefined') {
+        track.innerHTML = '';
+        Object.keys(databaseEventi).forEach(key => {
+            const evento = databaseEventi[key];
+            const card = document.createElement('div');
+            card.className = 'event-card';
+            card.innerHTML = `
+                <a href="evento.html?id=${key}" style="text-decoration:none; width:100%;">
+                    <div class="card-image-box">
+                        <img src="${evento.immagineLocandina || '../IMAGES/placeholder.jpg'}" alt="${evento.nome || evento.titolo}">
+                    </div>
+                    <div class="card-title">${evento.nome || evento.titolo}</div>
+                </a>
+            `;
+            track.appendChild(card);
+        });
     }
 
+    const originalCards = Array.from(track.querySelectorAll('.event-card'));
+    const totalOriginals = originalCards.length;
+
+    if (totalOriginals === 0) return;
+
     function getVisibleCardsCount() {
-        if (window.innerWidth <= 480) return 1;
-        if (window.innerWidth <= 768) return 2;
+        if (window.innerWidth <= 600) return 1;
         return 3;
     }
 
-    function moveNext() {
-        if (isTransitioning) return;
-        isTransitioning = true;
+    // Aggiunge o rimuove i cloni necessari per il loop infinito
+    function setupClones() {
+        // Rimuove vecchi cloni se presenti
+        track.querySelectorAll('.event-card.clone').forEach(clone => clone.remove());
 
-        currentIndex++;
+        const visibleCards = getVisibleCardsCount();
 
-        const firstCard = originalCards[0];
-        const cardWidth = firstCard.getBoundingClientRect().width;
-        const gap = 15;
-        const moveDistance = (cardWidth + gap) * currentIndex;
-
-        track.style.transition = 'transform 0.5s ease-in-out';
-        track.style.transform = `translateX(-${moveDistance}px)`;
-    }
-
-    track.addEventListener('transitionend', () => {
-        if (currentIndex >= originalCount) {
-            track.style.transition = 'none';
-            currentIndex = 0;
-            track.style.transform = `translateX(0px)`;
-            track.offsetHeight;
+        // Clona i primi 'visibleCards' elementi e li mette alla fine
+        for (let i = 0; i < visibleCards; i++) {
+            const clone = originalCards[i % totalOriginals].cloneNode(true);
+            clone.classList.add('clone');
+            track.appendChild(clone);
         }
-        isTransitioning = false;
-    });
-
-    function startAutoScroll() {
-        autoScrollInterval = setInterval(moveNext, 3000);
-    }
-
-    function stopAutoScroll() {
-        clearInterval(autoScrollInterval);
     }
 
     setupClones();
-    startAutoScroll();
 
-    container.addEventListener('mouseenter', stopAutoScroll);
-    container.addEventListener('mouseleave', startAutoScroll);
+    function getCardWidth() {
+        const allCards = track.querySelectorAll('.event-card');
+        if (allCards.length === 0) return 0;
+        return allCards[0].getBoundingClientRect().width + 15; // Width + gap (15px)
+    }
+
+    function updateCarousel(animate = true) {
+        const cardWidth = getCardWidth();
+        if (animate) {
+            track.style.transition = 'transform 0.4s ease-in-out';
+        } else {
+            track.style.transition = 'none';
+        }
+        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+
+    // Gestione del ripristino istantaneo al termine della transizione
+    track.addEventListener('transitionend', () => {
+        isTransitioning = false;
+
+        // Se si è arrivati al blocco clonato oltre la fine, salta a 0 senza animazione
+        if (currentIndex >= totalOriginals) {
+            currentIndex = 0;
+            updateCarousel(false);
+        }
+        // Se si è andati indietro da 0, salta alla fine originale senza animazione
+        else if (currentIndex < 0) {
+            currentIndex = totalOriginals - 1;
+            updateCarousel(false);
+        }
+    });
+
+    function nextSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex++;
+        updateCarousel(true);
+    }
+
+    function prevSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        // Se siamo all'inizio (0) e premiamo indietro, saltiamo prima all'equivalente clonato
+        if (currentIndex === 0) {
+            currentIndex = totalOriginals;
+            updateCarousel(false);
+            // Forza il reflow per applicare subito il posizionamento prima di scorrere indietro
+            track.offsetHeight;
+        }
+
+        currentIndex--;
+        updateCarousel(true);
+    }
+
+    // --- GESTIONE AUTOPLAY (Scorrimento Automatico) ---
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayTimer = setInterval(nextSlide, 3500); // Scorre ogni 3.5 secondi
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+    }
+
+    // Eventi pulsanti
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            startAutoPlay(); // Resetta il timer dell'autoplay dopo il click
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            startAutoPlay(); // Resetta il timer dell'autoplay dopo il click
+        });
+    }
+
+    // Mette in pausa l'autoplay se l'utente va sopra col mouse
+    if (container) {
+        container.addEventListener('mouseenter', stopAutoPlay);
+        container.addEventListener('mouseleave', startAutoPlay);
+    }
 
     window.addEventListener('resize', () => {
-        const firstCard = originalCards[0];
-        const cardWidth = firstCard.getBoundingClientRect().width;
-        const gap = 15;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${(cardWidth + gap) * currentIndex}px)`;
+        setupClones();
+        updateCarousel(false);
     });
+
+    // Avvio iniziale
+    updateCarousel(false);
+    startAutoPlay();
 });

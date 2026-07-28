@@ -19,74 +19,85 @@
 
 <!-- CONTENUTO PRINCIPALE DELLA PAGINA EVENTO -->
 
+<!-- TITOLO -->
+<h1 id="evento-titolo" class="page-title">Sagra del Fusillo al Tegamino</h1>
 
-    <!-- TITOLO -->
-    <h1 id="evento-titolo" class="page-title">Sagra del Fusillo al Tegamino</h1>
+<!-- SEZIONE SUPERIORE: Immagine e Dettagli -->
+<section class="evento-top-section">
 
-    <!-- SEZIONE SUPERIORE: Immagine e Dettagli -->
-    <section class="evento-top-section">
-
-        <!-- Immagine Locandina -->
-        <div class="evento-image-wrapper">
-            <img id="evento-img" src="IMAGES/sagra_del_fusillo_al_tegamino.png" alt="Locandina Evento">
-        </div>
-
-        <!-- Dati Evento (Luogo, Data, Prezzo) -->
-        <article class="evento-dati-box">
-            <div class="dato-item">
-                <span class="dato-label">Luogo:</span>
-                <p id="evento-luogo">Piazza La Rocca, 84090 San Mango Piemonte SA.</p>
-            </div>
-            <div class="dato-item">
-                <span class="dato-label">Data:</span>
-                <p id="evento-data">Si terrà dal venerdì 1 a lunedì 4 agosto alle ore 20:00</p>
-            </div>
-            <div class="dato-item">
-                <span class="dato-label">Prezzo:</span>
-                <p id="evento-prezzo">Ingresso gratuito</p>
-            </div>
-
-
-        </article>
-
-    </section>
-
-    <!-- SEZIONE INFERIORE: Descrizione e Partecipazione -->
-    <section class="evento-bottom-section">
-
-        <!-- Descrizione Testuale -->
-        <article class="evento-descrizione-box">
-            <h2>Descrizione</h2>
-            <p id="evento-descrizione">
-                Protagonista indiscusso è chiaramente il fusillo al tegamino: un formato di pasta corta condito con sugo di pomodoro, ricco di formaggio filante e ragù di carne, il cui sapore si esalta nella cottura nel classico tegamino di terracotta. Accanto alla celebrata specialità gastronomica, le serate includono panini assortiti, dolci tradizionali e vino locale, con della musica dal vivo per offrire un'esperienza sensoriale unica. Novità importante di questa edizione è la presenza dello stand per celiaci.
-            </p>
-        </article>
-
-        <!-- Box Partecipazione -->
-        <aside class="evento-partecipa-box">
-            <p class="posti-rimanenti">Posti Rimanenti<br><span id="evento-posti">Illimitati</span></p>
-            <button id="btn-apri-partecipa" class="btn-partecipa" aria-label="Partecipa all'evento">Partecipa</button>
-        </aside>
-
-    </section>
-
-    <!-- Modale Partecipazione -->
-    <div id="modal-partecipa" class="modal-overlay">
-        <div class="modal-content">
-            <h2>Avviso</h2>
-            <p>Questa funzionalità è ancora in fase di sviluppo.</p>
-            <div class="modal-buttons">
-                <button id="btn-conferma-partecipa" class="btn-partecipa">Chiudi</button>
-            </div>
-        </div>
+    <!-- Immagine Locandina con Lente d'Ingrandimento -->
+    <div class="evento-image-wrapper">
+        <img id="evento-img" src="IMAGES/sagra_del_fusillo_al_tegamino.png" alt="Locandina Evento">
+        <button class="zoom-icon-btn" aria-label="Ingrandisci immagine">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+        </button>
     </div>
 
+    <!-- Dati Evento (Luogo, Data, Prezzo) -->
+    <article class="evento-dati-box">
+        <div class="dato-item">
+            <span class="dato-label">Luogo:</span>
+            <p id="evento-luogo">Piazza La Rocca, 84090 San Mango Piemonte SA.</p>
+        </div>
+        <div class="dato-item">
+            <span class="dato-label">Data:</span>
+            <p id="evento-data">Si terrà dal venerdì 1 a lunedì 4 agosto alle ore 20:00</p>
+        </div>
+        <div class="dato-item">
+            <span class="dato-label">Prezzo:</span>
+            <p id="evento-prezzo">Ingresso gratuito</p>
+        </div>
+    </article>
 
+</section>
+
+<!-- SEZIONE INFERIORE: Descrizione e Partecipazione -->
+<section class="evento-bottom-section">
+
+    <!-- Descrizione Testuale -->
+    <article class="evento-descrizione-box">
+        <h2>Descrizione</h2>
+        <p id="evento-descrizione">
+            Protagonista indiscusso è chiaramente il fusillo al tegamino: un formato di pasta corta condito con sugo di pomodoro, ricco di formaggio filante e ragù di carne, il cui sapore si esalta nella cottura nel classico tegamino di terracotta. Accanto alla celebrata specialità gastronomica, le serate includono panini assortiti, dolci tradizionali e vino locale, con della musica dal vivo per offrire un'esperienza sensoriale unica. Novità importante di questa edizione è la presenza dello stand per celiaci.
+        </p>
+    </article>
+
+    <!-- Box Partecipazione -->
+    <aside class="evento-partecipa-box">
+        <p class="posti-rimanenti">Posti Rimanenti<br><span id="evento-posti">Illimitati</span></p>
+        <button id="btn-apri-partecipa" class="btn-partecipa" aria-label="Partecipa all'evento">Partecipa</button>
+    </aside>
+
+</section>
+
+<!-- Modale Partecipazione -->
+<div id="modal-partecipa" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Avviso</h2>
+        <p>Questa funzionalità è ancora in fase di sviluppo.</p>
+        <div class="modal-buttons">
+            <button id="btn-conferma-partecipa" class="btn-partecipa">Chiudi</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Zoom Immagine -->
+<div id="modal-zoom-img" class="modal-zoom-overlay">
+    <div class="modal-zoom-content">
+        <span id="btn-chiudi-zoom" class="btn-chiudi-zoom">&times;</span>
+        <img id="img-zoomata" src="" alt="Locandina Ingrandita">
+    </div>
+</div>
 
 <!-- 1. Richiamo del database finto degli eventi -->
 <script src="../JAVASCRIPT/dati_eventi.js"></script>
 
-<!-- 2. Script per popolare dinamicamente i dati e gestire il popup -->
+<!-- 2. Script per popolare dinamicamente i dati, gestire i popup e lo zoom -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -147,28 +158,53 @@
         // Gestione posti
         document.getElementById("evento-posti").innerText = dati.posti || "Illimitati";
 
-
-
         // GESTIONE POPUP PARTECIPA
         const btnApriPartecipa = document.getElementById("btn-apri-partecipa");
         const modalPartecipa = document.getElementById("modal-partecipa");
         const btnConfermaPartecipa = document.getElementById("btn-conferma-partecipa");
 
         if (btnApriPartecipa && modalPartecipa) {
-            // Apre il popup
             btnApriPartecipa.addEventListener("click", function() {
                 modalPartecipa.style.display = "flex";
             });
 
-            // Chiude il popup
             btnConfermaPartecipa.addEventListener("click", function() {
                 modalPartecipa.style.display = "none";
             });
 
-            // Chiude cliccando fuori dal modale
             window.addEventListener("click", function(event) {
                 if (event.target === modalPartecipa) {
                     modalPartecipa.style.display = "none";
+                }
+            });
+        }
+
+        // GESTIONE ZOOM IMMAGINE
+        const imgWrapper = document.querySelector(".evento-image-wrapper");
+        const eventoImg = document.getElementById("evento-img");
+        const modalZoom = document.getElementById("modal-zoom-img");
+        const imgZoomata = document.getElementById("img-zoomata");
+        const btnChiudiZoom = document.getElementById("btn-chiudi-zoom");
+
+        if (imgWrapper && modalZoom && imgZoomata) {
+            // Clic sull'immagine o sull'icona per aprire lo zoom
+            imgWrapper.addEventListener("click", function() {
+                imgZoomata.src = eventoImg.src;
+                modalZoom.style.display = "flex";
+            });
+
+            // Clic sulla X per chiudere
+            if (btnChiudiZoom) {
+                btnChiudiZoom.addEventListener("click", function(e) {
+                    e.stopPropagation(); // Evita la riapertura
+                    modalZoom.style.display = "none";
+                });
+            }
+
+            // Clic sullo sfondo scuro per chiudere
+            modalZoom.addEventListener("click", function(event) {
+                if (event.target === modalZoom) {
+                    modalZoom.style.display = "none";
                 }
             });
         }

@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. FUNZIONE PER FILTRARE, ORDINARE E MOSTRARE LE CARD
-    function aggiornaVista() {
+    window.aggiornaVista = function() {
         if (!itinerariList) return;
 
         const testoRicerca = searchInput ? searchInput.value.toLowerCase().trim() : '';
@@ -70,23 +70,106 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             itinerariList.appendChild(card);
         });
-    }
+    };
 
-    // 3. LISTENERS PER EVENTI DI RICERCA E FILTRO
+    // ==========================================
+    // GESTIONE MENÙ A TENDINA (AUTOCOMPLETAMENTO)
+    // ==========================================
     if (searchInput) {
-        searchInput.addEventListener('input', aggiornaVista);
+        const wrapper = searchInput.closest('.search-wrapper') || searchInput.parentElement;
+        searchInput.setAttribute('autocomplete', 'off');
+
+        function mostraTendina(filtro = '') {
+            chiudiTutteLeTendine();
+
+            // Raccoglie tutti i titoli/partenze/arrivi degli itinerari disponibili
+            const suggerimenti = [];
+            itinerari.forEach(item => {
+                if (item.titolo) suggerimenti.push(item.titolo);
+            });
+
+            // Rimuove i duplicati
+            const unici = [...new Set(suggerimenti)];
+
+            // Filtra in base a quanto digitato
+            const corrispondenze = unici.filter(nome =>
+                nome.toLowerCase().includes(filtro.toLowerCase())
+            );
+
+            const listContainer = document.createElement('div');
+            listContainer.classList.add('autocomplete-list');
+            wrapper.appendChild(listContainer);
+
+            if (corrispondenze.length === 0) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.classList.add('autocomplete-item');
+                emptyDiv.style.fontStyle = 'italic';
+                emptyDiv.style.color = '#888';
+                emptyDiv.textContent = 'Nessun itinerario trovato';
+                listContainer.appendChild(emptyDiv);
+                return;
+            }
+
+            corrispondenze.forEach(nome => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('autocomplete-item');
+
+                if (filtro.trim() !== '') {
+                    const matchIndex = nome.toLowerCase().indexOf(filtro.toLowerCase());
+                    const prima = nome.substring(0, matchIndex);
+                    const coincidenza = nome.substring(matchIndex, matchIndex + filtro.length);
+                    const dopo = nome.substring(matchIndex + filtro.length);
+                    itemDiv.innerHTML = `${prima}<strong>${coincidenza}</strong>${dopo}`;
+                } else {
+                    itemDiv.textContent = nome;
+                }
+
+                itemDiv.addEventListener('mousedown', function (e) {
+                    e.preventDefault();
+                    searchInput.value = nome;
+                    chiudiTutteLeTendine();
+                    window.aggiornaVista();
+                });
+
+                listContainer.appendChild(itemDiv);
+            });
+        }
+
+        function chiudiTutteLeTendine() {
+            const liste = document.querySelectorAll('.autocomplete-list');
+            liste.forEach(lista => lista.remove());
+        }
+
+        searchInput.addEventListener('focus', function () {
+            mostraTendina(this.value.trim());
+        });
+
+        searchInput.addEventListener('click', function () {
+            mostraTendina(this.value.trim());
+        });
+
+        searchInput.addEventListener('input', function () {
+            mostraTendina(this.value.trim());
+            window.aggiornaVista();
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.search-wrapper') && !e.target.closest('#search-bar')) {
+                chiudiTutteLeTendine();
+            }
+        });
     }
 
     if (formFiltri) {
         formFiltri.addEventListener('change', () => {
-            aggiornaVista();
+            window.aggiornaVista();
             const popover = document.getElementById('popover-filtro');
             if (popover) popover.classList.remove('show');
         });
     }
 
     // Caricamento iniziale
-    aggiornaVista();
+    window.aggiornaVista();
 
     // 4. APERTURA POPUP E CARICAMENTO DATI
     if (itinerariList) {
@@ -168,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     modal.classList.remove('show');
                 }
 
-                aggiornaVista();
+                window.aggiornaVista();
             }
         });
     }

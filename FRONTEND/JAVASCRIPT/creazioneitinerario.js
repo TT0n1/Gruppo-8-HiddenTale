@@ -20,26 +20,30 @@ const databaseLocalita = [
  */
 function setupAutocomplete(inputElement) {
     const wrapper = inputElement.closest('.search-input-wrapper');
+    if (!wrapper) return;
 
     inputElement.setAttribute('autocomplete', 'off');
 
-    inputElement.addEventListener('input', function () {
-        const val = this.value.trim();
-
+    // Funzione per mostrare/aggiornare il menu a tendina
+    function mostraTendina(filtro = '') {
         closeAllAutocompleteLists();
-
-        if (!val) return;
 
         const listContainer = document.createElement('div');
         listContainer.classList.add('autocomplete-list');
         wrapper.appendChild(listContainer);
 
+        // Se il filtro è vuoto prende tutte le località, altrimenti filtra
         const corrispondenze = databaseLocalita.filter(item =>
-            item.nome.toLowerCase().includes(val.toLowerCase())
+            item.nome.toLowerCase().includes(filtro.toLowerCase())
         );
 
         if (corrispondenze.length === 0) {
-            closeAllAutocompleteLists();
+            const emptyDiv = document.createElement('div');
+            emptyDiv.classList.add('autocomplete-item');
+            emptyDiv.style.fontStyle = 'italic';
+            emptyDiv.style.color = '#888';
+            emptyDiv.textContent = 'Nessuna località trovata';
+            listContainer.appendChild(emptyDiv);
             return;
         }
 
@@ -47,26 +51,39 @@ function setupAutocomplete(inputElement) {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('autocomplete-item');
 
-            const matchIndex = item.nome.toLowerCase().indexOf(val.toLowerCase());
-            const prima = item.nome.substring(0, matchIndex);
-            const coincidenza = item.nome.substring(matchIndex, matchIndex + val.length);
-            const dopo = item.nome.substring(matchIndex + val.length);
+            if (filtro.trim() !== '') {
+                const matchIndex = item.nome.toLowerCase().indexOf(filtro.toLowerCase());
+                const prima = item.nome.substring(0, matchIndex);
+                const coincidenza = item.nome.substring(matchIndex, matchIndex + filtro.length);
+                const dopo = item.nome.substring(matchIndex + filtro.length);
+                itemDiv.innerHTML = `${prima}<strong>${coincidenza}</strong>${dopo}`;
+            } else {
+                itemDiv.textContent = item.nome;
+            }
 
-            itemDiv.innerHTML = `${prima}<strong>${coincidenza}</strong>${dopo}`;
-
-            itemDiv.addEventListener('click', function () {
+            // Selezione della voce
+            itemDiv.addEventListener('mousedown', function (e) {
+                e.preventDefault(); // Previene il blur dell'input prima del click
                 inputElement.value = item.nome;
                 closeAllAutocompleteLists();
             });
 
             listContainer.appendChild(itemDiv);
         });
+    }
+
+    // Mostra tutte le località al click o al focus
+    inputElement.addEventListener('focus', function () {
+        mostraTendina(this.value.trim());
     });
 
-    document.addEventListener('click', function (e) {
-        if (e.target !== inputElement) {
-            closeAllAutocompleteLists();
-        }
+    inputElement.addEventListener('click', function () {
+        mostraTendina(this.value.trim());
+    });
+
+    // Filtra durante la digitazione
+    inputElement.addEventListener('input', function () {
+        mostraTendina(this.value.trim());
     });
 }
 
@@ -78,8 +95,15 @@ function closeAllAutocompleteLists() {
     liste.forEach(lista => lista.remove());
 }
 
+// Chiusura al click esterno
+document.addEventListener('click', function (e) {
+    if (!e.target.closest('.search-input-wrapper')) {
+        closeAllAutocompleteLists();
+    }
+});
+
 /**
- * Estrae il segmento di tappe e assegna a ciascuna tappa il tempo di percorrenza singolo dalla tappa precedente.
+ * Estrae il segmento di tappe e assegna a ciascuna tappa il tempo di percorrenza singolo
  */
 function calcolaSequenzaItinerario(partenza, arrivo) {
     const normalize = str => str.trim().toLowerCase();
@@ -108,9 +132,8 @@ function calcolaSequenzaItinerario(partenza, arrivo) {
         let tempoTratta = 0;
 
         if (idx === 0) {
-            tempoTratta = 0; // La prima tappa ha 0 min di attesa/spostamento
+            tempoTratta = 0;
         } else {
-            // Se andiamo avanti usiamo il valore della tappa corrente, altrimenti della tappa precedente nell'array originale
             tempoTratta = versoAvanti ? tappa.tempoDaPrecedente : segmento[idx - 1].tempoDaPrecedente;
         }
 

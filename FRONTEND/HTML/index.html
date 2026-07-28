@@ -13,7 +13,7 @@
 <script src="../JAVASCRIPT/navbar.js"></script>
 
 <div class="Descrizione">
-    <div><img src="IMAGES/Logo1.svg" ></div>
+    <div><img src="IMAGES/Logo1.svg"></div>
     <p>Hiddentale: Riscopri la tradizione</p>
 </div>
 
@@ -29,18 +29,27 @@
 </div>
 
 <div class="map-banner">
-    <div id="map">
-        <script src="../JAVASCRIPT/mappa.js"></script>
-    </div>
+    <div id="map"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../JAVASCRIPT/mappa.js"></script>
 </div>
 
 <div class="events-section">
     <h2 class="events-title">Eventi nei paraggi</h2>
-    <div class="carousel-container" id="carouselContainer">
-        <div class="carousel-track" id="carouselTrack">
-            <!-- Verrà popolato dinamicamente dal JS -->
+
+    <!-- Wrapper per contenere sia le frecce esterne sia il carosello -->
+    <div class="carousel-wrapper">
+        <!-- Freccia Sinistra -->
+        <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Precedente">&#10094;</button>
+
+        <div class="carousel-container" id="carouselContainer">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Verrà popolato dinamicamente da carousel.js -->
+            </div>
         </div>
+
+        <!-- Freccia Destra -->
+        <button class="carousel-btn next-btn" id="nextBtn" aria-label="Successivo">&#10095;</button>
     </div>
 </div>
 

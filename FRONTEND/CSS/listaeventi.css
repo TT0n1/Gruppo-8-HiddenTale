@@ -2,18 +2,17 @@
    LAYOUT GENERALE DELLA PAGINA
    ========================================== */
 
-
 /* Titolo principale (grande, a sinistra, linea accorciata) */
 .main-title {
     color: #633A1C;
     font-size: 1.8rem;
     font-weight: normal;
     margin-bottom: 25px;
-    margin-left: 5px;       /* Aggiunto il margine a sinistra (puoi aumentarlo a 10px o 15px se serve) */
+    margin-left: 5px;
     position: relative;
     padding-bottom: 12px;
     display: block;
-    width: calc(100% - 5px); /* Regola la larghezza per evitare overflow con il margine */
+    width: calc(100% - 5px);
     box-sizing: border-box;
 }
 
@@ -21,7 +20,7 @@
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;                /* Allinea la linea sotto direttamente al margine del testo */
+    left: 0;
     right: 5px;
     height: 1px;
     background-color: #633A1C;
@@ -34,9 +33,9 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    width: calc(100% - 30px);          /* Stessa larghezza calcolata per le card */
-    margin-left: 15px;                 /* Stesso margine sinistro delle card */
-    margin-right: 15px;                /* Stesso margine destro delle card */
+    width: calc(100% - 30px);
+    margin-left: 15px;
+    margin-right: 15px;
     margin-top: 15px;
     margin-bottom: 25px;
     box-sizing: border-box;
@@ -50,7 +49,7 @@
 }
 
 #search-bar {
-    width: 100%;                       /* Occupa il 100% del wrapper */
+    width: 100%;
     height: 38px;
     padding-left: 42px;
     padding-right: 12px;
@@ -81,6 +80,42 @@
     fill: none;
 }
 
+/* --- AUTOCOMPLETAMENTO BARRA DI RICERCA --- */
+.autocomplete-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    border: 1.5px solid #8d5026;
+    border-radius: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 4px 0;
+}
+
+.autocomplete-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    color: #5c3011;
+    font-size: 0.95rem;
+    text-align: left;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.autocomplete-item:hover {
+    background-color: #f7eedd;
+    color: #8d5026;
+    font-weight: 600;
+}
+
+.autocomplete-item strong {
+    color: #8d5026;
+    text-decoration: underline;
+}
+
 .filter-button {
     background: none;
     border: none;
@@ -89,7 +124,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;                   /* L'icona del filtro non si schiaccia mai */
+    flex-shrink: 0;
     color: #4a3319;
     transition: transform 0.1s ease, color 0.2s;
 }
@@ -105,10 +140,10 @@
 .evento-card {
     display: flex;
     gap: 20px;
-    text-decoration: none;     /* Rimuove la sottolineatura dei link */
-    color: #4a3728;            /* Testo marrone */
-    width: calc(100% - 30px); /* Sottrae i 30px totali dei margini laterali */
-    margin: 15px auto;        /* 15px sopra, sotto e centratura orizzontale (15px a SX e DX) */
+    text-decoration: none;
+    color: #4a3728;
+    width: calc(100% - 30px);
+    margin: 15px auto;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
@@ -116,8 +151,8 @@
 }
 
 .evento-card:hover {
-    transform: translateY(-2px); /* Effetto sollevamento in hover */
-    z-index: 10;                 /* Mantiene il livello sopra agli altri elementi */
+    transform: translateY(-2px);
+    z-index: 10;
 }
 
 /* Immagine a sinistra */
@@ -131,9 +166,9 @@
     width: 160px;
     height: 160px;
     object-fit: cover;
-    border-radius: 18px;         /* Angoli arrotondati */
-    border: 2px solid #4a3728;   /* Bordo marrone attorno alla foto */
-    box-sizing: border-box;      /* Mantiene il bordo all'INTERNO dei 160px */
+    border-radius: 18px;
+    border: 2px solid #4a3728;
+    box-sizing: border-box;
     display: block;
 }
 

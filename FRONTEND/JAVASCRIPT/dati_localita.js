@@ -7,7 +7,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/fisciano_principale.png",
         stemma: "IMAGES/stemma_fisciano.png",
-        tradizione: "Oltre a essere un vivace polo universitario, Fisciano affonda le sue radici in un'antica tradizione contadina legata alla lavorazione del rame e alla coltivazione della nocciola Tonda Giffoni. Si racconta che le sue numerose frazioni collinari, come Pentima e Soccorso, siano nate come rifugi strategici lungo la via romana che collegava Salerno all'Irpinia.",
+        tradizione: "Oltre a essere un vivace e moderno polo universitario di rilievo internazionale, Fisciano affonda le sue radici in un'antica tradizione contadina e artigianale, legata per secoli alla maestria nella lavorazione del rame e alla coltivazione della rinomata nocciola Tonda Giffoni. La storia del territorio è racchiusa nelle sue numerose frazioni collinari, come Pentima, Canfora e Soccorso. Si narra che questi borghi siano nati come rifugi strategici ed insediamenti fortificati lungo la direttrice della via romana che collegava l'antica Salernum all'entroterra irpino. Passeggiando tra i vicoli del centro e delle sue frazioni si scoprono antiche fontane in pietra, cappelle votive ed eremi che testimoniano una devozione secolare mai sopita, oltre a una tradizione enogastronomica genuina e legata ai ritmi della terra.",
         galleria1: "IMAGES/fisciano_chiesa_sbartolomeo.png",
         galleria2: "IMAGES/fisciano_soccorso.png",
         galleria3: "IMAGES/fisciano_villa.png"
@@ -19,7 +19,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/baronissi_principale.png",
         stemma: "IMAGES/stemma_baronissi.png",
-        tradizione: "Baronissi fu teatro di uno storico scontro nel 1861 tra le truppe borboniche e quelle unitarie. Il Convento della SS. Trinità, arroccato sulla collina della Montagnola, ha custodito per secoli antichi manoscritti e rappresenta il cuore spirituale della città, circondato dai borghi medievali di Saragnano e Capo Saragnano.",
+        tradizione: "Baronissi vanta un passato storico di fondamentale importanza per la Valle dell'Irno: fu infatti teatro di uno storico e sanguinoso scontro nel 1861 tra le truppe borboniche e le forze unitarie durante gli anni cruciali del Risorgimento. Il cuore spirituale e simbolico della città è indubbiamente il Convento della SS. Trinità, arroccato sulla collina della Montagnola; per secoli i monaci vi hanno custodito preziosi manoscritti e opere d'arte, offrendo rifugio alla popolazione nei momenti di crisi. Il tessuto urbano è impreziosito dalle sue storiche frazioni medievali, come Saragnano, Capo Saragnano e Acquamela, quest'ultima legata a leggende popolari sulla purezza delle sue acque sorgive. Oggi Baronissi coniuga questo ricco patrimonio di palazzi nobiliari e cortili in pietra con un'intensa vita culturale fatta di mostre, eventi e festival artistici.",
         galleria1: "IMAGES/baronissi_saragnano.png",
         galleria2: "IMAGES/baronissi_convento.png",
         galleria3: "IMAGES/baronissi_acquamela.png"
@@ -31,7 +31,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/mercato_san_severino_principale.png",
         stemma: "IMAGES/stemma_mercato_san_severino.png",
-        tradizione: "Il suo nome richiama la secolare fiera commerciale concessa nel Medioevo dalla potente famiglia dei Sanseverino. Il castello che domina la città era uno dei complessi fortificati più grandi del Mezzogiorno. Tra le sue frazioni, il borgo di Spiano conserva ancora l'impianto e l'atmosfera dei vecchi casali campani.",
+        tradizione: "Il nome stesso della città richiama la secolare vocazione mercantile legata alla grandiosa fiera concesso nel Medioevo dalla potente e nobile famiglia dei Sanseverino, tra i feudatari più influenti dell'intero Regno di Napoli. Sulla cima del colle adiacente svettano imponenti i resti del Castello dei Sanseverino, che in epoca medievale rappresentava uno dei complessi fortificati più estesi, strategici ed inespugnabili dell'Italia meridionale. Il territorio si articola in una fitta rete di ben ventidue frazioni storiche; tra queste spicca il borgo di Spiano, che conserva intatto l'impianto urbanistico originario con portali in pietra, corti interne e vicoli stretti che rimandano all'atmosfera tipica dei vecchi casali campani d'un tempo.",
         galleria1: "IMAGES/san_severino_castello.png",
         galleria2: "IMAGES/san_severino_spiano.png",
         galleria3: "IMAGES/san_severino_corto.png"
@@ -43,7 +43,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/calvanico_principale.png",
         stemma: "IMAGES/stemma_calvanico.png",
-        tradizione: "Storicamente isolato tra i boschi dei Picentini, Calvanico è famoso per l'antica produzione della calce nei tipici forni a legna (i 'calcarali'). Un aneddoto locale narra che durante i mesi autunnali la raccolta delle castagne fosse regolata da un rigido codice d'onore comunitario per spartire le risorse tra i vari casali.",
+        tradizione: "Storicamente protetto e quasi isolato tra i lussureggianti boschi dei Monti Picentini, Calvanico è celebre per l'antica e faticosa produzione della calce nei tipici forni a legna scavati nella roccia, detti 'calcarali'. La vita del borgo è da sempre scandita dai ritmi della montagna e della selvicoltura. Un affascinante aneddoto locale racconta che, durante la stagione autunnale, la cruciale raccolta delle castagne fosse regolata da un rigido e consuetudinario 'codice d'onore' comunitario, necessario per spartire equamente l'accesso ai boschi tra i vari casali senza creare contese. Tra le tradizioni culinarie più autentiche spiccano i piatti a base di nocciole, funghi porcini e castagne, oltre alle preparazioni contadine rimaste immutate nel tempo.",
         galleria1: "IMAGES/calvanico_capo_calvanico.png",
         galleria2: "IMAGES/calvanico_bosco.png",
         galleria3: "IMAGES/calvanico_frazione.png"
@@ -55,7 +55,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/pellezzano_principale.png",
         stemma: "IMAGES/stemma_pellezzano.png",
-        tradizione: "Pellezzano vanta una ricca tradizione legata alla lavorazione della ceramica e alla presenza di antiche cartiere lungo la valle del torrente Irno. Frazioni come Coperchia e Capriglia nascondono vicoli in pietra e palazzi nobiliari che in passato ospitavano le residenze estive dei patrizi salernitani.",
+        tradizione: "Pellezzano vanta un patrimonio storico profondamente legato all'artigianato della ceramica e alla proto-industria cartaria che fiorì lungo il corso del torrente Irno a partire dal Settecento. Grazie alla posizione collinare salubre e panoramica affacciata sul Golfo di Salerno, frazioni suggestive come Coperchia, Capriglia e Capezzano vennero scelte nel XVIII e XIX secolo come amene residenze estive da importanti famiglie patrizio-salernitane. Passeggiando tra le viuzze lastricate dei borghi si possono ammirare eleganti portali di palazzi d'epoca, storiche edicole votive e antiche chiese patronali, testimoni di una profonda devozione popolare che culmina ogni anno nelle tradizionali feste rionali e nelle processioni di paese.",
         galleria1: "IMAGES/pellezzano_coperchia.png",
         galleria2: "IMAGES/pellezzano_capezzano.png",
         galleria3: "IMAGES/pellezzano_capriglia.png"
@@ -67,7 +67,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/castiglione_principale.png",
         stemma: "IMAGES/stemma_castiglione.png",
-        tradizione: "Legato indissolubilmente alla figura di Antonio Genovesi, padre dell'economia politica illuminista, il borgo conserva intatta la casa natale del filosofo. Una leggenda popolare racconta di passaggi segreti e camminamenti sotterranei che collegavano il centro abitato con le fortificazioni montane circostanti.",
+        tradizione: "Questo incantevole borgo montano è indissolubilmente legato alla figura di Antonio Genovesi, illustre filosofo, economista e figura di spicco dell'Illuminismo italiano, che qui nacque nel 1713 e di cui è tuttora conservata e visitabile la casa natale nel centro storico. Una suggestiva leggenda popolare tramanda la presenza di passaggi segreti e camminamenti sotterranei che, in epoca medievale e rinascimentale, collegavano il cuore dell'abitato con le fortificazioni e gli stazi di avvistamento situati sulle vette circostanti. L'identità del paese vive nella valorizzazione della castanicoltura, della lavorazione del legno e nell'accoglienza tipica delle comunità montane dei Picentini.",
         galleria1: "IMAGES/castiglione_casa_genovesi.png",
         galleria2: "IMAGES/castiglione_piazza.png",
         galleria3: "IMAGES/castiglione_vicolo.png"
@@ -79,7 +79,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/sancipriano_principale.png",
         stemma: "IMAGES/stemma_sancipriano.png",
-        tradizione: "Famoso fin dal Medioevo per i suoi fertili terreni agricoli, San Cipriano comprende splendide frazioni come Filetta e Vignale. Un aneddoto storico riporta che l'olio d'oliva qui prodotto fosse così pregiato da essere richiesto direttamente dalle corti nobiliari di Napoli per le tavole reali.",
+        tradizione: "Rinomato fin dall'epoca medievale per la straordinaria fertilità delle sue colline baciate dal sole, San Cipriano comprende pittoresche frazioni immerse nel verde come Filetta, Vignale e Campigliano. Un curioso aneddoto storico riporta che l'olio extravergine d'oliva prodotto nei suoi frantoi fosse considerato così pregiato per limpidezza e sapore da venire richiesto direttamente dalle corti e dai palazzi della nobiltà napoletana per i banchetti reali. La tradizione agricola, unita alla coltura della nocciola e della castagna, si fonde con una ricca memoria religiosa e con la riscoperta degli antichi cammini che attraversano il Parco Regionale dei Monti Picentini.",
         galleria1: "IMAGES/sancipriano_filetta.png",
         galleria2: "IMAGES/sancipriano_vignale.png",
         galleria3: "IMAGES/sancipriano_campagna.png"
@@ -91,7 +91,7 @@ const databaseLocalita = {
         provincia: "Avellino (AV)",
         immaginePrincipale: "IMAGES/montoro_principale.png",
         stemma: "IMAGES/stemma_montoro.png",
-        tradizione: "Nato dall'unione di ben quindici frazioni storiche (tra cui Banzano, Torchiati e Aterrana), Montoro vanta il borgo medievale di Aterrana, interamente costruito in pietra locale. La celebre Cipolla Ramata viene coltivata secondo metodi tramandati oralmente da generazioni, garantendone la dolcezza unica.",
+        tradizione: "Frutto dell'unione di ben quindici frazioni storiche uniche (tra le quali Banzano, Torchiati, San Bartolomeo ed Aterrana), Montoro vanta una storia millenaria. Particolarmente suggestivo è il borgo medievale di Aterrana, caratterizzato da un'architettura spontanea interamente realizzata in pietra locale e rimasta pressoché intatta. L'eccellenza e l'orgoglio del territorio sono rappresentati dalla celebre Cipolla Ramata di Montoro, un prodotto agroalimentare d'eccellenza coltivato da secoli con tecniche tradizionali tramandate oralmente di padre in figlio. La dolcezza e l'aroma inconfondibile di questo ortaggio sono celebrati ogni anno con sagre tradizionali e ricette culinarie contadine storiche.",
         galleria1: "IMAGES/montoro_aterrana.png",
         galleria2: "IMAGES/montoro_banzano.png",
         galleria3: "IMAGES/montoro_torchiati.png"
@@ -103,7 +103,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/bracigliano_principale.png",
         stemma: "IMAGES/stemma_bracigliano.png",
-        tradizione: "Soprannominato 'Terra della Musica' per la straordinaria concentrazione di maestri e bande musicali riconosciute a livello nazionale. Il Convento di San Francesco, risalente al XVII secolo, ospita un chiostro affrescato legato al culto dei frati minori che promuovevano anche la coltivazione della famosa Ciliegia di Bracigliano.",
+        tradizione: "Bracigliano è conosciuto in tutta la regione come la 'Terra della Musica', grazie all'eccezionale concentrazione di maestri concertisti, compositori e rinomate bande musicali pluripremiate a livello nazionale. Il punto di riferimento storico, artistico e spirituale è lo splendido Convento di San Francesco d'Assisi, risalente al XVII secolo; il suo chiostro affrescato è legato all'opera dei frati minori che per secoli non solo curarono lo spirito della comunità, ma incentivarono anche il perfezionamento delle tecniche agricole per la produzione della celebre e dolcissima Ciliegia di Bracigliano, oggi prodotto certificato e festeggiato con eventi e sagre ogni primavera.",
         galleria1: "IMAGES/bracigliano_convento.png",
         galleria2: "IMAGES/bracigliano_chiostro.png",
         galleria3: "IMAGES/bracigliano_frazione.png"
@@ -115,7 +115,7 @@ const databaseLocalita = {
         provincia: "Salerno (SA)",
         immaginePrincipale: "IMAGES/siano_principale.png",
         stemma: "IMAGES/stemma_siano.png",
-        tradizione: "Celebre per il goliardico 'Palio del Ciuccio' in cui i Rioni si sfidano in una gara campestre, Siano conserva una devozione profonda per San Rocco. Durante le epidemie del passato, si narra che la popolazione trovò rifugio tra i valloni della montagna, sviluppando ricette contadine uniche come la braciola caprina.",
+        tradizione: "Siano è celebre in tutto l'agro per il folkloristico e goliardico 'Palio del Ciuccio', una storica competizione in cui i rioni cittadini si sfidano in una corsa festosa, simbolo di identità e spirito di comunità. La cittadina conserva un profondo sentimento di devozione popolare per San Rocco e San Sebastiano e propone riti suggestivi durante la Settimana Santa. Durante le tragiche epidemie dei secoli scorsi, la tradizione racconta che i sianesi trovarono un rifugio sicuro e isolato tra i valichi e le cavità naturali della montagna; fu proprio lì che affinarono ricette gastronomiche contadine dai sapori forti e autentici, come la celebre braciola caprina e le percoche immerse nel vino rosso locale.",
         galleria1: "IMAGES/siano_rione_chiamanda.png",
         galleria2: "IMAGES/siano_centro_storico.png",
         galleria3: "IMAGES/siano_montagna.png"

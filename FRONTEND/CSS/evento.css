@@ -5,7 +5,7 @@
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px 40px;
-    font-family: sans-serif; /* Si adeguerà al global.css */
+    font-family: sans-serif;
     color: #4a3728;
 }
 
@@ -24,7 +24,7 @@
     box-sizing: border-box;
 }
 
-/* Linea sotto il titolo accorciata (stesso stile di località) */
+/* Linea sotto il titolo accorciata */
 .page-title::after {
     content: "";
     position: absolute;
@@ -42,34 +42,61 @@
     display: flex;
     gap: 30px;
     margin-bottom: 30px;
-    padding-left: 15px;         /* Margine rientrato a sinistra */
+    padding-left: 15px;
     box-sizing: border-box;
 }
 
 .evento-image-wrapper {
-    flex: 0 0 380px;            /* Aumentata da 320px a 380px per ingrandirla un po' */
+    flex: 0 0 380px;
     position: relative;
+    cursor: pointer;
 }
 
-/* Immagine con dimensioni riequilibrate */
+/* Immagine principale */
 .evento-image-wrapper img {
     width: 100%;
-    height: 260px;               /* Aumentata da 220px a 260px per mantenere le proporzioni */
-    border-radius: 15px;         /* Angoli arrotondati come località */
-    border: 2px solid #4a3728;   /* Bordo marrone attorno alla foto */
+    height: 260px;
+    border-radius: 15px;
+    border: 2px solid #4a3728;
     object-fit: cover;
     box-sizing: border-box;
     display: block;
 }
 
+/* Icona Lente di Ingrandimento con il + */
+.zoom-icon-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #4a3728;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 2;
+}
+
+/* Effetto al passaggio del mouse sul contenitore dell'immagine */
+.evento-image-wrapper:hover .zoom-icon-btn {
+    transform: scale(1.15);
+    background-color: #ffffff;
+}
+
 .evento-dati-box {
-    flex: 1;                     /* Occupazione dello spazio rimanente */
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-/* Linee sottili divisorie dei dati uniformate a quelle di località */
+/* Linee sottili divisorie dei dati */
 .dato-item {
     border-bottom: 2px solid #dfd5c6;
     padding-bottom: 8px;
@@ -92,7 +119,7 @@
 /* Bottone Modifica Evento */
 .btn-modifica {
     align-self: flex-start;
-    margin-top: auto; /* Lo spinge in basso se c'è spazio */
+    margin-top: auto;
     background-color: #d8bda5;
     color: #4a3728;
     border: 1.5px solid #4a3728;
@@ -111,12 +138,12 @@
     display: flex;
     gap: 40px;
     align-items: flex-end;
-    padding-left: 15px;         /* Stesso margine a sinistra del blocco superiore */
+    padding-left: 15px;
     box-sizing: border-box;
 }
 
 .evento-descrizione-box {
-    flex: 2; /* Prende più spazio rispetto al blocco partecipa */
+    flex: 2;
 }
 
 .evento-descrizione-box h2 {
@@ -158,7 +185,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Hover effect per entrambi i bottoni */
+/* Hover effect per i bottoni */
 .btn-modifica:hover, .btn-partecipa:hover {
     background-color: #c4a48c;
 }
@@ -204,4 +231,67 @@
     display: flex;
     justify-content: center;
     gap: 15px;
+}
+
+/* ==========================================
+   POPUP ZOOM IMMAGINE
+   ========================================== */
+.modal-zoom-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-zoom-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* L'immagine zoomata si adatta in proporzione al riquadro senza sgranarsi */
+.modal-zoom-content img {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 3px solid #dfd5c6;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Bottone di chiusura (X) */
+.btn-chiudi-zoom {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #4a3728;
+    border: 2px solid #dfd5c6;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    z-index: 2001;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-chiudi-zoom:hover {
+    background-color: #633a1c;
 }
