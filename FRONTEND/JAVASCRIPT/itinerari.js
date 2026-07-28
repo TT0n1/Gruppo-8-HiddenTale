@@ -12,6 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Legge gli itinerari salvati dal localStorage
     let itinerari = JSON.parse(localStorage.getItem('itinerari')) || [];
 
+    // Helper per estrarre il numero dei minuti da una stringa (es. "15 min" -> 15)
+    function estraiMinuti(stringaTempo) {
+        if (!stringaTempo) return 0;
+        const match = stringaTempo.toString().match(/\d+/);
+        return match ? parseInt(match[0], 10) : 0;
+    }
+
+    // Helper per CALCOLARE LA SOMMA di tutte le tappe dell'itinerario
+    function calcolaMinutiTotali(tappe) {
+        if (!tappe || !Array.isArray(tappe)) return 0;
+        return tappe.reduce((acc, tappa) => {
+            const tempoStr = tappa.tempo || tappa.orario || '0';
+            return acc + estraiMinuti(tempoStr);
+        }, 0);
+    }
+
     // 2. FUNZIONE PER FILTRARE, ORDINARE E MOSTRARE LE CARD
     function aggiornaVista() {
         if (!itinerariList) return;
@@ -26,10 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return titolo.includes(testoRicerca) || partenza.includes(testoRicerca) || arrivo.includes(testoRicerca);
         });
 
+        // Ordinamento basato sulla SOMMA dei minuti di tutte le tappe
         if (opzioneFiltro === 'lunghi') {
-            risultati.sort((a, b) => (b.durata || b.tappe?.length || 0) - (a.durata || a.tappe?.length || 0));
+            risultati.sort((a, b) => calcolaMinutiTotali(b.tappe) - calcolaMinutiTotali(a.tappe));
         } else if (opzioneFiltro === 'corti') {
-            risultati.sort((a, b) => (a.durata || a.tappe?.length || 0) - (b.durata || b.tappe?.length || 0));
+            risultati.sort((a, b) => calcolaMinutiTotali(a.tappe) - calcolaMinutiTotali(b.tappe));
         } else if (opzioneFiltro === 'az') {
             risultati.sort((a, b) => a.titolo.localeCompare(b.titolo));
         }
@@ -44,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         risultati.forEach(itinerario => {
             const card = document.createElement('button');
             card.classList.add('itinerario-card');
-            card.dataset.id = itinerario.id; // Assegna l'ID alla card
+            card.dataset.id = itinerario.id;
             card.innerHTML = `
                 <span>${itinerario.titolo}</span>
                 <svg class="arrow-down-icon" viewBox="0 0 24 24" width="20" height="20">
@@ -90,22 +107,44 @@ document.addEventListener('DOMContentLoaded', () => {
                         infoLines[1].textContent = `Arrivo: ${selezionato.arrivo || 'N/D'}`;
                     }
 
+                    // SOMMA DI TUTTI I MINUTI DELLE TAPPE
+                    const minutiTotali = calcolaMinutiTotali(selezionato.tappe);
+
+                    // Aggiorna o crea il box dei Minuti Totali sopra la lista tappe
+                    let totalBox = document.getElementById('popup-tempo-totale');
+                    if (!totalBox) {
+                        totalBox = document.createElement('div');
+                        totalBox.id = 'popup-tempo-totale';
+                        totalBox.style.cssText = 'margin: 10px 0 15px 0; font-weight: bold; color: #4a3728; text-align: center; background-color: #f5efe6; padding: 10px; border-radius: 8px; font-size: 1.1rem;';
+
+                        const gridBox = document.querySelector('.itinerary-grid-box');
+                        if (gridBox && gridBox.parentNode) {
+                            gridBox.parentNode.insertBefore(totalBox, gridBox);
+                        }
+                    }
+                    totalBox.innerHTML = `Tempo Totale Stimato: <span>${minutiTotali} min</span>`;
+
+                    // Popola la griglia con le singole tappe
                     const gridBox = document.querySelector('.itinerary-grid-box');
                     if (gridBox && selezionato.tappe) {
                         gridBox.innerHTML = '';
                         selezionato.tappe.forEach(tappa => {
                             const row = document.createElement('div');
                             row.classList.add('itinerary-grid-row');
+
+                            const tempoMostrato = tappa.tempo || tappa.orario || '0 min';
+                            const distanzaMostrata = tappa.distanza || '0 km';
+
                             row.innerHTML = `
                                 <div class="pill-box stage-name">${tappa.nome || tappa}</div>
-                                <div class="pill-box stage-time">${tappa.orario || '--:--'}</div>
-                                <div class="pill-box stage-dist">${tappa.distanza || '5Km'}</div>
+                                <div class="pill-box stage-time">${tempoMostrato}</div>
+                                <div class="pill-box stage-dist">${distanzaMostrata}</div>
                             `;
                             gridBox.appendChild(row);
                         });
                     }
 
-                    // Associa l'ID dell'itinerario selezionato al bottone "Elimina"
+                    // Associa l'ID dell'itinerario al bottone "Elimina"
                     if (btnElimina) {
                         btnElimina.dataset.id = id;
                     }
@@ -122,24 +161,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const idDaEliminare = this.dataset.id;
 
             if (idDaEliminare) {
-                // Rimuove l'itinerario dall'array principale
                 itinerari = itinerari.filter(item => item.id != idDaEliminare);
-
-                // Aggiorna il localStorage con il nuovo array
                 localStorage.setItem('itinerari', JSON.stringify(itinerari));
 
-                // Chiude il popup ripristinando la classe corretta
                 if (modal) {
                     modal.classList.remove('show');
                 }
 
-                // Ricarica la lista a schermo
                 aggiornaVista();
             }
         });
     }
 
-    // 6. CHIUSURA POPUP (X e click fuori dal modal)
+    // 6. CHIUSURA POPUP
     if (closeBtn && modal) {
         closeBtn.addEventListener('click', () => {
             modal.classList.remove('show');
